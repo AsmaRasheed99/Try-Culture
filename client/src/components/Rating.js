@@ -12,7 +12,7 @@ function Rating() {
 
   return (
     <div>
-      <div className="rating-stars">
+      <div className="rating-stars text-yellow-300">
       {[1, 2, 3, 4, 5].map((value) => (
           <span
             key={value}

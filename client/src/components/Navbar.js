@@ -1,5 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+
 import {
   Navbar,
   Collapse,
@@ -18,12 +21,10 @@ import {
   UserCircleIcon,
   Bars3Icon,
   XMarkIcon,
-  LanguageIcon
-
+  LanguageIcon,
 } from "@heroicons/react/24/outline";
 
 const colors = {
- 
   cyan: "bg-cyan-50 text-cyan-500",
 };
 
@@ -31,46 +32,44 @@ const navListMenuItems = [
   {
     color: "cyan",
     icon: LanguageIcon,
-    title: "English"  },
- 
+    title: "English",
+  },
+
   {
     color: "cyan",
     icon: LanguageIcon,
-    title: "Arabic"  }
- 
+    title: "Arabic",
+  },
 ];
 
 function NavListMenu() {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false);
 
-  const renderItems = navListMenuItems.map(
-    ({ icon, title, color }, key) => (
-      <a href="#" key={key}>
-        <MenuItem className="flex items-center gap-3 rounded-lg">
-          <div className={`rounded-lg p-5 ${colors[color]}`}>
-            {React.createElement(icon, {
-              strokeWidth: 2,
-              className: "h-6 w-6",
-            })}
-          </div>
-          <div>
-            <Typography
-              variant="h6"
-              color="blue-gray"
-              className="flex items-center text-sm"
-            >
-              {title}
-            </Typography>
-          
-          </div>
-        </MenuItem>
-      </a>
-    )
-  );
+  const renderItems = navListMenuItems.map(({ icon, title, color }, key) => (
+    <a href="#" key={key}>
+      <MenuItem className="flex items-center gap-3 rounded-lg">
+        <div className={`rounded-lg p-5 ${colors[color]}`}>
+          {React.createElement(icon, {
+            strokeWidth: 2,
+            className: "h-6 w-6",
+          })}
+        </div>
+        <div>
+          <Typography
+            variant="h6"
+            color="blue-gray"
+            className="flex items-center text-sm"
+          >
+            {title}
+          </Typography>
+        </div>
+      </MenuItem>
+    </a>
+  ));
 
   return (
-    <React.Fragment >
+    <React.Fragment>
       <Menu
         open={isMenuOpen}
         handler={setIsMenuOpen}
@@ -141,6 +140,7 @@ function NavList() {
           </ListItem>
         </Link>
       </Typography>
+     
       <Typography
         as="a"
         href="#"
@@ -161,7 +161,26 @@ function NavList() {
 
 export default function Example() {
   const [openNav, setOpenNav] = React.useState(false);
+  const [isLoggedIn, setIsLoggedIn] = React.useState(
+    localStorage.getItem("auth") !== null
+  );
+  const [selectedType, setSelectedype] = useState("");
+  const navigate = useNavigate();
 
+  function handleTypeSelection(SignUpType) {
+    setSelectedype(SignUpType);
+    navigate(`/Registration/${SignUpType}`);
+  }
+
+  const handleLogout = () => {
+    // Perform any necessary cleanup or API calls related to logout
+
+    // Clear the auth token or user data from local storage
+    localStorage.removeItem("auth");
+
+    // Update the login status
+    setIsLoggedIn(false);
+  };
   React.useEffect(() => {
     window.addEventListener(
       "resize",
@@ -184,23 +203,41 @@ export default function Example() {
           <NavList />
         </div>
         <div className="hidden gap-2 lg:flex">
-          <Typography
-            as="a"
-            href="#"
-            variant="small"
-            color="blue-gray"
-            className="font-normal"
-          >
-            <Link to="/Profile">
-              <ListItem className="flex items-center gap-2 py-2 pr-4 text-xl">
-                <UserCircleIcon className="h-[18px] w-[18px]" />
-                Profile
-              </ListItem>
+          {isLoggedIn ? (
+            <Typography
+              as="a"
+              href="#"
+              variant="small"
+              color="blue-gray"
+              className="font-normal flex gap-3"
+            >
+              <Link to="/" onClick={handleLogout}>
+                <Button variant="gradient" size="lg" color="cyan">
+                  Log Out
+                </Button>
+              </Link>
+              <Link to="/Profile">
+                <Button variant="gradient" size="lg" color="cyan">
+                  <UserCircleIcon className="h-[18px] w-[18px]" />
+                  
+                </Button>
+              </Link>
+            </Typography>
+          ) : (
+             <>
+          
+            <Link to="/SignUp">
+              <Button variant="gradient" size="lg" color="cyan"  onClick={() => handleTypeSelection("provider")}>
+                Join Us
+              </Button>
             </Link>
-          </Typography>
-          <Link to='/Registration'><Button variant="gradient" size="lg" color="cyan">
-            Sign Up
-          </Button></Link>
+            <Link to="/Registration">
+              <Button variant="gradient" size="lg" color="cyan" onClick={() => handleTypeSelection("user")}>
+                Sign Up
+              </Button>
+            </Link>
+            </>
+          )}
         </div>
         <IconButton
           variant="text"
@@ -217,16 +254,48 @@ export default function Example() {
       </div>
       <Collapse open={openNav}>
         <NavList />
-        <div className="flex w-full flex-nowrap items-center gap-2 lg:hidden">
-          <Link to="/Profile">
-            <Button variant="outlined" size="sm" color="blue-gray" fullWidth>
-              <UserCircleIcon className="h-[18px] w-[18px]" />
-            </Button>
-          </Link>
-          <Button variant="gradient" size="lg" fullWidth >
-            Sign Up
-          </Button>
-        </div>
+        {isLoggedIn ? (
+          
+            <Typography
+              as="a"
+              href="#"
+              variant="small"
+              className="font-normal flex gap-3"
+            >
+              <Link to="/" onClick={handleLogout}>
+                <Button variant="gradient" size="lg" color="cyan" >
+                  Log Out
+                </Button>
+              </Link>
+              <Link to="/Profile">
+                <Button variant="gradient" size="lg" color="cyan" >
+                Profile
+                </Button>
+              </Link>
+            </Typography>
+          ) : (
+             <>
+               <Typography
+              as="a"
+              href="#"
+              variant="small"
+              color="blue-gray"
+              className="font-normal flex gap-3"
+            >
+            <Link to="/SignUp">
+              <Button variant="gradient" size="lg" color="cyan"  onClick={() => handleTypeSelection("provider")}>
+                Join Us
+              </Button>
+            </Link>
+            <Link to="/Registration">
+              <Button variant="gradient" size="lg" color="cyan" onClick={() => handleTypeSelection("user")}>
+                Sign Up
+              </Button>
+            </Link>
+            </Typography>
+            </>
+          )}
+        
       </Collapse>
     </Navbar>
   );
