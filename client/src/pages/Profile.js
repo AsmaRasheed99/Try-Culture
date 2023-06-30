@@ -23,6 +23,8 @@ function Profile() {
   const [user, setUser] = useState([]);
   const [UserBlogs, setUserBlogs] = useState([]);
   const [UserServices, setUserServices] = useState([]);
+  const [img, setImage] = useState("");
+
   const fetchProtectedData = async () => {
     try {
       const token = localStorage.getItem("auth");
@@ -49,6 +51,7 @@ function Profile() {
             setUserEmail(response.data[0].email);
             setUserRole(response.data[0].role);
             setUser(response.data[0]);
+            setImage(response.data[0].image);
             console.log(response.data);
           })
           .catch((error) => {
@@ -147,8 +150,8 @@ function Profile() {
                       <div className="relative">
                         <img
                           alt="..."
-                          src="https://st4.depositphotos.com/4329009/19956/v/600/depositphotos_199564354-stock-illustration-creative-vector-illustration-default-avatar.jpg"
-                          className="shadow-xl rounded-full h-auto align-middle border-none absolute -m-16 -ml-20 lg:-ml-16 max-w-150-px"
+                          src={img}
+                          className="shadow-xl rounded-full h-40 w-96 align-middle border-none absolute -m-16 -ml-20 lg:-ml-16 max-w-150-px"
                         />
                       </div>
                     </div>
@@ -158,11 +161,7 @@ function Profile() {
                           <EditProfile />
                         ) : (
                           <Link to="/Login">
-                            <Button
-                              variant="gradient"
-                              size="lg"
-                              color="cyan"
-                            >
+                            <Button variant="gradient" size="lg" color="cyan">
                               Log In
                             </Button>
                           </Link>
@@ -231,9 +230,14 @@ function Profile() {
                                   Published on {blog.date}
                                 </p>
                                 <hr></hr>
-                                <p className="uppercase text-gray-800 hover:text-black pt-3">
+                                {/* <p className="uppercase text-gray-800 hover:text-black pt-3">
                                   {blog.content}
-                                </p>
+                                </p> */}
+                                <div className="w-full overflow-hidden">
+                                  <p className="whitespace-normal h-auto w-52">
+                                    {blog.content}
+                                  </p>
+                                </div>
                               </div>
                               <EditBlog id={blog._id} blogProps={blog} />
                             </article>

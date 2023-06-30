@@ -33,6 +33,28 @@ const [open, setOpen] = React.useState(false);
     const [userData ,setUserData] = useState({})
     const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+
+
+  const [img, setImg] = useState("");
+
+
+  const onChange = (e) => {
+    const files = e.target.files;
+    const file = files[0];
+    getBase64(file);
+    console.log(img);
+  };
+  const onLoad = (fileString) => {
+    setImg(fileString);
+  };
+  const getBase64 = (file) => {
+    let reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => {
+      onLoad(reader.result);
+    };
+  };
+
     
     const fetchProtectedData = async () => {
       try {
@@ -80,6 +102,8 @@ console.log(name,email,userId )
       .put(`http://localhost:5000/api/users/${userId}`, {
         firstName: name,
         email: email,
+        image: img,
+
       })
       .then(function (response) {
         console.log(response);
@@ -137,6 +161,15 @@ console.log(name,email,userId )
               Text in a modal
             </Input>{" "}
             <br></br>
+
+            <input
+                      type="file"
+                      className="file-input file-input-bordered file-input-accent w-full max-w-xs"
+                      onChange={(e) => {
+                        onChange(e);
+                      }}
+                      accept="image/*"
+                    />
             <Button
               onClick={handleSubmit}
               className=" m-5 border-solid border-[#00acc1] border-2 text-[#00acc1] hover:bg-[#00acc1] hover:text-[#ffffff]"

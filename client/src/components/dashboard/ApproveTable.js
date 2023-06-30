@@ -108,28 +108,7 @@ const ApproveTable = () => {
 
 
 
-const addrestaurants = async () => {
 
-
-const userData = {
-  firstName:"provider",
-  email: email,
-  password:"LUNA@IO10m",
-  role:2 
-};
-
-try {
-  // Send the data to the server using an HTTP POST request
-  const response = await axios.post(
-    "http://localhost:5000/api/users",
-    userData
-  );
-} catch (error) {
-  console.error("Error inserting data:", error);
-}
-
-
-}
 
 
 
@@ -145,29 +124,7 @@ try {
 <div className='bg-[#ffffff] mr-5 ml-5 p-10 rounded-2xl min-h-[calc(100vh)] '>
 
 
-<form>
- 
-  <div className="relative">
- 
-    <input
-      type="email"
-      id="search"
-      name='email'
-      className="block w-full p-4 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-      placeholder="Email"
-      required=""
-      value={email}
-      onChange={(e) => {setEmail(e.target.value);}}
-    />
-    <button
-       onClick={()=>addrestaurants()}
-      type="submit"
-      className="text-white bg-amber-700 absolute right-2.5 bottom-2.5 amber-600 rounded-lg focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-    >
-      add Email
-    </button>
-  </div>
-</form>
+
   <div className="relative flex items-center justify-between pt-4">
     <div className="text-xl font-bold text-navy-700 dark:text-white">
     Beneficiary 
@@ -267,17 +224,18 @@ return(
                       className="pt-[14px] pb-[18px] sm:text-[14px] flex items-center"
                       role="cell"
                     >
-          <div className="h-[30px] w-[30px] rounded-full">
+                      <div className="h-[30px] w-[30px] rounded-full">
                         <img
-                          src="https://images.unsplash.com/photo-1506863530036-1efeddceb993?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2244&q=80"
+                          src={e.image}
                           className="h-full w-full rounded-full"
                           alt=""
                         />
                       </div>
-            <p className="text-sm font-bold text-navy-700 dark:text-white">
-              {e.firstName} 
-            </p>
-          </td>
+
+                      <p className="text-sm font-bold text-navy-700 dark:text-white ml-3">
+                        {e.firstName}
+                      </p>
+                    </td>
           <td className="pt-[14px] pb-[18px] sm:text-[14px]" role="cell">
             <div className="flex items-center gap-2">
               <div className="rounded-full text-xl">

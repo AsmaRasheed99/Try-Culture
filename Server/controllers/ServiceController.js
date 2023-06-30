@@ -2,10 +2,10 @@ const Service = require("../models/Services");
 
 
 const AddNewBusiness = async (req, res) => {
-    const { businessName, phoneNumber,location,WorkDays,FromHours,ToHours,culture,businessType,businessImage, provider_id,Payment_id } = req.body;
+    const { businessName, phoneNumber,location,WorkDays,FromHours,ToHours,culture,businessType,businessImage, provider_id,Payment_id,provider_Name } = req.body;
     console.log(req.body);
     try {
-      const service = await Service.create({ businessName,phoneNumber,location,WorkDays,FromHours,ToHours,culture,businessType,businessImage,provider_id,Payment_id });
+      const service = await Service.create({ businessName,phoneNumber,location,WorkDays,FromHours,ToHours,culture,businessType,businessImage,provider_id,Payment_id,provider_Name });
       res.status(200).json(service);
       console.log(service)
     } catch (error) {
@@ -67,6 +67,18 @@ const AddNewBusiness = async (req, res) => {
 
   }
 }
+
+const Approve = async (req, res) => {
+const id = req.params.id;
+console.log(id);
+try {
+  const App = await Service.findByIdAndUpdate(id, { flag: true});
+  res.status(200).json(App);
+} catch (error) {
+  console.error(error.message);
+}
+}
+
 const oneUserBusiness = async (req, res) => {
 
   const businessId = req.params.id;
@@ -79,10 +91,37 @@ const oneUserBusiness = async (req, res) => {
   const updatedService = await service.save();
   console.log(service)
   res.json(updatedService);
-
-
-
 };
+
+const pendingBusiness = (req, res) => { 
+  Service.find({ Subscribed: true,  flag: false })
+    .then((data) => {   
+      res.json(data);
+    })
+    .catch((error) => {
+      errorHandler(error, req, res);
+    });
+};
+
+const ApprovedBusiness = (req, res) => { 
+  Service.find({ Subscribed: true,  flag: true })
+    .then((data) => {   
+      res.json(data);
+    })
+    .catch((error) => {
+      errorHandler(error, req, res);
+    });
+};
+
+const DeleteBusiness = async (req, res) => {
+  const businessId = req.params.id;
+  console.log(businessId)
+
+  // updatedUserData.password= await bcrypt.hash(updatedUserData.password, 5)
+  const service = await Service.findByIdAndUpdate(businessId, {flag:false , Subscribed: false});
+  console.log(service)
+  res.json(service);
+}
   // const averageRating = async (req, res, next) => {
   //   try {
   //     const ratings = await Service.find();
@@ -122,6 +161,10 @@ const oneUserBusiness = async (req, res) => {
     Subscribed,
     allUserServices,
     oneUserBusiness,
+    pendingBusiness,
+    Approve,
+    ApprovedBusiness,
+    DeleteBusiness,
     // addRate,
     // averageRating,
 

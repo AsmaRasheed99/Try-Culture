@@ -245,13 +245,13 @@ const UsersInfo = () => {
               return (
                 <tbody role="rowgroup">
                   <tr role="row">
-                    <td
+                     <td
                       className="pt-[14px] pb-[18px] sm:text-[14px] flex items-center"
                       role="cell"
                     >
                       <div className="h-[30px] w-[30px] rounded-full">
                         <img
-                          src="https://images.unsplash.com/photo-1506863530036-1efeddceb993?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2244&q=80"
+                          src={e.image}
                           className="h-full w-full rounded-full"
                           alt=""
                         />

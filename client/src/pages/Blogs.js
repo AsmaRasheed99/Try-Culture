@@ -2,12 +2,28 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import Swal from "sweetalert2";
+import Box from "@mui/material/Box";
+import { Button } from "@material-tailwind/react";
+import Modal from "@mui/material/Modal";
+
+const style = {
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  width: 400,
+  bgcolor: "background.paper",
+  border: " solid #f2f2f2",
+  boxShadow: 3,
+  p: 4,
+};
 
 
 const Blogs = () => {
-
-  const [modalOpen, setModalOpen] = useState(false); // New state variable
-
+  // const [modalOpen, setModalOpen] = useState(false); // New state variable
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
   const [img, setImg] = useState("");
 
   const onChange = (e) => {
@@ -26,8 +42,6 @@ const Blogs = () => {
       onLoad(reader.result);
     };
   };
-
-
 
   const [User, setUser] = useState(null);
   const [userId, setUserId] = useState(null);
@@ -84,26 +98,29 @@ const Blogs = () => {
         {
           ...newBlog,
           author: User,
-          image:img,
+          image: img,
           userId: userId,
         }
       );
+      setOpen(false);
+      handleClose()
+      // updateProfileRefresh(response)
+      // setModalOpen(false); // Close the modal
+
       const createdBlog = response.data;
       setBlogs([...blogs, createdBlog]);
       setNewBlog({
-        image:img ,
+        image: img,
         title: "",
         content: "",
         author: "",
       });
-      setModalOpen(false); // Close the modal
       Swal.fire({
         title: `Your Blog was successfully submited`,
         icon: "success",
         confirmButtonText: "OK",
       });
       console.log("New blog created:", createdBlog);
-
     } catch (error) {
       Swal.fire({
         title: "Error",
@@ -113,50 +130,52 @@ const Blogs = () => {
       });
       console.error(error.message);
     }
-    console.log(userId)
+    console.log(userId);
   };
 
-  const closeModal = () => {
-    setModalOpen(false);
-  };
-
+  // const closeModal = () => {
+  //   setModalOpen(false);
+  // };
 
   return (
     <>
-      <div className="container mx-auto flex flex-wrap py-6">
+      <div className="container mx-auto flex py-6">
         {/* Posts Section */}
-        <section className="w-[750px] md:w-2/3 flex flex-col items-center px-3">
+        <section className="w-full md:w-2/3 flex flex-col items-center px-3">
           {blogs.map((blog) => (
-            <article className="flex flex-col shadow my-4 w-full " key={blog._id}>
+            <article
+              className="flex flex-col flex-wrap shadow my-4 w-full "
+              key={blog._id}
+            >
               <div className="hover:opacity-75 ">
-                <img src={blog.image} className="w-full h-96" alt="Blog"/>
+                <img src={blog.image} className="w-full h-96" alt="Blog" />
               </div>
-              <div className="bg-white flex flex-col justify-start p-6">
-                <p
-                  className="text-3xl font-bold hover:text-gray-700 pb-4"
-                >
+              <div className="bg-white w-full flex flex-col justify-start p-6">
+                <p className="text-3xl font-bold hover:text-gray-700 pb-4">
                   {blog.title}
                 </p>
 
                 <p className="text-sm pb-3">
-                  By <span className="font-semibold hover:text-gray-800"> {blog.author}</span>
-
-                  
+                  By{" "}
+                  <span className="font-semibold hover:text-gray-800">
+                    {" "}
+                    <Link>{blog.author}</Link>
+                  </span>
                   <br></br>
                   Published on {blog.date}
-                </p><hr></hr>
-                <p
-                  className="uppercase text-gray-800 hover:text-black pt-3"
-                >
-                  {blog.content} 
                 </p>
+                <hr></hr>
+                <p className=" text-gray-800 hover:text-black pt-3">
+                  {blog.content}
+                </p>
+     
               </div>
             </article>
           ))}
         </section>
         {/* Sidebar Section  */}
         <aside className="w-full md:w-1/3 flex flex-col items-center px-3">
-        <div className="w-full bg-white shadow flex flex-col my-4 p-6">
+          <div className="w-full bg-white shadow flex flex-col my-4 p-6">
             <p className="text-xl font-semibold pb-5">Share Your Experience</p>
             <p className="pb-2">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas
@@ -164,75 +183,83 @@ const Blogs = () => {
               In hac habitasse platea dictumst.
             </p>
             <div className="flex flex-col justify-center items-center">
-              <label
-                htmlFor="my-modal"
-                className="w-full bg-cyan-600 text-white font-bold text-sm uppercase rounded hover:bg-[#0b3e45] flex items-center justify-center px-2 py-3 mt-4"
+              <Button
+                className="mb-10 border-solid border-[#0b3e45] border-2 text-[#00acc1] hover:bg-[#0b3e45] hover:text-[#ffffff]"
+                variant="text"
+                onClick={handleOpen}
               >
                 Share Your Experience
-              </label>
+              </Button>
+              <Modal
+                open={open}
+                onClose={handleClose}
+                aria-labelledby="modal-modal-title"
+                aria-describedby="modal-modal-description"
+              >
+                <Box sx={style}>
+                  <div className="flex flex-col">
+                      <input
+                        type="text"
+                        placeholder="Title"
+                        className="input input-bordered input-info w-full max-w-xs mb-5"
+                        value={newBlog.title}
+                        onChange={(e) =>
+                          setNewBlog({ ...newBlog, title: e.target.value })
+                        }
+                      />
 
-              <input type="checkbox" id="my-modal" className="modal-toggle" />
-              <div className="modal">
-                <div className="modal-box">
-                  <form onSubmit={createNewBlog}>
-                    <input
-                      type="text"
-                      placeholder="Title"
-                      className="input input-bordered input-info w-full max-w-xs mb-5"
-                      value={newBlog.title}
-                      onChange={(e) =>
-                        setNewBlog({ ...newBlog, title: e.target.value })
-                      }
-                    />
+                      <textarea
+                        type="text"
+                        placeholder="Content"
+                        className="input input-bordered input-info input-lg w-full max-w-xs mb-5"
+                        value={newBlog.content}
+                        onChange={(e) =>
+                          setNewBlog({ ...newBlog, content: e.target.value })
+                        }
+                      ></textarea>
 
-                    <input
-                      type="text"
-                      placeholder="Content"
-                      className="input input-bordered input-info input-lg w-full max-w-xs mb-5"
-                      value={newBlog.content}
-                      onChange={(e) =>
-                        setNewBlog({ ...newBlog, content: e.target.value })
-                      }
-                    />
+                      <input
+                        type="file"
+                        className="file-input file-input-bordered file-input-accent w-full max-w-xs"
+                        onChange={(e) => {
+                          onChange(e);
+                        }}
+                        accept="image/*"
+                      />
+                      <Button
+                        onClick={createNewBlog}
+                        className=" m-5 border-solid border-[#00acc1] border-2 text-[#00acc1] hover:bg-[#00acc1] hover:text-[#ffffff]"
+                        variant="text"
+                      >
+                        submit
+                      </Button>
+                      <Button
+                        className="m-5 border-solid border-[#0b3e45] border-2 text-[#0b3e45] hover:bg-[#0b3e45] hover:text-[#ffffff]"
+                        variant="text"
+                        onClick={handleClose}
+                      >
+                        Cancel
+                      </Button>
+                  </div>
+                </Box>
+              </Modal>
 
-                    <input
-                      type="file"
-                      className="file-input file-input-bordered file-input-accent w-full max-w-xs"
-                      onChange={(e) => {
-                        onChange(e);
-                      }}
-                      accept="image/*"
-                    />
-
-                    <div className="modal-action">
-                      <button type="submit" className="btn">
-                        Submit
-                      </button>
-                      <button
-                          type="button"
-                          className="btn btn-error"
-                          onClick={closeModal} 
-                        >
-                          Cancel
-                        </button>
-                    </div>
-                  </form>
-                </div>
-              </div>
             </div>
           </div>
+
+          {/** */}
           <div className="w-full bg-white shadow flex flex-col my-4 p-6">
-            <p className="text-xl font-semibold pb-5">About Us</p>
+            <p className="text-xl font-semibold pb-5">Contact Us</p>
             <p className="pb-2">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas
               mattis est eu odio sagittis tristique. Vestibulum ut finibus leo.
               In hac habitasse platea dictumst.
             </p>
             <Link
-              to="/AboutUs"
+              to="/ContactUs"
               className="w-full bg-cyan-600 text-white font-bold text-sm uppercase rounded hover:bg-[#0b3e45] flex items-center justify-center px-2 py-3 mt-4"
             >
-              Get to know us
+              Get in touch with us
             </Link>
           </div>
           <div className="w-full bg-white shadow flex flex-col my-4 p-6">
@@ -249,7 +276,6 @@ const Blogs = () => {
               Get to know us
             </Link>
           </div>
-        
         </aside>
       </div>
     </>

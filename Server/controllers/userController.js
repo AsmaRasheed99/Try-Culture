@@ -42,11 +42,22 @@ const allAdmins = (req, res) => {
 
 const oneUser =  async (req, res) => {
   const id = req.params.id;
-  const user = await User.find({ _id: id });
- 
+  const user = await User.find({ _id: id  });
+ console.log(user)
   res.json(user);
 };
 
+const chatUser = async (req, res) => {
+  const userId = req.params.id;
+    console.log(userId);
+    try {
+      const user =  await User.findById(userId)
+      console.log(user);
+      res.status(200).json(user);
+    } catch (err) {
+      res.status(500).json(err);
+    }
+};
 
 
 const newUser =  async (req, res) => {
@@ -160,5 +171,6 @@ module.exports = {
   allAdmins,
   newUserContactUs,
   usersMessages,
+  chatUser,
   
 }; 

@@ -18,7 +18,7 @@ function Home() {
   return (
     <div>
       <Slider2 />
-      <div className="container my-24 px-6 mx-auto">
+      <div className="container my-24 lg:px-30 md:px-5 sm:px-5 ">
         {/* Section: Design Block */}
         <section className="mb-32 text-gray-800">
           <h2 className="text-3xl font-bold mb-8 text-center font-serif italic text-cyan-500">
@@ -73,7 +73,7 @@ function Home() {
             <div className="grow-0 shrink-0 basis-auto w-full lg:w-7/12 md:px-6">
               <>
                 {" "}
-                <div className="flex mb-12" onClick={()=> {
+                <div className="flex mb-12 cursor-pointer" onClick={()=> {
                   handleCulture("Egypt")
                 }} >
                   <div className="shrink-0">
@@ -185,37 +185,9 @@ function Home() {
                 <div className="lg:flex items-stretch md:mt-12 mt-8">
                   <div className="lg:w-1/2">
                     <div className="sm:flex items-center justify-between xl:gap-x-8 gap-x-6">
-                      <div className="sm:w-1/2 relative  transition duration-300 ease-in-out hover:scale-110">
-                        <div>
-                         
-                        </div>
-                        <img
-                          src="https://images.pexels.com/photos/5738091/pexels-photo-5738091.jpeg?auto=compress&cs=tinysrgb&w=600"
-                          className=" w-[530px] h-[250px]"
-                          alt="chair"
-                        />
-                      </div>
-                      <div className="sm:w-1/2 sm:mt-0 mt-4 relative  transition duration-300 ease-in-out hover:scale-110">
-                        <div>
-                      
-                        </div>
-                        <img
-                          src="https://media.istockphoto.com/id/1252684502/photo/professional-blogger-working-on-his-new-post-for-social-media-at-home-closeup-creative.jpg?b=1&s=612x612&w=0&k=20&c=Wf2xfJbZXVhNepslbcOLQ_DGzPWlr9i3ae3W1Mn2J1M="
-                          className="w-[538px] h-[250px]"
-                          alt="chair"
-                        />
-                      </div>
+                      <p>hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh</p>
                     </div>
-                    <div className="relative  transition duration-300 ease-in-out hover:scale-105">
-                      <div>
-                       
-                      </div>
-                      <img
-                        src="https://images.unsplash.com/photo-1546074177-ffdda98d214f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OXx8YmxvZ3xlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=60"
-                        alt="sitting place"
-                        className=" mt-8 md:mt-6 w-full h-[548px] hidden sm:block"
-                      />
-                    </div>
+                   
                   </div>
                   <div className="lg:w-1/2 xl:ml-8 lg:ml-4 lg:mt-0 md:mt-6 mt-4 lg:flex flex-col justify-between">
                     <div className="relative transition duration-300 ease-in-out hover:scale-105">
@@ -263,6 +235,40 @@ function Home() {
             {/* ///////////////////////////////// */}
           </section>
           {/* Section: Design Block */}
+          {/* <div className="lg:w-1/2 mx-20">
+                    <div className="sm:flex items-center justify-between xl:gap-x-8 gap-x-6">
+                      <div className="sm:w-1/2 relative  transition duration-300 ease-in-out hover:scale-110">
+                        <div>
+                         
+                        </div>
+                        <img
+                          src="https://images.pexels.com/photos/5738091/pexels-photo-5738091.jpeg?auto=compress&cs=tinysrgb&w=600"
+                          className=" w-[530px] h-[250px]"
+                          alt="chair"
+                        />
+                      </div>
+                      <div className="sm:w-1/2 sm:mt-0 mt-4 relative  transition duration-300 ease-in-out hover:scale-110">
+                        <div>
+                      
+                        </div>
+                        <img
+                          src="https://media.istockphoto.com/id/1252684502/photo/professional-blogger-working-on-his-new-post-for-social-media-at-home-closeup-creative.jpg?b=1&s=612x612&w=0&k=20&c=Wf2xfJbZXVhNepslbcOLQ_DGzPWlr9i3ae3W1Mn2J1M="
+                          className="w-[538px] h-[250px]"
+                          alt="chair"
+                        />
+                      </div>
+                    </div>
+                    <div className="relative  transition duration-300 ease-in-out hover:scale-105">
+                      <div>
+                       
+                      </div>
+                      <img
+                        src="https://images.unsplash.com/photo-1546074177-ffdda98d214f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OXx8YmxvZ3xlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=60"
+                        alt="sitting place"
+                        className=" mt-8 md:mt-6 w-full h-[548px] hidden sm:block"
+                      />
+                    </div>
+                  </div> */}
         </div>
       </>
     </div>

@@ -7,7 +7,7 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 
 
 
-function ServiceForm(UserIdApp) {
+function ServiceForm({UserIdApp}) {
 
   const navigate = useNavigate();
 
@@ -42,38 +42,30 @@ function ServiceForm(UserIdApp) {
     businessType: "",
     businessImage: "",
     provider_id:"",
+    provider_Name:"",
+    
   });
  
-  // const [ProviderId , setProviderId] = useState("");
-  //   const fetchProtectedData = async () => {
-  //     try {
-  //       const token = localStorage.getItem("auth");
-  //       if (token) {
-  //         const response = await axios.get("http://localhost:5000/protected", {
-  //           headers: {
-  //             Authorization: token,
-  //           },
-  //         });
-  //         setProviderId(response.data.user.id);
-  //         console.log(response.data.user.id);
+  const [ProviderName , setProviderName] = useState("");
+    const fetchProvider = async () => {
+      try {
+        const provider = await axios.get(`http://localhost:5000/api/users/${UserIdApp}`)
+        console.log(provider.data)
+        setProviderName(provider.data[0].firstName)
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    useEffect(() => {
+      fetchProvider();
 
-  //       }
-
-  //     } catch (error) {
-  //       console.error(error.message);
-  //       // localStorage.removeItem("auth");
-  //       // window.location.href = "http://localhost:3000/Login";
-  //     }
-  //   };
-  //   useEffect(() => {
-  //     fetchProtectedData();
-  // }, []);
-
+  }, []);
+console.log(ProviderName)
 
   const CreateNewBusiness = async (e) => {
     e.preventDefault();
     console.log({...NewBusiness,businessImage: img,
-            provider_id: UserIdApp.UserIdApp,
+            provider_id: UserIdApp,
           } )
 
     try {
@@ -82,7 +74,8 @@ function ServiceForm(UserIdApp) {
         {
           ...NewBusiness,
           businessImage: img,
-          provider_id: UserIdApp.UserIdApp,
+          provider_id: UserIdApp,
+          provider_Name: ProviderName,
         }
       );
       const createdBusiness = response.data;
@@ -97,7 +90,8 @@ function ServiceForm(UserIdApp) {
         culture: "",
         businessType: "",
         businessImage: img,
-        provider_id: UserIdApp.UserIdApp,
+        provider_id: UserIdApp,
+        provider_Name: ProviderName,
 
       });
       console.log(response.data)

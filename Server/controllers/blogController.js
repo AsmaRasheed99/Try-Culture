@@ -48,7 +48,14 @@ const createNewBlog = async (req, res) => {
   };
   
 
+ const deleteBlog = async (req, res ) => {
+ 
+  const blogId = req.params.id;
 
+  const deletedBlog = await BlogPost.findByIdAndDelete(blogId);
+  res.json(deletedBlog);
+
+ }
 
     
 
@@ -57,4 +64,5 @@ const createNewBlog = async (req, res) => {
     getAllBlogs,
     allUserBlogs,
     oneUserBlogs,
+    deleteBlog,
   }; 

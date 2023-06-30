@@ -18,11 +18,11 @@ const ServiceSchema = new Schema({
     type: String,
     required: true,
   },
- FromHours: {
+  FromHours: {
     type: String,
     required: true,
   },
- ToHours: {
+  ToHours: {
     type: String,
     required: true,
   },
@@ -40,7 +40,7 @@ const ServiceSchema = new Schema({
   },
   provider_id: {
     type: Schema.Types.ObjectId,
-    required : true
+    required: true,
   },
   averageRating: {
     type: String,
@@ -50,14 +50,32 @@ const ServiceSchema = new Schema({
     type: Boolean,
     default: false,
   },
-  Subscribed : {
+  Subscribed: {
     type: Boolean,
     default: false,
   },
   Payment_id: {
     type: Schema.Types.ObjectId,
-    required : false,    
+    required: false,
   },
+  provider_Name: {
+    type: String,
+    required: true,
+  },
+  rate: {
+    type: Array,
+    required: false,
+  },
+  rating: {
+    type: String,
+    required: false,
+    default: "0",
+  },
+  UsersIdRate: {
+    type: Array,
+    required: false,
+  },
+  
 });
 
 const Service = mongoose.model("Service", ServiceSchema);

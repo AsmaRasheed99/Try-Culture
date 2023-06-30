@@ -115,7 +115,7 @@ function handleLogOut(){
           </ListItem>
           </Link>
 
-          <Link to='/AcceptTables'>
+          <Link to='/Pending'>
           <ListItem className="hover:bg-[#00ACC1]">
             <ListItemPrefix>
             <Icon path={mdiReload

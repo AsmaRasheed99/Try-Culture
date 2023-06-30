@@ -3,11 +3,14 @@ const cors = require("cors");
 const PORT = process.env.PORT;
 const mongoose = require("mongoose");
 const userRouts = require('./Routes/userRouter');
-// const aboutUsRouts = require('./routes/aboutUsRouter');
+const aboutUsRouts = require('./Routes/aboutUsRouter');
 const paymentRouts = require('./Routes/paymentRouter');
 const BlogRouts = require('./Routes/blogRouter');
 const CultureRouts = require('./Routes/culturesRouter');
 const ServiceRouts = require('./Routes/serviceRouter');
+const EventsRouts = require('./Routes/EventsRouter');
+const ConversationRouts = require('./Routes/conversationsRouter');
+const MessageRouts = require('./Routes/messagesRouter');
 
 // const beneficiaryRouter = require('./routes/beneficiaryRouter');
 const notFoundHandler = require('./middleware/404');
@@ -26,11 +29,15 @@ app.get("/", (req, res) => {
 
 app.use(userRouts);
 // app.use(beneficiaryRouter);
-// app.use(aboutUsRouts);
+app.use(aboutUsRouts);
 app.use(paymentRouts);
 app.use(BlogRouts);
 app.use(CultureRouts);
 app.use(ServiceRouts);
+app.use(EventsRouts);
+app.use(ConversationRouts);
+app.use(MessageRouts);
+
 app.use('*',notFoundHandler);
 app.use(errorHandler);
 app.use(Protected)

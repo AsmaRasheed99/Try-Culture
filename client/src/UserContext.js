@@ -7,6 +7,8 @@ const UserProvider = ( {children} ) => {
   const [test, setTest] = useState([]);
   const [closeNav, setCloseNav] = useState();
   const [profileRefresh, setProfileRefresh] = useState([]);
+  const [EventRefresh, setEventRefresh] = useState([]);
+  const [RateRefresh, setRateRefresh] = useState([]);
 
 
   const updateTest = (newValue) => {
@@ -15,8 +17,14 @@ const UserProvider = ( {children} ) => {
   const updateNav = (newValue) => {
     setCloseNav(newValue);
   };
+  const updateEventRefresh = (newValue) => {
+    setEventRefresh(newValue);
+  };
   const updateProfileRefresh = (newValue) => {
     setProfileRefresh(newValue);
+  };
+  const updateRateRefresh = (newValue) => {
+    setRateRefresh(newValue);
   };
 console.log(profileRefresh)
 
@@ -27,7 +35,7 @@ console.log(profileRefresh)
         <>
             <UserContext.Provider
                 value={{
-                 test,updateTest,closeNav,updateNav,profileRefresh,updateProfileRefresh
+                 test,updateTest,closeNav,updateNav,profileRefresh,updateProfileRefresh,updateEventRefresh,EventRefresh,updateRateRefresh,RateRefresh
                 }}
             >
                 {children}

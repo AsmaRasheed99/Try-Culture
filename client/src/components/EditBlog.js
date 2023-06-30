@@ -92,14 +92,23 @@ function EditBlog(props) {
           console.log(response);
           handleClose()
           updateProfileRefresh(response)
-          
+          setOpen(false);
         })
         .catch(function (error) {
           console.log(error);
         });
 
+    }
 
-
+    const handleDelete = async () => {
+      try {
+       const response = await axios.delete(`http://localhost:5000/api/deleteBlog/${Id}`);
+        updateProfileRefresh(response)
+        setOpen(false);
+        handleClose()
+      } catch (error) {
+        console.error(error.message)
+      }
 
     }
   return (
@@ -178,6 +187,13 @@ function EditBlog(props) {
             onClick={handleClose}
           >
             Cancel
+          </Button>
+          <Button
+            className="m-5 border-solid border-red-800 border-2 text-red-800 hover:bg-red-800 hover:text-[#ffffff]"
+            variant="text"
+            onClick={handleDelete}
+          >
+            Delete
           </Button>
         </div>
       </Box>
