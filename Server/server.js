@@ -1,5 +1,6 @@
 const express = require("express");
 const cors = require("cors");
+const path = require("path");
 const PORT = process.env.PORT;
 const mongoose = require("mongoose");
 const userRouts = require('./Routes/userRouter');
@@ -20,8 +21,7 @@ const errorHandler = require('./middleware/500')
 const Protected = require('./middleware/Protected')
 const app = express();
 app.use(cors());
-app.use(express.json({limit:'50mb'}));
-
+app.use(express.static('public'));
 
 app.get("/", (req, res) => {
   res.send("Welcome");
@@ -41,6 +41,9 @@ app.use(MessageRouts);
 app.use('*',notFoundHandler);
 app.use(errorHandler);
 app.use(Protected)
+
+
+app.use("/public", express.static(path.join(__dirname, "public")));
 
 
 

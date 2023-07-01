@@ -94,7 +94,9 @@ function Profile() {
     }
   }, [profileRefresh]);
 
-  console.log(profileRefresh);
+  console.log(img);
+
+  
   return (
     <div>
       <>
@@ -148,11 +150,10 @@ function Profile() {
                   <div className="flex flex-wrap justify-center">
                     <div className="w-full lg:w-3/12 px-4 lg:order-2 flex justify-center">
                       <div className="relative">
-                        <img
-                          alt="..."
-                          src={img}
-                          className="shadow-xl rounded-full h-40 w-96 align-middle border-none absolute -m-16 -ml-20 lg:-ml-16 max-w-150-px"
-                        />
+                      <img className="shadow-xl rounded-full h-40 w-96 align-middle border-none absolute -m-16 -ml-20 lg:-ml-16 max-w-150-px" 
+                      src={`http://localhost:5000/${img}`}
+                      />
+
                       </div>
                     </div>
                     <div className="w-full lg:w-4/12 px-4 lg:order-3 lg:text-right lg:self-center">
@@ -213,7 +214,7 @@ function Profile() {
                               key={blog._id}
                             >
                               <div className="hover:opacity-75 ">
-                                <img src={blog.image} alt="Blog" />
+                                {/* <img src={`http://localhost:5000/${blog.image}`}/> */}
                               </div>
                               <div className="bg-white flex flex-col justify-start p-6">
                                 <p className="text-3xl font-bold hover:text-gray-700 pb-4">
@@ -258,7 +259,7 @@ function Profile() {
                               <Card className="w-full max-w-[26rem] shadow-lg">
                                 <CardHeader floated={false} color="blue-gray">
                                   <img
-                                    src={card.businessImage}
+                                    // src={card.businessImage}
                                     alt="ui/ux review check"
                                   />
                                   <div className="to-bg-black-10 absolute inset-0 h-full w-full bg-gradient-to-tr from-transparent via-transparent to-black/60 " />

@@ -34,6 +34,12 @@ const [open, setOpen] = React.useState(false);
     const [name, setName] = useState("");
   const [email, setEmail] = useState("");
 
+  
+  const [productImage, setProductImage] = useState(null);
+
+  const handleProductImageChange = (event) => {
+    setProductImage(event.target.files[0]);
+  };
 
   const [img, setImg] = useState("");
 
@@ -98,19 +104,21 @@ const [open, setOpen] = React.useState(false);
   const handleSubmit = async (e) => {
     e.preventDefault();
 console.log(name,email,userId )
-    axios
-      .put(`http://localhost:5000/api/users/${userId}`, {
-        firstName: name,
-        email: email,
-        image: img,
 
-      })
+const formData = new FormData()
+formData.append('firstName',name)
+formData.append('image',productImage)
+formData.append('email',email)
+
+    // console.log(name , productImage , email)
+
+    axios
+      .put(`http://localhost:5000/api/usersMulter/${userId}`, formData)
       .then(function (response) {
         console.log(response);
-        // navigate("/ProfilePage")
-        // window.location.href = 'http://localhost:3000/ProfilePage';
+      
         handleClose()
-        updateProfileRefresh(response)
+        // updateProfileRefresh(response)
         
       })
       .catch(function (error) {
@@ -162,14 +170,22 @@ console.log(name,email,userId )
             </Input>{" "}
             <br></br>
 
-            <input
+            {/* <input
                       type="file"
                       className="file-input file-input-bordered file-input-accent w-full max-w-xs"
                       onChange={(e) => {
                         onChange(e);
                       }}
                       accept="image/*"
-                    />
+                    /> */}
+                     <input
+            className="file-upload-input mx-auto"
+            type="file"
+            name="image"
+            onChange={handleProductImageChange}
+            accept="image/*"
+            required
+          />
             <Button
               onClick={handleSubmit}
               className=" m-5 border-solid border-[#00acc1] border-2 text-[#00acc1] hover:bg-[#00acc1] hover:text-[#ffffff]"
