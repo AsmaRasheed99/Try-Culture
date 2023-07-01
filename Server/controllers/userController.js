@@ -6,7 +6,7 @@ const jwt = require("jsonwebtoken");
 const SECRETKEY = process.env.SECRETKEY;
 
 const allUsers = (req, res) => {
-  User.find({ role: 0 })
+  User.find({ role: 0})
     .then((data) => {
       res.json(data);
     })

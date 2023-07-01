@@ -8,26 +8,14 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 
 
 function ServiceForm({UserIdApp}) {
-
+console.log(UserIdApp);
   const navigate = useNavigate();
 
-  const [img, setImg] = useState("");
+  
+  const [productImage, setProductImage] = useState(null);
 
-  const onChange = (e) => {
-    const files = e.target.files;
-    const file = files[0];
-    getBase64(file);
-    console.log(img);
-  };
-  const onLoad = (fileString) => {
-    setImg(fileString);
-  };
-  const getBase64 = (file) => {
-    let reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onload = () => {
-      onLoad(reader.result);
-    };
+  const handleProductImageChange = (event) => {
+    setProductImage(event.target.files[0]);
   };
 
   const [Business, setBusiness] = useState([]);
@@ -64,19 +52,28 @@ console.log(ProviderName)
 
   const CreateNewBusiness = async (e) => {
     e.preventDefault();
-    console.log({...NewBusiness,businessImage: img,
-            provider_id: UserIdApp,
-          } )
+
+    const formData = new FormData();
+    formData.append("image", productImage);
+    formData.append("location", NewBusiness.location);
+    formData.append("businessName",NewBusiness.businessName);
+    formData.append("phoneNumber",NewBusiness.phoneNumber);
+    formData.append("WorkDays",NewBusiness.WorkDays);
+    formData.append("FromHours",NewBusiness.FromHours);
+    formData.append("ToHours",NewBusiness.ToHours);
+    formData.append("culture",NewBusiness.culture);
+    formData.append("businessType",NewBusiness.businessType);
+    formData.append("provider_id",UserIdApp);
+    formData.append("provider_Name",ProviderName);
+ 
+    console.log(productImage, NewBusiness.location,NewBusiness.businessType,UserIdApp, ProviderName,NewBusiness.businessName, NewBusiness.phoneNumber,NewBusiness.WorkDays,NewBusiness.FromHours,NewBusiness.ToHours,NewBusiness.culture,)
+    console.log(NewBusiness)
+
+   
 
     try {
       const response = await axios.post(
-        "http://localhost:5000/api/AddNewBusiness",
-        {
-          ...NewBusiness,
-          businessImage: img,
-          provider_id: UserIdApp,
-          provider_Name: ProviderName,
-        }
+        "http://localhost:5000/api/AddNewBusiness", formData
       );
       const createdBusiness = response.data;
       setBusiness([...Business, createdBusiness]);
@@ -89,7 +86,7 @@ console.log(ProviderName)
         ToHours: "",
         culture: "",
         businessType: "",
-        businessImage: img,
+        businessImage: productImage,
         provider_id: UserIdApp,
         provider_Name: ProviderName,
 
@@ -326,14 +323,13 @@ console.log(ProviderName)
               </label>
 
               <input
-                className="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-200 dark:text-gray-400 focus:outline-none dark:bg-cyan-700 dark:border-cyan-600 dark:placeholder-cyan-400"
-                id="file_input"
-                type="file"
-                onChange={(e) => {
-                  onChange(e);
-                }}
-                accept="image/*"
-              />
+            className="file-upload-input mx-auto"
+            type="file"
+            name="image"
+            onChange={handleProductImageChange}
+            accept="image/*"
+            required
+          />
             </div>
           </div>
           <div className="flex flex-wrap -mx-3 mb-6 mt-5">

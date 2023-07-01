@@ -11,36 +11,17 @@ import { mdiShieldCrownOutline } from "@mdi/js";
 import { mdiAccountOutline } from "@mdi/js";
 
 const EditCultures = () => {
-  const onChange = (e) => {
-    const files = e.target.files;
-    const file = files[0];
-    getBase64(file);
-  };
-  const onLoad = (fileString) => {
-    setImage(fileString);
-  };
-  const getBase64 = (file) => {
-    let reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onload = () => {
-      onLoad(reader.result);
-    };
+
+  const [productImage, setProductImage] = useState(null);
+
+  const handleProductImageChange = (event) => {
+    setProductImage(event.target.files[0]);
   };
 
-  const onChange2 = (e) => {
-    const files2 = e.target.files;
-    const file2 = files2[0];
-    getBase642(file2);
-  };
-  const onLoad2 = (fileString2) => {
-    setHeroImage(fileString2);
-  };
-  const getBase642 = (file) => {
-    let reader2 = new FileReader();
-    reader2.readAsDataURL(file);
-    reader2.onload = () => {
-      onLoad2(reader2.result);
-    };
+  const [productImage0, setProductImage0] = useState(null);
+
+  const handleProductImageChange0 = (event) => {
+    setProductImage0(event.target.files[0]);
   };
 
   const [cultures, setCultures] = useState([]);
@@ -77,16 +58,22 @@ const EditCultures = () => {
 
  const EditCulture = async (e)=> {
     e.preventDefault();
-    
-    const updatedCulture = {
-        Culture:Culture,
-        Information:Information,
-        HeroImage:HeroImage,
-        image:Image
-    }
+  
+
+    const formData = new FormData();
+    formData.append("Culture", Culture);
+    formData.append("image1", productImage);
+    formData.append("image2", productImage0);
+    formData.append("Information", Information);
+   
 
     try {
-        const updated = await axios.put(`http://localhost:5000/api/updateCulture/${cultureId}`, updatedCulture)
+        const updated = await axios.put(`http://localhost:5000/api/updateCulture/${cultureId}`, formData, {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+        },
+      }
+       )
     } catch (error) {
         console.error(error)
     }
@@ -259,14 +246,12 @@ const EditCultures = () => {
               Hero Image
             </label>
             <input
-              className="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 mb-5"
-              aria-describedby="user_avatar_help"
-              id="hero"
+              className="file-upload-input mx-auto"
               type="file"
-              onChange={(e) => {
-                onChange2(e);
-              }}
+              name="image"
+              onChange={handleProductImageChange}
               accept="image/*"
+              required
             />
 
             <label
@@ -276,14 +261,12 @@ const EditCultures = () => {
               Card Image
             </label>
             <input
-              className="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
-              aria-describedby="user_avatar_help"
-              id="user_avatar"
+              className="file-upload-input mx-auto"
               type="file"
-              onChange={(e) => {
-                onChange(e);
-              }}
+              name="image"
+              onChange={handleProductImageChange0}
               accept="image/*"
+              required
             />
             <button
               type="submit"

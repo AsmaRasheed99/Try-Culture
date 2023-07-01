@@ -18,6 +18,7 @@ export default function Conversation({ conversation, currentUser }) {
       try {
         const res = await axios.get(`http://localhost:5000/api/chatUser/${friendId}`);
         setUser(res.data);
+        console.log(user)
       } catch (err) {
         console.log(err);
       }

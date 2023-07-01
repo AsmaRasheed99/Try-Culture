@@ -5,7 +5,7 @@ import Swal from "sweetalert2";
 import Box from "@mui/material/Box";
 import { Button } from "@material-tailwind/react";
 import Modal from "@mui/material/Modal";
-
+import { Pagination } from "@mui/material";
 const style = {
   position: "absolute",
   top: "50%",
@@ -22,6 +22,7 @@ const Blogs = () => {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+
 
   const [productImage, setProductImage] = useState(null);
 
@@ -126,13 +127,28 @@ const Blogs = () => {
   const closeModal = () => {
     setModalOpen(false);
   };
+   /// pagination
+ 
 
+  const [currentResPage, setCurrentResPage] = useState(1);
+
+  const handleResChangeArray = (event, page) => {
+    setCurrentResPage(page);}
+
+  const itemsPerPage = 1;
+
+  const totalResPagesArray = Math.ceil(blogs.length / itemsPerPage);
+
+
+  const startResIndexArray = (currentResPage - 1) * itemsPerPage;
+  const endResIndexArray = startResIndexArray + itemsPerPage;
+  const slicedResArray = blogs.slice(startResIndexArray, endResIndexArray);
   return (
     <>
       <div className="container mx-auto flex py-6">
         {/* Posts Section */}
         <section className="w-full md:w-2/3 flex flex-col items-center px-3">
-          {blogs.map((blog) => (
+          {slicedResArray.map((blog) => (
             <article
               className="flex flex-col flex-wrap shadow my-4 w-full "
               key={blog._id}
@@ -165,7 +181,16 @@ const Blogs = () => {
               </div>
             </article>
           ))}
+          <div className="flex flex-col justify-center items-center  mt-20 w-full">
+          
+          <Pagination
+            count={totalResPagesArray}
+            page={currentResPage}
+            onChange={handleResChangeArray}
+          />
+        </div>
         </section>
+        
         {/* Sidebar Section  */}
         <aside className="w-full md:w-1/3 flex flex-col items-center px-3">
           <div className="w-full bg-white shadow flex flex-col my-4 p-6">

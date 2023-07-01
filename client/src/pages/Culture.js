@@ -50,7 +50,6 @@ function Culture({UserIdApp}) {
     try {
       const culture = await axios.get(`http://localhost:5000/api/oneCulture/${country}`)
       setCulture(culture.data);
-      // console.log(Culture.HeroImage)
     } catch (error) {
       console.error(error.message);
     }
@@ -111,6 +110,8 @@ console.log(Business)
         setFilteredBusiness(filteredDataVegetables);
         // setCurrentPageVegetables(1);
       };
+      console.log(Culture.HeroImage)
+
    console.log(Culture)
   return (
     <div style={{ backgroundColor: "#f2f2f2" }}>
@@ -143,7 +144,10 @@ console.log(Business)
   <div className="container flex flex-col justify-center p-6 mx-auto sm:py-12 lg:py-24 lg:flex-row lg:justify-center">
     <div className="flex items-center font-serif italic font-bold justify-center p-6 mt-8 lg:mt-0 h-72 sm:h-80 lg:h-96 xl:h-112 2xl:h-128">
       <img
-            src={Culture?.HeroImage}
+
+src={`http://localhost:5000/public/images/${Culture.HeroImage}`}
+
+
             alt=""
         className="object-contain h-72 sm:h-80 lg:h-96 xl:h-112 2xl:h-128"
       />

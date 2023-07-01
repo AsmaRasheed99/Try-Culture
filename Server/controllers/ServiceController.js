@@ -2,10 +2,12 @@ const Service = require("../models/Services");
 
 
 const AddNewBusiness = async (req, res) => {
-    const { businessName, phoneNumber,location,WorkDays,FromHours,ToHours,culture,businessType,businessImage, provider_id,Payment_id,provider_Name } = req.body;
-    console.log(req.body);
+    const { businessName, phoneNumber,location,WorkDays,FromHours,ToHours,culture,businessType, provider_id,provider_Name } = req.body;
+    const businessImage = req.file.path;
+    console.log("a")
+    console.log(businessName, businessType, location, FromHours, ToHours, culture, WorkDays, phoneNumber, provider_id, provider_Name);
     try {
-      const service = await Service.create({ businessName,phoneNumber,location,WorkDays,FromHours,ToHours,culture,businessType,businessImage,provider_id,Payment_id,provider_Name });
+      const service = await Service.create({ businessName,phoneNumber,location,WorkDays,FromHours,ToHours,culture,businessType,businessImage,provider_id,provider_Name });
       res.status(200).json(service);
       console.log(service)
     } catch (error) {

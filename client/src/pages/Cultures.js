@@ -116,8 +116,9 @@ console.log(countries)
           <Slide index={index}>
             <div className="flex flex-shrink-0 relative w-full sm:w-auto">
               <img
-                src={card.image}
-                alt="black chair and white table"
+                  src={`http://localhost:5000/public/images/${card.image}`}
+
+                  alt="black chair and white table"
                 className="object-cover object-center w-full"
               />
               <div

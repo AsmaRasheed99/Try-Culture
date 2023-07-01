@@ -2,10 +2,12 @@ const cultures = require("../models/cultures");
 
 
 const AddNewCulture = async (req, res) => {
-    const {  Culture ,image, HeroImage,Information} = req.body;
-    console.log(Culture, image, HeroImage, Information)
+    const {  Culture ,Information} = req.body;
+    const image1 = req.files['image1'][0];
+    const image2 = req.files['image2'][0];
+        console.log(Culture, Information, image1.filename, image2.filename);
     try {
-      const culture = await cultures.create({ Culture,image, HeroImage,Information });
+      const culture = await cultures.create({ Culture:Culture ,image:image1.filename, HeroImage:image2.filename,Information:Information });
       res.status(200).json(culture);
     } catch (error) {
       res.status(400).json({ error: error.message });
@@ -39,10 +41,12 @@ const AddNewCulture = async (req, res) => {
    
   const updateCulture = async (req, res) => {
     const cultureId = req.params.id;
-    const {Culture , Information , HeroImage, image} = req.body;
-    console.log(image);
+    const image1 = req.files['image1'][0];
+    const image2 = req.files['image2'][0];
+    const {Culture , Information } = req.body;
+    console.log(image1, image2);
     try {
-      const updateCulture = await cultures.findByIdAndUpdate(cultureId,{Culture:Culture, Information:Information, HeroImage:HeroImage, image:image});
+      const updateCulture = await cultures.findByIdAndUpdate(cultureId,{Culture:Culture, Information:Information, HeroImage:image2.filename, image:image1.filename});
       res.json(updateCulture);
     } catch (error) {
       console.error(error.message);

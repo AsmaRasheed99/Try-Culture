@@ -1,8 +1,8 @@
 import React, { useEffect, useState, useRef } from 'react'
 import './Messenger.css'
+import '../Messenger/ChatOnline.css'
 import Conversation from '../../components/conversations/Conversation'
 import Message from '../../components/messages/Message'
-import ChatOnline from '../../components/chatOnline/ChatOnline'
 import axios from "axios";
 import { io } from 'socket.io-client';
 
@@ -15,7 +15,9 @@ export default function Messenger({UserApp}) {
     const [messages, setMessages] = useState([]);
     const [newMessage, setNewMessage] = useState("");
     const [arrivalMessage, setArrivalMessage] = useState(null);
-    const [onlineUsers, setOnlineUsers] = useState([]);
+    const [persons, setPersons] = useState([]);
+    const [FilterDataUsers,setFilterDataUsers]= useState([]);
+    const [searchTermUsers, setSearchTermUsers] = useState("");
     const socket = useRef()
     const scrollRef = useRef();
 
@@ -40,9 +42,7 @@ export default function Messenger({UserApp}) {
 
     useEffect(()=>{
         socket.current.emit("addUser", UserId)
-        socket.current.on("getUsers", users =>{
-            setOnlineUsers(users)
-        })
+       
     },[UserApp]);
 
 
@@ -102,19 +102,88 @@ export default function Messenger({UserApp}) {
   useEffect(() => {
     scrollRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
+ 
+  const allUsers = async () => {
+    const token = localStorage.getItem("auth");
+    try {
+      // Send the data to the server using an HTTP POST request
+      const response = await axios.get("http://localhost:5000/api/users", {
+        headers: {
+          Authorization: token,
+        },
+      });
 
+      console.log(response.data);
+      setPersons(response.data);
+      setFilterDataUsers(response.data);
+    } catch (error) {
+      console.error("Error inserting data:", error);
+    }
+  };
+
+  useEffect(() => {
+    allUsers();
+  }, []);
+
+  //-----------------------search------------------------//
+
+  const filterDataByNameUsers = (searchTermUsers) => {
+    const filteredDataUsers = persons.filter((item) =>
+      item.firstName.toLowerCase().includes(searchTermUsers.toLowerCase())
+    );
+    setFilterDataUsers(filteredDataUsers);
+    console.log(filteredDataUsers);
+    setCurrentPageUsers(1);
+  };
+
+  const [currentPageUsers, setCurrentPageUsers] = useState(1);
+  let totalItemsUsers;
+
+  let totalPagesUsers;
+
+  let slicedArrayUsers;
+
+  const itemsPerPage = 5;
+
+  totalItemsUsers = FilterDataUsers.length;
+
+  totalPagesUsers = Math.ceil(totalItemsUsers / itemsPerPage);
+
+  const startIndexUsers = (currentPageUsers - 1) * itemsPerPage;
+
+  const endIndexUsers = startIndexUsers + itemsPerPage;
+
+  slicedArrayUsers = FilterDataUsers.slice(startIndexUsers, endIndexUsers);
+
+  const handlePageChangeUsers = (event, pageNumber) => {
+    setCurrentPageUsers(pageNumber);
+  };
+
+const startConversation = (id)=>{
+ console.log(id)
+ console.log(UserId)
+ try {
+    const conversation = axios.post("http://localhost:5000/api/NewConversation", {
+        senderId:UserId,
+        receiverId:id,
+
+    })
+ } catch (error) {
+    
+ }
+}
  return (
     <>
     <div className='messenger'>
         <div className='chatMenu'>
             <div className='chatMenuWrapper'>
-             <input placeholder='Search for friends' className='chatMenuInput'/>
-             
+           
             {conversations.map((c) =>
             <div onClick={()=> setcurrentChat(c)}>
              <Conversation conversation={c} currentUser={UserApp} />
              </div>
              )}
+           
             
 
             
@@ -142,13 +211,33 @@ export default function Messenger({UserApp}) {
                 </div>
                 </> : <span className='noConversationText'>Start A Conversation</span> }
             </div>
+            
         </div>
         <div className='chatOnline'>
             <div className='chatOnlineWrapper'>
-                {/* <ChatOnline
-                 onlineUsers={onlineUsers}
-                 currentId={UserId} 
-                 setcurrentChat={setcurrentChat}/> */}
+            <input
+              type="text"
+              id="search"
+              className="block w-full p-4 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              placeholder="Search"
+              required=""
+              value={searchTermUsers}
+              onChange={(e) => {
+                setSearchTermUsers(e.target.value);
+                filterDataByNameUsers(e.target.value);
+              }}
+            />             
+            {FilterDataUsers.map((c) =>
+             <div className="conversation" onClick={()=>startConversation(c._id)}>
+             <img
+               className="conversationImg"
+               src={`http://localhost:5000/${c?.image}`}
+               alt=""
+             />
+             <span className="conversationName">{c?.firstName}</span>
+           </div>
+           
+             )}
             </div>
         </div>
         </div>
