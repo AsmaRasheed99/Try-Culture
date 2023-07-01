@@ -14,7 +14,7 @@ const CultureSchema = new Schema({
     },
     HeroImage: {
         type : String,
-        required : false
+        required : true
     },
     Information: {
         type : String,

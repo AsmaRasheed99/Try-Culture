@@ -35,13 +35,7 @@ function Profile() {
           },
         });
         setUserId(response.data.user.id);
-        // setUserName(response.data.user.username);
-        // setUserEmail(response.data.user.email);
-        // setUserRole(response.data.user.role);
-        // console.log(response.data.user.id);
-        // console.log(response.data.user.email);
-        // console.log(response.data.user.username);
-        // console.log(response.data.user.role);
+   
 
         axios
           .get(`http://localhost:5000/api/users/${response.data.user.id}`)
@@ -214,7 +208,7 @@ function Profile() {
                               key={blog._id}
                             >
                               <div className="hover:opacity-75 ">
-                                {/* <img src={`http://localhost:5000/${blog.image}`}/> */}
+                                <img src={`http://localhost:5000/${blog.image}`}/>
                               </div>
                               <div className="bg-white flex flex-col justify-start p-6">
                                 <p className="text-3xl font-bold hover:text-gray-700 pb-4">
@@ -259,7 +253,8 @@ function Profile() {
                               <Card className="w-full max-w-[26rem] shadow-lg">
                                 <CardHeader floated={false} color="blue-gray">
                                   <img
-                                    // src={card.businessImage}
+                                    src={`http://localhost:5000/${card.businessImage}`}
+
                                     alt="ui/ux review check"
                                   />
                                   <div className="to-bg-black-10 absolute inset-0 h-full w-full bg-gradient-to-tr from-transparent via-transparent to-black/60 " />

@@ -113,24 +113,21 @@ const newUserLogin = async (req, res) => {
   }
 };
 
-const updateUser = async (req, res) => {
-  const userId = req.params.id;
-  const updatedUserData = req.body;
-  // updatedUserData.password= await bcrypt.hash(updatedUserData.password, 5)
-  const user = await User.findByIdAndUpdate(userId, updatedUserData, {
-    new: true,
-  });
-  const updatedUser = await user.save();
-  res.json(updatedUser);
-};
+// const updateUser = async (req, res) => {
+//   const userId = req.params.id;
+//   const updatedUserData = req.body;
+//   const user = await User.findByIdAndUpdate(userId, updatedUserData, {
+//     new: true,
+//   });
+//   const updatedUser = await user.save();
+//   res.json(updatedUser);
+// };
 
 const updateUserMulter = async (req, res) => {
   const userId = req.params.id;
   const { firstName, email } = req.body;
   const image = req.file.path;
   console.log(userId, image , firstName, email);
-  // const updatedUserData = req.body;
-  // updatedUserData.password= await bcrypt.hash(updatedUserData.password, 5)
   const user = await User.findByIdAndUpdate(userId, { firstName:firstName, email:email , image:image}, { new: true });
   const updatedUser = await user.save();
   res.json(updatedUser);
@@ -173,7 +170,6 @@ module.exports = {
   allUsers,
   newUser,
   oneUser,
-  updateUser,
   deleteUser,
   newUserLogin,
   protected,

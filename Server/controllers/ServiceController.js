@@ -82,15 +82,17 @@ try {
 const oneUserBusiness = async (req, res) => {
 
   const businessId = req.params.id;
-  const updatedData = req.body;
-  console.log(businessId)
-  console.log(updatedData)
-
-  // updatedUserData.password= await bcrypt.hash(updatedUserData.password, 5)
-  const service = await Service.findByIdAndUpdate(businessId, updatedData, { new: true });
-  const updatedService = await service.save();
+  console.log(businessId);
+  const { businessType, businessName,culture,FromHours,ToHours,phoneNumber,WorkDays,location} = req.body;
+ const businessImage =req.file.path;
+ console.log(businessImage);
+console.log(businessImage, businessId, businessName, businessType, culture,FromHours,ToHours,phoneNumber,WorkDays,location);
+try {
+  const service = await Service.findByIdAndUpdate(businessId,{businessImage:businessImage , businessType:businessType, businessName:businessName,culture:culture,FromHours:FromHours,ToHours:ToHours,phoneNumber:phoneNumber,WorkDays:WorkDays,location:location} );
   console.log(service)
-  res.json(updatedService);
+  res.json(service);} catch {
+    console.error(error.message)
+  }
 };
 
 const pendingBusiness = (req, res) => { 
@@ -117,41 +119,11 @@ const DeleteBusiness = async (req, res) => {
   const businessId = req.params.id;
   console.log(businessId)
 
-  // updatedUserData.password= await bcrypt.hash(updatedUserData.password, 5)
   const service = await Service.findByIdAndUpdate(businessId, {flag:false , Subscribed: false});
   console.log(service)
   res.json(service);
 }
-  // const averageRating = async (req, res, next) => {
-  //   try {
-  //     const ratings = await Service.find();
-      
-  //     // Calculate the average rating
-  //     let totalRating = 0;
-  //     let count = 0;
-  //     ratings.forEach((rating) => {
-  //       if (rating.averageRating) {
-  //         totalRating += parseFloat(rating.averageRating);
-  //         count++;
-  //       }
-  //     });
-  
-  //     const average = count > 0 ? totalRating / count : 0;
-  //     res.status(200).json({ averageRating: average });
-  //   } catch (error) {
-  //     res.status(500).json({ error: error.message });
-  //   }
-  // };
-  
-  // const addRate = async (req, res) => {
-  //   const { rating } = req.body;
-  //   try {
-  //     const newRating = await Service.create({ averageRating: rating });
-  //     res.status(200).json(newRating);
-  //   } catch (error) {
-  //     res.status(400).json({ error: error.message });
-  //   }
-  // };
+
 
   module.exports = {
     AddNewBusiness,
@@ -165,7 +137,6 @@ const DeleteBusiness = async (req, res) => {
     Approve,
     ApprovedBusiness,
     DeleteBusiness,
-    // addRate,
-    // averageRating,
+ 
 
   }; 

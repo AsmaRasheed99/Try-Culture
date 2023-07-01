@@ -29,29 +29,33 @@ function EditBlog(props) {
     const handleClose = () => setOpen(false);
       /////////////////////
       const [Id ,setId] = useState()
-      const [img ,setImg] = useState("")
+      // const [img ,setImg] = useState("")
       const [title, setTitle] = useState("");
       const [content, setContent] = useState("");
       const [blogData , setBlogData] = useState({});
   
 
+      const [productImage, setProductImage] = useState(null);
 
-      const onChange = (e) => {
-        const files = e.target.files;
-        const file = files[0];
-        getBase64(file);
-        console.log(img);
+      const handleProductImageChange = (event) => {
+        setProductImage(event.target.files[0]);
       };
-      const onLoad = (fileString) => {
-        setImg(fileString);
-      };
-      const getBase64 = (file) => {
-        let reader = new FileReader();
-        reader.readAsDataURL(file);
-        reader.onload = () => {
-          onLoad(reader.result);
-        };
-      };
+      // const onChange = (e) => {
+      //   const files = e.target.files;
+      //   const file = files[0];
+      //   getBase64(file);
+      //   console.log(img);
+      // };
+      // const onLoad = (fileString) => {
+      //   setImg(fileString);
+      // };
+      // const getBase64 = (file) => {
+      //   let reader = new FileReader();
+      //   reader.readAsDataURL(file);
+      //   reader.onload = () => {
+      //     onLoad(reader.result);
+      //   };
+      // };
 
 
 
@@ -61,13 +65,13 @@ function EditBlog(props) {
 
       const fetchProtectedData = async () => {
         
-       let x =props?.blogProps.image
+      //  let x =props?.blogProps.image
 
         
         setContent(props?.blogProps.content)
         setTitle(props?.blogProps.title)
         setId(props?.blogProps._id)
-        setImg(x)
+        // setImg(x)
       };
     
     
@@ -80,14 +84,13 @@ function EditBlog(props) {
       
     const handleSubmit = async (e) => {
       e.preventDefault();
-      console.log( img )
-
+      const formData = new FormData();
+      formData.append("image", productImage);
+      formData.append("title", title);
+      formData.append("content",content);
+   
       axios
-        .put(`http://localhost:5000/api/oneUserBlogs/${Id}`, {
-          title: title,
-           image: img,
-          content: content,
-        })
+        .put(`http://localhost:5000/api/oneUserBlogs/${Id}`, formData)
         .then(function (response) {
           console.log(response);
           handleClose()
@@ -162,16 +165,14 @@ function EditBlog(props) {
             Image
           </label>
 
-               <input
-              className="shadow mb-4 appearance-none border rounded w-full py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline"
-              type="file"
-              placeholder="Table Image"
-              name="guest_num"
-              onChange={(e) => {
-                onChange(e);
-              }}
-              accept="image/*"
-            />
+          <input
+            className="file-upload-input mx-auto"
+            type="file"
+            name="image"
+            onChange={handleProductImageChange}
+            accept="image/*"
+            required
+          />
 
           <br></br>
           <Button

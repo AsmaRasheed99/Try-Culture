@@ -18,30 +18,17 @@ const style = {
   p: 4,
 };
 
-
 const Blogs = () => {
-  // const [modalOpen, setModalOpen] = useState(false); // New state variable
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-  const [img, setImg] = useState("");
 
-  const onChange = (e) => {
-    const files = e.target.files;
-    const file = files[0];
-    getBase64(file);
-    console.log(img);
+  const [productImage, setProductImage] = useState(null);
+
+  const handleProductImageChange = (event) => {
+    setProductImage(event.target.files[0]);
   };
-  const onLoad = (fileString) => {
-    setImg(fileString);
-  };
-  const getBase64 = (file) => {
-    let reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onload = () => {
-      onLoad(reader.result);
-    };
-  };
+
 
   const [User, setUser] = useState(null);
   const [userId, setUserId] = useState(null);
@@ -92,25 +79,28 @@ const Blogs = () => {
 
   const createNewBlog = async (e) => {
     e.preventDefault();
+    console.log(newBlog.title, newBlog.content, newBlog.author);
+    const formData = new FormData();
+    formData.append("image", productImage);
+    formData.append("title", newBlog.title);
+    formData.append("content", newBlog.content);
+    formData.append("author", User);
+    formData.append("userId", userId);
     try {
       const response = await axios.post(
         "http://localhost:5000/api/createNewBlog",
-        {
-          ...newBlog,
-          author: User,
-          image: img,
-          userId: userId,
-        }
+        formData
+        // {...newBlog, author: User, image: img,  userId: userId,   }
       );
       setOpen(false);
-      handleClose()
+      handleClose();
       // updateProfileRefresh(response)
       // setModalOpen(false); // Close the modal
 
       const createdBlog = response.data;
       setBlogs([...blogs, createdBlog]);
       setNewBlog({
-        image: img,
+        // Image: productImage,
         title: "",
         content: "",
         author: "",
@@ -133,9 +123,9 @@ const Blogs = () => {
     console.log(userId);
   };
 
-  // const closeModal = () => {
-  //   setModalOpen(false);
-  // };
+  const closeModal = () => {
+    setModalOpen(false);
+  };
 
   return (
     <>
@@ -148,7 +138,11 @@ const Blogs = () => {
               key={blog._id}
             >
               <div className="hover:opacity-75 ">
-                <img src={blog.image} className="w-full h-96" alt="Blog" />
+                <img
+                  src={`http://localhost:5000/${blog.image}`}
+                  className="w-full h-96"
+                  alt="Blog"
+                />
               </div>
               <div className="bg-white w-full flex flex-col justify-start p-6">
                 <p className="text-3xl font-bold hover:text-gray-700 pb-4">
@@ -168,7 +162,6 @@ const Blogs = () => {
                 <p className=" text-gray-800 hover:text-black pt-3">
                   {blog.content}
                 </p>
-     
               </div>
             </article>
           ))}
@@ -184,7 +177,7 @@ const Blogs = () => {
             </p>
             <div className="flex flex-col justify-center items-center">
               <Button
-                className="mb-10 border-solid border-[#0b3e45] border-2 text-[#00acc1] hover:bg-[#0b3e45] hover:text-[#ffffff]"
+                className="w-full bg-cyan-600 text-white font-bold text-sm uppercase rounded hover:bg-[#0b3e45] flex items-center justify-center px-2 py-3 mt-4"
                 variant="text"
                 onClick={handleOpen}
               >
@@ -198,52 +191,59 @@ const Blogs = () => {
               >
                 <Box sx={style}>
                   <div className="flex flex-col">
-                      <input
-                        type="text"
-                        placeholder="Title"
-                        className="input input-bordered input-info w-full max-w-xs mb-5"
-                        value={newBlog.title}
-                        onChange={(e) =>
-                          setNewBlog({ ...newBlog, title: e.target.value })
-                        }
-                      />
+                    <input
+                      type="text"
+                      placeholder="Title"
+                      className="input input-bordered input-info w-full max-w-xs mb-5"
+                      value={newBlog.title}
+                      onChange={(e) =>
+                        setNewBlog({ ...newBlog, title: e.target.value })
+                      }
+                    />
 
-                      <textarea
-                        type="text"
-                        placeholder="Content"
-                        className="input input-bordered input-info input-lg w-full max-w-xs mb-5"
-                        value={newBlog.content}
-                        onChange={(e) =>
-                          setNewBlog({ ...newBlog, content: e.target.value })
-                        }
-                      ></textarea>
+                    <textarea
+                      type="text"
+                      placeholder="Content"
+                      className="input input-bordered input-info input-lg w-full max-w-xs mb-5"
+                      value={newBlog.content}
+                      onChange={(e) =>
+                        setNewBlog({ ...newBlog, content: e.target.value })
+                      }
+                    ></textarea>
 
-                      <input
-                        type="file"
-                        className="file-input file-input-bordered file-input-accent w-full max-w-xs"
-                        onChange={(e) => {
-                          onChange(e);
-                        }}
-                        accept="image/*"
-                      />
-                      <Button
-                        onClick={createNewBlog}
-                        className=" m-5 border-solid border-[#00acc1] border-2 text-[#00acc1] hover:bg-[#00acc1] hover:text-[#ffffff]"
-                        variant="text"
-                      >
-                        submit
-                      </Button>
-                      <Button
-                        className="m-5 border-solid border-[#0b3e45] border-2 text-[#0b3e45] hover:bg-[#0b3e45] hover:text-[#ffffff]"
-                        variant="text"
-                        onClick={handleClose}
-                      >
-                        Cancel
-                      </Button>
+                    {/* <input
+                      type="file"
+                      className="file-input file-input-bordered file-input-accent w-full max-w-xs"
+                      onChange={(e) => {
+                        onChange(e);
+                      }}
+                      accept="image/*"
+                    /> */}
+                    <input
+                      className="file-upload-input mx-auto"
+                      type="file"
+                      name="image"
+                      onChange={handleProductImageChange}
+                      accept="image/*"
+                      required
+                    />
+                    <Button
+                      onClick={createNewBlog}
+                      className="w-full bg-cyan-600 text-white font-bold text-sm uppercase rounded hover:bg-[#0b3e45] flex items-center justify-center px-2 py-3 mt-10"
+                      variant="text"
+                    >
+                      submit
+                    </Button>
+                    <Button
+                      className="w-full  text-[#0b3e45] border border-[#0b3e45] font-bold text-sm uppercase rounded hover:bg-[#0b3e45] hover:text-white flex items-center justify-center px-2 py-3 mt-4"
+                      variant="text"
+                      onClick={handleClose}
+                    >
+                      Cancel
+                    </Button>
                   </div>
                 </Box>
               </Modal>
-
             </div>
           </div>
 

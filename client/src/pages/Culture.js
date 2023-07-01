@@ -111,19 +111,18 @@ console.log(Business)
         setFilteredBusiness(filteredDataVegetables);
         // setCurrentPageVegetables(1);
       };
-
+   console.log(Culture)
   return (
     <div style={{ backgroundColor: "#f2f2f2" }}>
       {/* hero section  */}
-      <div className="hero min-h-screen bg-base-200">
-        <div className="hero-content flex-col lg:flex-row gap-10 object-cover h-100 w-100">
+      {/* <div className="hero min-h-screen bg-base-200">
+        <div className="hero-content flex-col lg:flex-row gap-10 object-cover ">
           <img
             style={{
-              maxWidth: "100%",
-              maxHeight: "100%",
+              
               boxShadow: "1px 1px 3px grey",
             }}
-            src={Culture.HeroImage}
+            src={Culture?.HeroImage}
           />
           <div>
             <h1 className="text-5xl font-serif italic font-bold">
@@ -139,7 +138,39 @@ console.log(Business)
             </Link>
           </div>
         </div>
+      </div> */}
+    <section className="dark:bg-gray-800 dark:text-gray-100">
+  <div className="container flex flex-col justify-center p-6 mx-auto sm:py-12 lg:py-24 lg:flex-row lg:justify-center">
+    <div className="flex items-center font-serif italic font-bold justify-center p-6 mt-8 lg:mt-0 h-72 sm:h-80 lg:h-96 xl:h-112 2xl:h-128">
+      <img
+            src={Culture?.HeroImage}
+            alt=""
+        className="object-contain h-72 sm:h-80 lg:h-96 xl:h-112 2xl:h-128"
+      />
+    </div>
+    <div className="flex flex-col justify-center p-6 text-center rounded-sm lg:max-w-md xl:max-w-lg lg:text-left">
+      <h4 className="text-3xl font-bold leadi sm:text-5xl">
+      Welcome to {Culture.Culture}!
+
+      </h4>
+      <p className="mt-6 mb-8 text-md sm:mb-12 flex flex-wrap">
+      {Culture.Information}
+        <br className="hidden md:inline md:hidden" />
+      </p>
+      <div className="flex flex-col space-y-4 sm:items-center sm:justify-center sm:flex-row sm:space-y-0 sm:space-x-4 lg:justify-start">
+         
+      <div className="flex items-center justify-center">
+         
+      <Link to="/Calendar">
+              {" "}
+              <button className="btn bg-cyan-600">Events</button>{" "}
+            </Link>
+                  
       </div>
+       </div>
+    </div>
+  </div>
+</section>
       <div className="flex justify-center mt-5 mb-5">
         <div className="w-full md:w-full mx-8 shadow shadow-black p-5 rounded-lg bg-white border-solid border-1 border-[#0e0d0d] transform transition duration-300 ">
           <div className="relative">
@@ -198,8 +229,8 @@ console.log(Business)
       <Card className="w-full max-w-[26rem] shadow-lg">
       <CardHeader floated={false} color="blue-gray">
         <img
-          src={card.businessImage}
-          alt="ui/ux review check"
+                  src={`http://localhost:5000/${card.businessImage}`}
+                  alt="ui/ux review check"
         />
         <div className="to-bg-black-10 absolute inset-0 h-full w-full bg-gradient-to-tr from-transparent via-transparent to-black/60 " />
       </CardHeader>

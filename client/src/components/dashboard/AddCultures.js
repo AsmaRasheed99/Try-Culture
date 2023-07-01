@@ -49,7 +49,9 @@ const AddCultures = () => {
     const token = localStorage.getItem("auth");
 
 console.log(HeroImage);
-
+console.log(Culture)
+console.log(Information)
+console.log(Image)
 
     try {
       // Send the data to the server using an HTTP POST request
@@ -66,7 +68,7 @@ console.log(HeroImage);
       console.log("Cultures")
 
     } catch (error) {
-      console.error("Error inserting data:", error);
+      console.error(error.message);
     }
   };
 

@@ -41,25 +41,9 @@ const [open, setOpen] = React.useState(false);
     setProductImage(event.target.files[0]);
   };
 
-  const [img, setImg] = useState("");
 
 
-  const onChange = (e) => {
-    const files = e.target.files;
-    const file = files[0];
-    getBase64(file);
-    console.log(img);
-  };
-  const onLoad = (fileString) => {
-    setImg(fileString);
-  };
-  const getBase64 = (file) => {
-    let reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onload = () => {
-      onLoad(reader.result);
-    };
-  };
+
 
     
     const fetchProtectedData = async () => {
@@ -118,7 +102,7 @@ formData.append('email',email)
         console.log(response);
       
         handleClose()
-        // updateProfileRefresh(response)
+        updateProfileRefresh(response)
         
       })
       .catch(function (error) {
@@ -170,14 +154,7 @@ formData.append('email',email)
             </Input>{" "}
             <br></br>
 
-            {/* <input
-                      type="file"
-                      className="file-input file-input-bordered file-input-accent w-full max-w-xs"
-                      onChange={(e) => {
-                        onChange(e);
-                      }}
-                      accept="image/*"
-                    /> */}
+           
                      <input
             className="file-upload-input mx-auto"
             type="file"

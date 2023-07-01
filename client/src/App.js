@@ -31,6 +31,7 @@ import AdminInfo from "./components/dashboard/AdminInfo";
 import  Chat  from "./pages/dashboard/Chat";
 import Pending from "./components/dashboard/Pending";
 import AddCultures from "./components/dashboard/AddCultures"
+import EditCultures from "./components/dashboard/EditCultures"
 
 
 
@@ -138,6 +139,7 @@ export default function App() {
           <Route path="ListAdmin" element={<AdminInfo />} />
           <Route path="Pending" element={<Pending />} />
           <Route path="AddCultures" element={<AddCultures />} />
+          <Route path="EditCultures" element={<EditCultures />} />
         </Routes>
       </div>
     </Router>

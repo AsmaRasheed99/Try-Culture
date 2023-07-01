@@ -134,6 +134,15 @@ function handleLogOut(){
           </ListItem>
           </Link>
 
+          <Link to='/EditCultures'>
+          <ListItem className="hover:bg-[#00ACC1]">
+            <ListItemPrefix>
+            <Icon path={mdiPlus} size={1} />
+            </ListItemPrefix>
+            <a style={{color:'black'}}> Edit Cultures </a>
+          </ListItem>
+          </Link>
+
          <Link to='/Chat'>
          <ListItem className="hover:bg-[#00ACC1]">
             <ListItemPrefix>

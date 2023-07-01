@@ -3,9 +3,11 @@ const BlogPost = require("../models/blog");
 
 
 const createNewBlog = async (req, res) => {
-    const { image, title, content, author, date, userId } = req.body;
+    const { title, content, author, userId } = req.body;
+    const image = req.file.path;
+   console.log(title, content, author, userId, image)
     try {
-      const blogPost = await BlogPost.create({ image,title, content, author,date, userId });
+      const blogPost = await BlogPost.create({ image,title, content, author, userId });
       res.status(200).json(blogPost);
     } catch (error) {
       res.status(400).json({ error: error.message });
@@ -34,14 +36,12 @@ const createNewBlog = async (req, res) => {
   const oneUserBlogs = async (req, res) => {
 
     const blogId = req.params.id;
-    const updatedBlogData = req.body;
-    console.log(updatedBlogData)
+    const {title , content } = req.body;
+    const image = req.file.path;
 
-    // updatedUserData.password= await bcrypt.hash(updatedUserData.password, 5)
-    const blog = await BlogPost.findByIdAndUpdate(blogId, updatedBlogData, { new: true });
-    const updatedblog = await blog.save();
+    const blog = await BlogPost.findByIdAndUpdate(blogId, {title :title, content:content, image:image });
     console.log(blog)
-    res.json(updatedblog);
+    res.json(blog);
 
 
 
