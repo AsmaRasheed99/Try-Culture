@@ -11,6 +11,7 @@ let users = [];
 const addUser = (userId, socketId) => {
     !users.some((user)=> user.userId === userId) &&
      users.push({userId, socketId});
+     console.log(users)
 }
 
 const removeUser = ( socketId) =>{
@@ -22,6 +23,7 @@ const getUser = (userId) => {
 }
 
 io.on("connection", (socket) => {
+  console.log(socket.id)
     //when ceonnect
     console.log("a user connected.");
   // take userId and socketId from user

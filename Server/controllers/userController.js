@@ -54,9 +54,12 @@ const chatUser = async (req, res) => {
 };
 
 const newUser = async (req, res) => {
-  const { firstName, email, password, role } = req.body;
-
-  const user0 = await User.find({ email: email });
+  const { firstName, email, password, role,phone } = req.body;
+console.log(phone)
+  const user0 = await User.find({ $or: [
+    { email: { $eq: email } },
+    { firstName: { $eq: firstName } }
+  ]});
   if (user0.length == 0) {
     const hashPassword = await bcrypt.hash(password, 5);
     const user = new User({
@@ -64,7 +67,9 @@ const newUser = async (req, res) => {
       email: email,
       password: hashPassword,
       role: role,
+      phone:phone,
     });
+    console.log(user)
     const addUser = await user.save();
     console.log(addUser);
     const token = jwt.sign(
@@ -74,6 +79,10 @@ const newUser = async (req, res) => {
     );
     res.json({ token, addUser });
   } else {
+
+    res.json({ error: "User Already Exist" });
+
+
   }
 };
 const newUserContactUs = async (req, res) => {

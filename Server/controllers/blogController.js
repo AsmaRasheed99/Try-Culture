@@ -3,11 +3,11 @@ const BlogPost = require("../models/blog");
 
 
 const createNewBlog = async (req, res) => {
-    const { title, content, author, userId } = req.body;
+    const { title, content, author, userId, UserImage } = req.body;
     const image = req.file.path;
-   console.log(title, content, author, userId, image)
+   console.log(title, content, author, userId, image, UserImage)
     try {
-      const blogPost = await BlogPost.create({ image,title, content, author, userId });
+      const blogPost = await BlogPost.create({ image,title, content, author, userId , UserImage});
       res.status(200).json(blogPost);
     } catch (error) {
       res.status(400).json({ error: error.message });

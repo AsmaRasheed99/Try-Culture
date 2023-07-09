@@ -31,7 +31,8 @@ console.log(user)
     <div className="conversation">
       <img
         className="conversationImg"
-        src={user?.image}    
+        src={`http://localhost:5000/${user?.image} `}
+ 
         alt=""
       />
       <span className="conversationName">{user?.firstName}</span>

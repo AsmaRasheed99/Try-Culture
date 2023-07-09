@@ -233,7 +233,7 @@ const Pending = () => {
                     >
                       <div className="h-[30px] w-[30px] rounded-full">
                         <img
-                          src={e.image}
+                          src={`http://localhost:5000/${e.image}`}
                           className="h-full w-full rounded-full"
                           alt=""
                         />

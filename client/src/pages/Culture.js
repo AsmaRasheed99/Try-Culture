@@ -115,31 +115,7 @@ console.log(Business)
    console.log(Culture)
   return (
     <div style={{ backgroundColor: "#f2f2f2" }}>
-      {/* hero section  */}
-      {/* <div className="hero min-h-screen bg-base-200">
-        <div className="hero-content flex-col lg:flex-row gap-10 object-cover ">
-          <img
-            style={{
-              
-              boxShadow: "1px 1px 3px grey",
-            }}
-            src={Culture?.HeroImage}
-          />
-          <div>
-            <h1 className="text-5xl font-serif italic font-bold">
-              Welcome to {Culture.Culture}!
-            </h1>
-            <p className="py-6">
-               {Culture.Information}
-           
-            </p>
-            <Link to="/Calendar">
-              {" "}
-              <button className="btn bg-cyan-600">Events</button>{" "}
-            </Link>
-          </div>
-        </div>
-      </div> */}
+     
     <section className="dark:bg-gray-800 dark:text-gray-100">
   <div className="container flex flex-col justify-center p-6 mx-auto sm:py-12 lg:py-24 lg:flex-row lg:justify-center">
     <div className="flex items-center font-serif italic font-bold justify-center p-6 mt-8 lg:mt-0 h-72 sm:h-80 lg:h-96 xl:h-112 2xl:h-128">
@@ -216,7 +192,8 @@ src={`http://localhost:5000/public/images/${Culture.HeroImage}`}
               >
                 <option value="">All business types</option>
                 <option value="resturant">restaurants</option>
-                <option value="fruit">fruit</option>
+                <option value="LanguageInstitute">Language Institute</option>
+                <option value="Shop">Shop</option>
               </select>
             </div>
           </div>

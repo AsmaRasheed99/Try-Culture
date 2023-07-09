@@ -41,26 +41,25 @@ const handleSubmit = async (event) => {
         email: email,
         password: password,
         role: 0,
+        phone:phone,
     };
-
+console.log(phone)
     try {
         // Send the data to the server using an HTTP POST request
         const response = await axios.post(
         "http://localhost:5000/api/users",
         userData
         );
-        let x = [];
-        if (response.data.addUser.role == 0) {
-        x = [false, true, true];
-        } else if (response.data.addUser.role == 1) {
-        x = [true, false, true];
-        } else if (response.data.addUser.role == 2) {
-        x = [true, true, false];
-        }
+        if(response.data.error === "User Already Exist"){
+            setemailp("User already exists")
+        }else {
+       
         localStorage.setItem("auth", response.data.token);
         window.location.href = "http://localhost:3000/";
-    } catch (error) {
-        console.error("Error inserting data:", error);
+    }}
+     catch (error) {
+        // console.error("Error inserting data:", error);
+        console.log(error)
     }
     }
 };
@@ -145,6 +144,8 @@ return (
                 className="block w-full text-xl px-4 py-2 mt-2 text-gray-800 bg-white border rounded-md focus:border-cyan-200 focus:ring-cyan-100 focus:outline-none focus:ring focus:ring-opacity-40"
             />
               <p className="text-red-500">{namep}</p>
+              <p className="text-red-500">{emailp}</p>
+
 
             </div>
             <div className="mb-2 p-3">

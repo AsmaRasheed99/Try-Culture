@@ -242,13 +242,7 @@ const AdminInfo = () => {
                       className="pt-[14px] pb-[18px] sm:text-[14px] flex items-center"
                       role="cell"
                     >
-                      <div className="h-[30px] w-[30px] rounded-full">
-                        <img
-                          src={e.image}
-                          className="h-full w-full rounded-full"
-                          alt=""
-                        />
-                      </div>
+                   
 
                       <p className="text-sm font-bold text-navy-700 dark:text-white ml-3">
                         {e.firstName}

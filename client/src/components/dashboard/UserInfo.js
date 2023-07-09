@@ -251,12 +251,11 @@ const UsersInfo = () => {
                     >
                       <div className="h-[30px] w-[30px] rounded-full">
                         <img
-                          src={e.image}
+                          src={`http://localhost:5000/${e.image}`}
                           className="h-full w-full rounded-full"
                           alt=""
                         />
                       </div>
-
                       <p className="text-sm font-bold text-navy-700 dark:text-white ml-3">
                         {e.firstName}
                       </p>

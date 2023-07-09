@@ -78,7 +78,7 @@ function EditBusiness(props) {
     formData.append("phoneNumber", phoneNumber);
     formData.append("WorkDays", WorkDays);
     formData.append("location", location);
-    // console.log(productImage, businessName, businessType, culture, FromHours, ToHours, phoneNumber, WorkDays, location);
+    console.log(productImage, businessName, businessType, culture, FromHours, ToHours, phoneNumber, WorkDays, location);
     axios
       .put(`http://localhost:5000/api/oneUserBusiness/${Id}`, formData
      )

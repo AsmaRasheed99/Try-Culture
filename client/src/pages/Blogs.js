@@ -22,7 +22,7 @@ const Blogs = () => {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-
+  const [ModalOpen , setModalOpen] = useState(false);
 
   const [productImage, setProductImage] = useState(null);
 
@@ -32,6 +32,7 @@ const Blogs = () => {
 
 
   const [User, setUser] = useState(null);
+  const [UserAll, setUserAll] = useState(null);
   const [userId, setUserId] = useState(null);
   const [blogs, setBlogs] = useState([]);
   const [newBlog, setNewBlog] = useState({
@@ -42,6 +43,7 @@ const Blogs = () => {
   });
 
   useEffect(() => {
+    let id;
     const fetchProtectedData = async () => {
       try {
         const token = localStorage.getItem("auth");
@@ -53,8 +55,24 @@ const Blogs = () => {
           });
           setUser(response.data.user.username);
           setUserId(response.data.user.id);
+          id =response.data.user.id;
+
         }
         console.log(User);
+
+
+
+    axios
+        .get(`http://localhost:5000/api/users/${id}`)
+        .then((response) => {
+          setUserAll(response.data[0]);
+        })
+        .catch((error) => {
+          console.error("Error fetching user data:", error);
+        });  
+
+
+        
       } catch (error) {
         console.error(error);
         // localStorage.removeItem("auth");
@@ -78,6 +96,7 @@ const Blogs = () => {
     fetchBlogs();
   }, []);
 
+  console.log(UserAll?.image)
   const createNewBlog = async (e) => {
     e.preventDefault();
     console.log(newBlog.title, newBlog.content, newBlog.author);
@@ -87,6 +106,8 @@ const Blogs = () => {
     formData.append("content", newBlog.content);
     formData.append("author", User);
     formData.append("userId", userId);
+    formData.append("UserImage", UserAll?.image)
+    // formData.append("image", UserAll.image);
     try {
       const response = await axios.post(
         "http://localhost:5000/api/createNewBlog",
@@ -295,7 +316,7 @@ const Blogs = () => {
               In hac habitasse platea dictumst.
             </p>
             <Link
-              to="/AboutUs"
+              to="/about"
               className="w-full bg-cyan-600 text-white font-bold text-sm uppercase rounded hover:bg-[#0b3e45] flex items-center justify-center px-2 py-3 mt-4"
             >
               Get to know us

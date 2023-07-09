@@ -201,14 +201,14 @@ function Profile() {
                         <p className="mb-4 text-lg leading-relaxed text-blueGray-700">
                           My Blogs
                         </p>
-                        <section className="lg:-w-96 md:w-2/3 sm:min-w-full flex flex-col items-center ">
+                        <section className="  grid grid-cols-2 items-center ">
                           {UserBlogs.map((blog) => (
                             <article
-                              className="flex flex-col shadow my-4 text-start"
+                              className="flex flex-col w-96 shadow my-4 text-start"
                               key={blog._id}
                             >
-                              <div className="hover:opacity-75 ">
-                                <img src={`http://localhost:5000/${blog.image}`}/>
+                              <div className="hover:opacity-75  ">
+                                <img className="w-full" src={`http://localhost:5000/${blog.image}`}/>
                               </div>
                               <div className="bg-white flex flex-col justify-start p-6">
                                 <p className="text-3xl font-bold hover:text-gray-700 pb-4">
@@ -244,15 +244,16 @@ function Profile() {
                   {userRole == 2 && (
                     <div className="mt-10 py-10 border-t border-blueGray-200 text-center">
                       <div className="flex flex-wrap justify-center">
-                        <div className="w-full lg:w-9/12 px-4">
+                        <div className="w-full px-4">
                           <p className="mb-4 text-lg leading-relaxed text-blueGray-700">
                             My Business
                           </p>
-                          <div className="flex flex-row justify-center flex-wrap gap-20 mt-20 text-start">
+                          <div className="flex flex-wrap gap-7 justify-center mt-20 text-start">
                             {UserServices.map((card) => (
-                              <Card className="w-full max-w-[26rem] shadow-lg">
+                              <Card className="w-80 shadow-lg">
                                 <CardHeader floated={false} color="blue-gray">
                                   <img
+                                  className="w-full h-60"
                                     src={`http://localhost:5000/${card.businessImage}`}
 
                                     alt="ui/ux review check"

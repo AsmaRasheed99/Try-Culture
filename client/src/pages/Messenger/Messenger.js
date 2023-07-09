@@ -18,6 +18,7 @@ export default function Messenger({UserApp}) {
     const [persons, setPersons] = useState([]);
     const [FilterDataUsers,setFilterDataUsers]= useState([]);
     const [searchTermUsers, setSearchTermUsers] = useState("");
+    const [refreshMessenger, setRefreshMessenger] = useState(null);
     const socket = useRef()
     const scrollRef = useRef();
 
@@ -59,7 +60,7 @@ export default function Messenger({UserApp}) {
 
  };
  getConversations();
- },[UserId])
+ },[UserId , refreshMessenger])
  useEffect(()=> {
     const getMessages = async (req, res) => {
         try {
@@ -159,15 +160,19 @@ export default function Messenger({UserApp}) {
     setCurrentPageUsers(pageNumber);
   };
 
-const startConversation = (id)=>{
+
+const startConversation = async (id)=>{
  console.log(id)
  console.log(UserId)
  try {
-    const conversation = axios.post("http://localhost:5000/api/NewConversation", {
+    const conversation = await axios.post("http://localhost:5000/api/NewConversation", {
         senderId:UserId,
         receiverId:id,
-
+  
     })
+    setRefreshMessenger(conversation)
+    {console.log(conversation)}
+
  } catch (error) {
     
  }
@@ -195,7 +200,8 @@ const startConversation = (id)=>{
                     <div className='chatBoxTop'>
                 {messages?.map((m)=>{
             
-                 return (  <Message message={m} own={m.sender === UserId} />)
+            {console.log(messages)}
+                 return (  <Message message={m} own={m.sender === UserId}  />)
                 })}
                 </div>
               
@@ -228,7 +234,16 @@ const startConversation = (id)=>{
               }}
             />             
             {FilterDataUsers.map((c) =>
-             <div className="conversation" onClick={()=>startConversation(c._id)}>
+             <div className="conversation" onClick={()=>
+             
+           {
+            // setcurrentChat(c)
+            startConversation(c._id)
+           }  
+             
+             
+             
+             }>
              <img
                className="conversationImg"
                src={`http://localhost:5000/${c?.image}`}

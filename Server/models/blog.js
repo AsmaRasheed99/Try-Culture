@@ -6,6 +6,10 @@ const blogPostSchema = new Schema({
     type: String,
     required: false,
   },
+  UserImage: {
+    type: String,
+    required: false,
+  },
   title: {
     type: String,
     required: true,
@@ -27,11 +31,17 @@ const blogPostSchema = new Schema({
     default: Date.now,
     required:false
   },
+  
+   
   // flag: {
   //   type: Boolean,
   //   default: false,
   // }
-});
+},
+
+{timestamps : true}
+
+);
 
 const BlogPost = mongoose.model("BlogPost", blogPostSchema);
 
