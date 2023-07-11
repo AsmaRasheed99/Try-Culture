@@ -190,7 +190,7 @@ src={`http://localhost:5000/public/images/${Culture.HeroImage}`}
                 
                 }}
               >
-                <option value="">All business types</option>
+                <option value="">All Categories</option>
                 <option value="resturant">restaurants</option>
                 <option value="LanguageInstitute">Language Institute</option>
                 <option value="Shop">Shop</option>

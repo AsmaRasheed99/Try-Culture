@@ -70,13 +70,16 @@ function SignIn() {
     }
 
     
+    const backgroundImageUrl = 'https://images-ext-1.discordapp.net/external/hRkXOoDd7ZLu_-SprloP_3KVP3L48oz5mD_OI1zY6k4/https/www.adlittle.com/sites/default/files/viewpoints/CreatingValueInTelecomsConsolidation169_0.jpg.pagespeed.ce.LdsEKwgWKc.jpg?width=880&height=495';
 
  
 
 
   return (
+    
     <>
-      <div className="relative flex flex-col justify-center min-h-screen overflow-hidden" style={{backgroundColor:'#e5f5f7'}}>
+      <div className="bg-cover bg-center relative flex flex-col justify-center min-h-screen overflow-hidden" style={{ backgroundImage: `url(${backgroundImageUrl})` }}
+>
         <div className="w-full p-12 m-auto bg-white rounded-md shadow-xl lg:max-w-xl">
           <h1 className="text-3xl font-semibold text-center text-cyan-500 uppercase">
             Welcome

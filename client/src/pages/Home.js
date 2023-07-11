@@ -12,8 +12,7 @@ function Home() {
   const navigate = useNavigate();
 
   function handleCulture(country) {
- navigate(`/Culture/${country}`);
-
+    navigate(`/Culture/${country}`);
   }
 
   return (
@@ -32,13 +31,13 @@ function Home() {
           <div className="flex flex-wrap items-center">
             <div className="grow-0 shrink-0 basis-auto w-full lg:w-5/12 mb-12 lg:mb-0 md:px-6">
               <div
-                className="relative overflow-hidden bg-no-repeat bg-cover rounded-lg shadow-lg"
+                className="relative h-96 overflow-hidden bg-no-repeat bg-cover rounded-lg shadow-lg"
                 data-mdb-ripple="true"
                 data-mdb-ripple-color="light"
                 style={{ backgroundPosition: "50%" }}
               >
                 <img
-                  src="https://images.unsplash.com/photo-1605292356183-a77d0a9c9d1d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8Y3VsdHVyZXN8ZW58MHwxfDB8fHww&auto=format&fit=crop&w=500&q=60"
+                  src="https://images.pexels.com/photos/4937197/pexels-photo-4937197.jpeg?auto=compress&cs=tinysrgb&w=600"
                   className="w-full"
                 />
                 <Link to="/Cultures">
@@ -53,11 +52,8 @@ function Home() {
                           <u style={{ color: "#1EBBCE" }}>Cultures</u>
                         </h3>
                         <p style={{ color: "hsl(231, 52.6%, 85%)" }}>
-                          Lorem ipsum dolor sit amet consectetur adipisicing
-                          elit. Harum quia laboriosam error consequuntur fugit,
-                          doloribus rerum, iure nesciunt amet quidem veniam
-                          cupiditate hic fugiat dolore aperiam quisquam libero
-                          earum quibusdam?
+                          Explore a world of cultures! Visit our comprehensive
+                          page showcasing the diversity of humanity
                         </p>
                       </div>
                     </div>
@@ -74,106 +70,81 @@ function Home() {
             <div className="grow-0 shrink-0 basis-auto w-full lg:w-7/12 md:px-6">
               <>
                 {" "}
-                <div className="flex mb-12 cursor-pointer" onClick={()=> {
-                  handleCulture("Egypt")
-                }} >
+                <div
+                  className="flex mb-12 cursor-pointer"
+                  onClick={() => {
+                    handleCulture("Egypt");
+                  }}
+                >
                   <div className="shrink-0">
-                    <div
-                      className="p-4 rounded-md shadow-lg"
-                      style={{ backgroundColor: "RGB(30,187,206,30%)" }}
-                    >
+                    <div className="p-4 rounded-md shadow-lg">
                       <span className="fi fi-eg"></span>
                     </div>
                   </div>
                   <div className="grow ml-4">
                     <p className="font-bold mb-1">Egypt</p>
                     <p className="text-gray-500">
-                      Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-                      Nihil quisquam quibusdam modi sapiente magni molestias
-                      pariatur facilis reprehenderit facere aliquam ex.
+                    The Egyptian culture in Jordan represents a vibrant tapestry of traditions and customs…
                     </p>
                   </div>
                 </div>
               </>
               <>
-                <div className="flex mb-12 cursor-pointer"
-                
-                onClick={()=> {
-                  handleCulture("China")
-                }}
-                
-                
-                
-                
-                
-                
+                <div
+                  className="flex mb-12 cursor-pointer"
+                  onClick={() => {
+                    handleCulture("China");
+                  }}
                 >
                   <div className="shrink-0">
-                    <div
-                      className="p-4 rounded-md shadow-lg"
-                      style={{ backgroundColor: "RGB(30,187,206,30%)" }}
-                    >
+                    <div className="p-4 rounded-md shadow-lg">
                       <span className="fi fi-cn"></span>
                     </div>
                   </div>
-                  <div className="grow ml-4 cursor-pointer"   >
+                  <div className="grow ml-4 cursor-pointer">
                     <p className="font-bold mb-1">China</p>
                     <p className="text-gray-500">
-                      Eum nostrum fugit numquam, voluptates veniam neque
-                      quibusdam ullam aspernatur odio soluta, quisquam dolore
-                      animi mollitia a omnis praesentium, expedita nobis!
+                    The Chinese culture is diverse and encompasses various aspects such as…
                     </p>
                   </div>
                 </div>
               </>
               <>
-                <div className="flex mb-12 cursor-pointer"
-                onClick={()=> {
-                  handleCulture("India")
-                }}
-                
+                <div
+                  className="flex mb-12 cursor-pointer"
+                  onClick={() => {
+                    handleCulture("Morocco");
+                  }}
                 >
                   <div className="shrink-0">
-                    <div
-                      className="p-4 rounded-md shadow-lg"
-                      style={{ backgroundColor: "RGB(30,187,206,30%)" }}
-                    >
-                      <span className="fi fi-in"></span>
+                    <div className="p-4 rounded-md shadow-lg">
+                      <span className="fi fi-ma"></span>
                     </div>
                   </div>
-                  <div className="grow ml-4 cursor-pointer" >
-                    <p className="font-bold mb-1"> India</p>
+                  <div className="grow ml-4 cursor-pointer">
+                    <p className="font-bold mb-1"> Morocco</p>
                     <p className="text-gray-500">
-                      Enim cupiditate, minus nulla dolor cumque iure eveniet
-                      facere ullam beatae hic voluptatibus dolores
-                      exercitationem? Facilis debitis aspernatur amet nisi iure
-                      eveniet facere?
+                    Moroccan culture and the Moroccan community in Jordan have a noticeabl…
                     </p>
                   </div>
                 </div>
               </>
               <>
                 <div className="flex">
-                  <div className="shrink-0 cursor-pointer "
-                  
-                  onClick={()=> {
-                    handleCulture("Korea")
-                  }}
-                  
+                  <div
+                    className="shrink-0 cursor-pointer "
+                    onClick={() => {
+                      handleCulture("Mexico");
+                    }}
                   >
-                    <div
-                      className="p-4 rounded-md shadow-lg"
-                      style={{ backgroundColor: "RGB(30,187,206,30%)" }}
-                    >
-                      <span className="fi fi-kr"></span>
+                    <div className="p-4 rounded-md shadow-lg">
+                      <span className="fi fi-mx"></span>
                     </div>
                   </div>
-                  <div className="grow ml-4 cursor-pointer" >
-                    <p className="font-bold mb-1">Korea</p>
+                  <div className="grow ml-4 cursor-pointer">
+                    <p className="font-bold mb-1">Mexico</p>
                     <p className="text-gray-500">
-                      Illum doloremque ea, blanditiis sed dolor laborum
-                      praesentium maxime sint, consectetur atque ipsum ab
-                      adipisci ullam aspernatur odio soluta, quisquam dolore
+                    Mexican culture in Jordan is relatively limited, with a small presence…
                     </p>
                   </div>
                 </div>
@@ -197,12 +168,10 @@ function Home() {
               Insights, Stories, and Perspectives
             </p>
             {/* //////////////////////////////////////////// */}
-      <BlogSection/>
-
+            <BlogSection />
 
             {/* ///////////////////////////////// */}
           </section>
-        
         </div>
       </>
     </div>

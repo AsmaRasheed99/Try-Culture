@@ -2,7 +2,6 @@ import React from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from "axios";
-import PricingReact from "../../components/PricingReact";
 function SignUp() {
 
 const [name, setName] = useState("");
@@ -119,14 +118,17 @@ function validateConfirmPassword() {
     }
   }
 
- 
+  const backgroundImageUrl = 'https://images-ext-1.discordapp.net/external/hRkXOoDd7ZLu_-SprloP_3KVP3L48oz5mD_OI1zY6k4/https/www.adlittle.com/sites/default/files/viewpoints/CreatingValueInTelecomsConsolidation169_0.jpg.pagespeed.ce.LdsEKwgWKc.jpg?width=880&height=495';
+
     
 return (
      
      <>
-      <div className="min-h-screen bg-gray-100 text-gray-900 flex justify-around ">
-        <div className="max-w-screen-xl m-0  bg-white shadow sm:rounded-lg flex lg:flex-row flex-col justify-around items-center p-10">
-           <PricingReact/>
+        <div className="bg-cover bg-center  p-5 w-full   bg-white shadow sm:rounded-lg flex lg:flex-row flex-col justify-around items-center"
+        style={{ backgroundImage: `url(${backgroundImageUrl})` }}
+        
+        >
+           {/* <PricingReact/> */}
           <div>
    
       <div className="max-w-sm xl:w-[600px]  p-6 bg-white group h-full rounded-2xl w-full   shadow-xl lg:max-w-xl">
@@ -212,7 +214,7 @@ return (
         </div>
     </div>
         </div>
-      </div>
+     
     </>
     
   
