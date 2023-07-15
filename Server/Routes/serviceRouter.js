@@ -13,6 +13,7 @@ router.put("/api/Subscribed/:id", ServiceController.Subscribed);
 router.put("/api/Approve/:id", ServiceController.Approve);
 router.put("/api/DeleteBusiness/:id", ServiceController.DeleteBusiness);
 router.put("/api/oneUserBusiness/:id", uploadSingle,ServiceController.oneUserBusiness);
+router.put("/api/rateBusiness/:id", uploadSingle,ServiceController.rateBusiness);
 router.get("/api/allUserServices/:id", ServiceController.allUserServices);
 router.get("/api/pendingBusiness", ServiceController.pendingBusiness);
 router.get("/api/ApprovedBusiness", ServiceController.ApprovedBusiness);

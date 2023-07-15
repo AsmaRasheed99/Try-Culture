@@ -124,6 +124,7 @@ function validateConfirmPassword() {
 return (
      
      <>
+     
         <div className="bg-cover bg-center  p-5 w-full   bg-white shadow sm:rounded-lg flex lg:flex-row flex-col justify-around items-center"
         style={{ backgroundImage: `url(${backgroundImageUrl})` }}
         

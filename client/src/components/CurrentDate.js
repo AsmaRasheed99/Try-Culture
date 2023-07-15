@@ -1,36 +1,4 @@
-// import React, { useState, useEffect } from 'react';
 
-// function DateDisplay() {
-//   const [currentDate, setCurrentDate] = useState(new Date());
-
-//   useEffect(() => {
-//     const timerID = setInterval(() => tick(), 1000);
-
-//     return () => {
-//       clearInterval(timerID);
-//     };
-//   }, []);
-
-//   const tick = () => {
-//     setCurrentDate(new Date());
-//   };
-
-//   const options = {
-//     weekday: 'long',
-//     year: 'numeric',
-//     month: 'long',
-//     day: 'numeric',
-//   };
-//   const formattedDate = currentDate.toLocaleDateString(undefined, options);
-
-//   return (
-//     <div>
-//       <p>{formattedDate}</p>
-//     </div>
-//   );
-// }
-
-// export default DateDisplay;
 
 import React, { useState } from 'react';
 

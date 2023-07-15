@@ -170,7 +170,7 @@ const startConversation = async (id)=>{
         receiverId:id,
   
     })
-    setRefreshMessenger(conversation)
+    setRefreshMessenger(conversation.data)
     {console.log(conversation)}
 
  } catch (error) {

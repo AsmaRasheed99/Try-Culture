@@ -115,13 +115,40 @@ console.log(ProviderName)
 
     // Reset form fields
   };
+  const backgroundImageUrl = 'https://img.freepik.com/free-vector/worldwide-connection-gray-background-illustration-vector_53876-61769.jpg?size=626&ext=jpg&ga=GA1.1.558610342.1683500202&semt=ais';
 
   return (
     <>
-      <div className="flex justify-center">
+    <div  style={{ backgroundImage: `url(${backgroundImageUrl})` }} className="bg-cover bg-center">
+  <div className="flex items-center flex-wrap justify-around">
+   
+    <div className="text-center" >
+      <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl ">
+        Enter your business information 
+      </h2>
+      <p className="mt-4 text-gray-500 ">
+       Enter all the details needed to make it easy for users to easly find your business <br></br>
+        If you have more information that you feel should be added too please feel free to contact us <br></br>
+      </p>
+      <Link
+              to="/ContactUs"
+            >
+              <button
+                type="submit"
+                className=" mt-5 relative inline-flex items-center justify-center p-0.5 mb-2 mr-2 overflow-hidden text-xl font-medium text-white rounded-lg group bg-gradient-to-br from-cyan-500 to-gray-500  hover:text-black dark:text-white focus:ring-4 focus:outline-none focus:ring-cyan-200 dark:focus:ring-cyan-800 w-fit hover:bg-gradient-to-br hover:from-cyan-500 hover:to-gray-400 hover:bg-black " // Added 'w-full' class for full-width button
+              >
+                <span className="relative px-5 py-2.5 transition-all ease-in duration-75 dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
+                  Get In Touch With Us
+                </span>
+              </button>
+            </Link>
+    </div>
+
+    <div className="flex justify-center items-center">
         <form
-          className="w-full max-w-lg my-20 mx-5"
+          className="w-full max-w-lg  mx-5 bg-white p-10 rounded-lg my-5"
           onSubmit={CreateNewBusiness}
+
         >
           <div className="flex flex-wrap -mx-3 mb-6">
             <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
@@ -336,7 +363,7 @@ console.log(ProviderName)
             <div className="w-full px-3">
               <button
                 type="submit"
-                className="relative inline-flex items-center justify-center p-0.5 mb-2 mr-2 overflow-hidden text-xl font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-cyan-500 to-gray-500 group-hover:from-gray-500 group-hover:to-cyan-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-cyan-200 dark:focus:ring-cyan-800 w-full" // Added 'w-full' class for full-width button
+                className="relative inline-flex items-center justify-center p-0.5 mb-2 mr-2 overflow-hidden text-xl font-medium text-white rounded-lg group bg-gradient-to-br from-cyan-500 to-gray-500  hover:text-black dark:text-white focus:ring-4 focus:outline-none focus:ring-cyan-200 dark:focus:ring-cyan-800 w-full hover:bg-gradient-to-br hover:from-cyan-500 hover:to-gray-400 hover:bg-black " // Added 'w-full' class for full-width button
               >
                 <span className="relative px-5 py-2.5 transition-all ease-in duration-75 dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
                   Submit
@@ -346,6 +373,10 @@ console.log(ProviderName)
           </div>
         </form>
       </div>
+  </div>
+</div>
+
+    
     </>
   );
 }

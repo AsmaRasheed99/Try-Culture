@@ -92,6 +92,8 @@ console.log(Business)
 
     const [SearchTerm0, setSearchTerm0] = useState("");
     const [SearchType00, setSearchType00] = useState("");
+    const [yourSelectedStateValueCategory, setyourSelectedStateValueCategory] = useState("");
+    const [OptionType, setOptionType] = useState("");
 
     const setSearchType0 = (typeValue) => {
         const filteredDataUsers = Business?.filter(
@@ -103,13 +105,29 @@ console.log(Business)
     
     };
  
-    const filterDataByNameVegetables0 = (searchTermVegetables0) => {
-        const filteredDataVegetables = Business.filter((item) =>
-          item.businessName.toLowerCase().includes(searchTermVegetables0.toLowerCase())
-        );
-        setFilteredBusiness(filteredDataVegetables);
-        // setCurrentPageVegetables(1);
-      };
+    // const filterDataByNameVegetables0 = (searchTermVegetables0) => {
+    //     const filteredDataVegetables = Business.filter((item) =>
+    //       item.businessName.toLowerCase().includes(searchTermVegetables0.toLowerCase())
+    //     );
+    //     setFilteredBusiness(filteredDataVegetables);
+    //     // setCurrentPageVegetables(1);
+    //   };
+
+
+    const handleFilterChange = (typeValue, addressValue) => {
+console.log(typeValue,addressValue)
+console.log(typeValue,addressValue)
+console.log(typeValue,addressValue)
+
+    //   const filteredDataUsers = NewTable?.filter(
+    //     (item) =>
+    //       item.category?.toLowerCase().includes(typeValue.toLowerCase()) &&
+    //       item.nation?.toLowerCase().includes(addressValue.toLowerCase())
+    //   );
+    //   setFilterDataMeals(filteredDataUsers);
+    // console.log(filteredDataUsers)
+  };
+
       console.log(Culture.HeroImage)
 
    console.log(Culture)
@@ -152,7 +170,7 @@ src={`http://localhost:5000/public/images/${Culture.HeroImage}`}
   </div>
 </section>
       <div className="flex justify-center mt-5 mb-5">
-        <div className="w-full md:w-full mx-8 shadow shadow-black p-5 rounded-lg bg-white border-solid border-1 border-[#0e0d0d] transform transition duration-300 ">
+        <div className="w-full md:w-full mx-8  p-5 rounded-lg   transform transition duration-300 ">
           <div className="relative">
             <div className="absolute flex items-center ml-2 h-full">
               <svg
@@ -164,30 +182,66 @@ src={`http://localhost:5000/public/images/${Culture.HeroImage}`}
                 <path d="M15.8898 15.0493L11.8588 11.0182C11.7869 10.9463 11.6932 10.9088 11.5932 10.9088H11.2713C12.3431 9.74952 12.9994 8.20272 12.9994 6.49968C12.9994 2.90923 10.0901 0 6.49968 0C2.90923 0 0 2.90923 0 6.49968C0 10.0901 2.90923 12.9994 6.49968 12.9994C8.20272 12.9994 9.74952 12.3431 10.9088 11.2744V11.5932C10.9088 11.6932 10.9495 11.7869 11.0182 11.8588L15.0493 15.8898C15.1961 16.0367 15.4336 16.0367 15.5805 15.8898L15.8898 15.5805C16.0367 15.4336 16.0367 15.1961 15.8898 15.0493ZM6.49968 11.9994C3.45921 11.9994 0.999951 9.54016 0.999951 6.49968C0.999951 3.45921 3.45921 0.999951 6.49968 0.999951C9.54016 0.999951 11.9994 3.45921 11.9994 6.49968C11.9994 9.54016 9.54016 11.9994 6.49968 11.9994Z" />
               </svg>
             </div>
-            <input
-              type="text"
-              placeholder="Search by listing, location, bedroom number..."
-              className="px-8 py-3 w-full rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 text-sm"
-              value={SearchTerm0}
+           <form>
+  <label
+    htmlFor="default-search"
+    className="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white"
+  >
+    Search
+  </label>
+  <div className="relative">
+    <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+      <svg
+        className="w-4 h-4 text-gray-500 dark:text-gray-400"
+        aria-hidden="true"
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 20 20"
+      >
+        <path
+          stroke="currentColor"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth={2}
+          d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
+        />
+      </svg>
+    </div>
+    <input
+      type="search"
+      id="default-search"
+      className="block w-full p-4 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-cyan-500 focus:border-cyan-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-cyan-500 dark:focus:border-cyan-500"
+      placeholder="Search ..."
+       value={SearchTerm0}
               onChange={(e) => {
                 setSearchTerm0(e.target.value);
                
-                filterDataByNameVegetables0(e.target.value);
+                filterDataByNameVegetables0(e.target.value);}}
+    />
+    <button
+      type="submit"
 
-              }}
-            />
+      className=" text-white absolute  right-2.5 bottom-2 p-2 rounded-lg group bg-gradient-to-br from-cyan-500 to-gray-500  hover:text-black dark:text-white focus:ring-4  focus:ring-cyan-200 dark:focus:ring-cyan-800 w-fit hover:bg-gradient-to-br hover:from-cyan-500 hover:to-gray-400 hover:bg-black"
+    >
+      Search
+    </button>
+  </div>
+</form>
+ 
+          
           </div>
-          <div className="flex items-center justify-between mt-4">
-            <p className="font-medium">Filters</p>
-          </div>
+         
           <div className="flex justify-between">
             <div className="grid grid-cols-2  md:grid-cols-3 xl:grid-cols-4 gap-4 mt-4 ">
               <select
-                className="px-4 py-3 w-48 md:w-60 rounded-md bg-gray-100 border-yellow-500 border-2 focus:border-yellow-600 focus:bg-white focus:ring-0 text-sm appearance-none mr-5"
-                value={SearchType00}
-                onChange={(e) => {setSearchType00(e.target.value)
-                  setSearchType0(e.target.value)
-                
+                className="px-4 py-3 w-48 md:w-60 rounded-md border-gray-300 rounded-lg bg-gray-50 focus:ring-cyan-500 focus:border-cyan-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-cyan-500 dark:focus:border-cyan-500 text-sm appearance-none mr-5"
+                value={OptionType}
+                onChange={(e) => {
+                  setOptionType(e.target.value);
+                  handleFilterChange(
+                    e.target.value,
+                    yourSelectedStateValueCategory
+                  );
                 }}
               >
                 <option value="">All Categories</option>
@@ -197,6 +251,30 @@ src={`http://localhost:5000/public/images/${Culture.HeroImage}`}
               </select>
             </div>
           </div>
+
+
+          <div className="flex justify-between">
+            <div className="grid grid-cols-2  md:grid-cols-3 xl:grid-cols-4 gap-4 mt-4 ">
+              <select
+                className="px-4 py-3 w-48 md:w-60 rounded-md border-gray-300 rounded-lg bg-gray-50 focus:ring-cyan-500 focus:border-cyan-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-cyan-500 dark:focus:border-cyan-500 text-sm appearance-none mr-5"
+                value={yourSelectedStateValueCategory}
+                onChange={(e) => {
+                  setyourSelectedStateValueCategory(e.target.value);
+                  handleFilterChange(
+                    OptionType,
+                    e.target.value
+                  );
+                }}
+              >
+                <option value="">all location</option>
+                <option value="amman">amman</option>
+                <option value="zarqa">zarqa</option>
+              </select>
+            </div>
+          </div>
+
+
+
         </div>
       </div>
       <div className="text-center text-4xl font-serif text-black font-bold mt-20 mb-5 ">
@@ -240,9 +318,9 @@ src={`http://localhost:5000/public/images/${Culture.HeroImage}`}
         </Typography>
       </CardBody>
       <CardFooter className="pt-3">
-        <Rating ServiceId={card._id} card={card} UserIdApp={UserIdApp}/>
+        <Rating ServiceId={card._id} card={card} UserIdApp={UserIdApp} rating={card.rating}/>
         { card?.UsersIdRate?.includes(UserIdApp)?
-          <TotalRating rating={card.rating}/> : null
+          null: null
         }
       </CardFooter>
     </Card>

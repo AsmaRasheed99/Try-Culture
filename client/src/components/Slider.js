@@ -14,7 +14,7 @@ function Slider2() {
 
       </h1>
       <p className="max-w-2xl mb-6 font-light text-gray-500 lg:mb-8 md:text-lg lg:text-xl dark:text-gray-400">
-        Sign Up to explore and experience the culture you want in Jordan
+        Sign up to share your experince , rate , comment and make events so you can reach out to as much cultures lovers as possible
          
       </p>
 

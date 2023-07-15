@@ -81,6 +81,7 @@ try {
 }
 }
 
+
 const oneUserBusiness = async (req, res) => {
 
   const businessId = req.params.id;
@@ -95,6 +96,15 @@ try {
   res.json(service);} catch {
     console.error(error.message)
   }
+};
+
+const rateBusiness = async (req, res) => { 
+  const BusinessId  = req.params.id;
+  const updatedBusinessData = req.body;
+console.log(updatedBusinessData,BusinessId)
+  const Business = await Service.findByIdAndUpdate(BusinessId, updatedBusinessData, { new: true });
+  const updatedBusiness= await Business.save();
+  res.json(updatedBusiness);
 };
 
 const pendingBusiness = (req, res) => { 
@@ -139,6 +149,6 @@ const DeleteBusiness = async (req, res) => {
     Approve,
     ApprovedBusiness,
     DeleteBusiness,
- 
+    rateBusiness
 
   }; 

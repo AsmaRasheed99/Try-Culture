@@ -233,7 +233,7 @@ const Pending = () => {
                     >
                       <div className="h-[30px] w-[30px] rounded-full">
                         <img
-                          src={`http://localhost:5000/${e.image}`}
+                          src={`http://localhost:5000/${e.businessImage}`}
                           className="h-full w-full rounded-full"
                           alt=""
                         />
@@ -352,7 +352,6 @@ const Pending = () => {
               value={searchTermBusinessAp}
               onChange={(e) => {
                 setSearchTermBusinessAp(e.target.value);
-                filterDataByNameUsersAp(e.target.value);
               }}
             />
           </div>
@@ -432,6 +431,7 @@ const Pending = () => {
 
 
             {FilterDataBusinessAp.map((e) => {
+              console.log(endIndexUsers)
               return (
                 <tbody role="rowgroup">
                   <tr role="row">
@@ -441,7 +441,7 @@ const Pending = () => {
                     >
                       <div className="h-[30px] w-[30px] rounded-full">
                         <img
-                          src={e.image}
+                          src={`http://localhost:5000/${e.businessImage}`}
                           className="h-full w-full rounded-full"
                           alt=""
                         />

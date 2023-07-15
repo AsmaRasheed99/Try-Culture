@@ -38,7 +38,7 @@ function Home() {
               >
                 <img
                   src="https://images.pexels.com/photos/4937197/pexels-photo-4937197.jpeg?auto=compress&cs=tinysrgb&w=600"
-                  className="w-full"
+                  className="w-full "
                 />
                 <Link to="/Cultures">
                   <div

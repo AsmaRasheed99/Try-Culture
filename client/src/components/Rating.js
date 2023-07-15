@@ -34,7 +34,10 @@ import React, { useState,useContext,useEffect } from "react";
 import axios from "axios";
 import {UserContext} from "../UserContext"
 
-const Rating = ({ ServiceId, UserIdApp, card }) => {
+import TotalRating from "./TotalRating";
+
+
+const Rating = ({ ServiceId, UserIdApp, card ,rating}) => {
   const starCount = 5; // Total number of stars
   const[showRating, setShowRating] = useState(true);
 
@@ -67,15 +70,15 @@ console.log(RatingStatus)
     const  avg = card.rate.length === 0 ? 1 :card.rate?.length
 
     try {
-      const updatedRecipe = {
+      const updatedBusinessData = {
         UsersIdRate:ids,
         rate:newrate,
         rating:sum/avg
       };
 
-    const NupdatedRecipe=   await axios.put(`http://localhost:5000/api/oneUserBusiness/${ServiceId}`, updatedRecipe);
+    const NupdatedBusiness=   await axios.put(`http://localhost:5000/api/rateBusiness/${ServiceId}`, updatedBusinessData);
     setShowRating(true);
-    setRateRefresh(NupdatedRecipe)
+    setRateRefresh(NupdatedBusiness)
     } 
     
     catch (error) {
@@ -113,9 +116,11 @@ console.log(RatingStatus)
     </div>
   
       :
+      <div className="flex">
+      <TotalRating rating={rating}/>
+       <p className="bg-[#a59f9f] w-5 text-center">{rating}</p>  
+      </div>
     
-    
-    <p className="text-white">thanks for rating</p>
   }
     </>
   );

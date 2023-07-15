@@ -184,7 +184,7 @@ const Payment = ({UserIdApp}) => {
             <div className="mt-12 flex flex-col items-center">
               <h1
                 className="text-2xl xl:text-3xl font-extrabold"
-                style={{ color: "#0db5c9" }}
+                style={{ color: "#000" }}
               >
                 Annual Subscription
               </h1>
@@ -304,8 +304,8 @@ const Payment = ({UserIdApp}) => {
                       Go Back
                     </Link>
                     <button
-                      className="inline-block text-lg px-4 py-2 leading-none border rounded-lg mt-4 lg:mt-0"
-                      style={{ backgroundColor: "#0db5c9", color: "white" }}
+                className="relative inline-flex items-center justify-center p-1 overflow-hidden text-lg font-medium text-white rounded-lg group bg-gradient-to-br from-cyan-500 to-gray-500  hover:text-black dark:text-white focus:ring-4  focus:ring-cyan-200 dark:focus:ring-cyan-800 w-fit hover:bg-gradient-to-br hover:from-cyan-500 hover:to-gray-400 hover:bg-black " 
+                style={{ backgroundColor: "#0db5c9", color: "white" }}
                       onClick={handlePayment}
                       type="submit"
                     >
