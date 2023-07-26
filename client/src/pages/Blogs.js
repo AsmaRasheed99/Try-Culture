@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import axios from "axios";
 import Swal from "sweetalert2";
 import Box from "@mui/material/Box";
 import { Button } from "@material-tailwind/react";
 import Modal from "@mui/material/Modal";
+import { useNavigate } from "react-router-dom";
 import { Pagination } from "@mui/material";
 const style = {
   position: "absolute",
@@ -30,6 +31,7 @@ const Blogs = () => {
     setProductImage(event.target.files[0]);
   };
 
+ const navigate = useNavigate()
 
   const [User, setUser] = useState(null);
   const [UserAll, setUserAll] = useState(null);
@@ -95,7 +97,7 @@ const Blogs = () => {
     }
     fetchBlogs();
   }, []);
-
+  console.log(User)
   console.log(UserAll?.image)
   const createNewBlog = async (e) => {
     e.preventDefault();
@@ -164,15 +166,21 @@ const Blogs = () => {
   const startResIndexArray = (currentResPage - 1) * itemsPerPage;
   const endResIndexArray = startResIndexArray + itemsPerPage;
   const slicedResArray = blogs.slice(startResIndexArray, endResIndexArray);
+
+
+  const handleBlog = (id)=> {
+   navigate(`/BlogDetails/${id}`)
+  }
   return (
     <>
-      <div className="container mx-auto flex py-6">
+      <div className="container mx-auto  py-6 flex flex-col md:flex-col lg:flex-row">
         {/* Posts Section */}
         <section className="w-full md:w-2/3 flex flex-col items-center px-3">
           {slicedResArray.map((blog) => (
             <article
               className="flex flex-col flex-wrap shadow my-4 w-full "
               key={blog._id}
+              onClick={()=>{handleBlog(blog._id)}}
             >
               <div className="hover:opacity-75 ">
                 <img

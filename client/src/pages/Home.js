@@ -20,7 +20,7 @@ function Home() {
       <Slider2 />
       <div className="container my-24 lg:px-30 md:px-5 sm:px-5 ">
         {/* Section: Design Block */}
-        <section className="mb-32 text-gray-800">
+        <section className="mb-32 text-gray-800 flex flex-col justify-center w-screen">
           <h2 className="text-3xl font-bold mb-8 text-center font-serif italic text-cyan-500">
             CHOOSE A CULTURE
           </h2>
@@ -28,17 +28,17 @@ function Home() {
             Exploring the Multifaceted Diversity of Cultures within a Single
             Country
           </p>
-          <div className="flex flex-wrap items-center">
+          <div className="flex flex-wrap items-center  mx-auto">
             <div className="grow-0 shrink-0 basis-auto w-full lg:w-5/12 mb-12 lg:mb-0 md:px-6">
               <div
-                className="relative h-96 overflow-hidden bg-no-repeat bg-cover rounded-lg shadow-lg"
+                className="relative overflow-hidden bg-no-repeat bg-cover h-96 rounded-lg shadow-lg"
                 data-mdb-ripple="true"
                 data-mdb-ripple-color="light"
                 style={{ backgroundPosition: "50%" }}
               >
                 <img
                   src="https://images.pexels.com/photos/4937197/pexels-photo-4937197.jpeg?auto=compress&cs=tinysrgb&w=600"
-                  className="w-full "
+                  className="w-full h-full"
                 />
                 <Link to="/Cultures">
                   <div
@@ -68,7 +68,7 @@ function Home() {
               </div>
             </div>
             <div className="grow-0 shrink-0 basis-auto w-full lg:w-7/12 md:px-6">
-              <>
+              {/* <>
                 {" "}
                 <div
                   className="flex mb-12 cursor-pointer"
@@ -88,7 +88,7 @@ function Home() {
                     </p>
                   </div>
                 </div>
-              </>
+              </> */}
               <>
                 <div
                   className="flex mb-12 cursor-pointer"
@@ -157,9 +157,9 @@ function Home() {
 
       <>
         {/* Container for demo purpose */}
-        <div className="container my-24 px-6 mx-auto">
+        <div className=" my-24 w-screen bg-[#f2f2f2] py-10">
           {/* Section: Design Block */}
-          <section className="mb-32 text-gray-800 text-center">
+          <section className="mb-5 text-gray-800 text-center ">
             <h2 className="text-3xl font-bold mb-8 text-center font-serif italic text-cyan-500">
               SHARE YOUR EXPERIENCE
             </h2>
@@ -167,10 +167,8 @@ function Home() {
               Share your experience in exploring the richness of culture:
               Insights, Stories, and Perspectives
             </p>
-            {/* //////////////////////////////////////////// */}
             <BlogSection />
 
-            {/* ///////////////////////////////// */}
           </section>
         </div>
       </>

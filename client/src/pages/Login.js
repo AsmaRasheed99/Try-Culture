@@ -2,11 +2,18 @@ import React, { useEffect, useState ,useContext} from "react";
 import { Link } from "react-router-dom";
 import axios from 'axios';
 import { UserContext } from '../UserContext';
+import Icon from '@mdi/react';
+import { mdiEyeOutline } from '@mdi/js';
+import { mdiEyeOffOutline } from '@mdi/js';
+
 
 function Login() {
 
    
-
+  const [showPassword, setShowPassword] = useState(false);
+  const togglePasswordVisibility = () => {
+    setShowPassword((prevShowPassword) => !prevShowPassword);
+  };
 
 
     const [email, setemail] = useState("");
@@ -75,19 +82,32 @@ function Login() {
                type="email" placeholder="Email"
                value={email}
                onChange={(e) => setemail(e.target.value)}
-                className="block w-full text-xl px-4 py-2 mt-2 text-cyan-500 bg-white border rounded-md focus:border-cyan-200 focus:ring-cyan-100 focus:outline-none focus:ring focus:ring-opacity-40"
-              />
+               className="w-full px-8 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white mt-5"
+               />
                                           <p className="text-red-500">{emailp}</p>
 
             </div>
-            <div className="mb-2 p-3">
+            <div className="p-3 relative">
               <input
-                type="password" placeholder="Password" 
+                className="w-full px-8 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white mt-5"
+                type={showPassword ? "text" : "password"}
+                placeholder="Password"
                 value={password}
+                required
                 onChange={(e) => setpassword(e.target.value)}
-                className="block w-full px-4 text-xl py-2 mt-2 text-cyan-500 bg-white border rounded-md focus:border-cyan-200 focus:ring-cyan-100 focus:outline-none focus:ring focus:ring-opacity-40"
               />
+              <button
+                className="absolute right-7 top-1/2"
+                onClick={togglePasswordVisibility}
+              >
+                {showPassword ? (
+                  <Icon path={mdiEyeOutline} size={1} />
+                ) : (
+                  <Icon path={mdiEyeOffOutline} size={1} />
+                )}
+              </button>
             </div>
+              <p className="text-red-500  px-3">{passwordp}</p>
             <a href="#" className="text-lg text-cyan-400 hover:underline">
               Forgot Password?
             </a>

@@ -7,6 +7,8 @@ import axios from "axios";
 import { useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router";
 import { UserContext } from "../UserContext";
+import Icon from "@mdi/react";
+import { mdiNoteEdit } from "@mdi/js";
 
 const style = {
   position: "absolute",
@@ -116,13 +118,15 @@ function EditBlog(props) {
     }
   return (
     <div>
-    <Button
+     <Icon className="cursor-pointer " path={mdiNoteEdit} color={"green"} size={1} onClick={handleOpen} />
+
+    {/* <Button
       className="mb-10 border-solid border-[#0b3e45] border-2 text-[#00acc1] hover:bg-[#0b3e45] hover:text-[#ffffff]"
       variant="text"
       onClick={handleOpen}
     >
       Edit
-    </Button>
+    </Button> */}
     <Modal
       open={open}
       onClose={handleClose}
@@ -134,63 +138,60 @@ function EditBlog(props) {
           <label >
             Title
           </label>
-          <Input
+          <input
             onChange={(e) => setTitle(e.target.value)}
             id="name"
             value={title}
             type="text"
             variant="h6"
             component="h2"
-            className="m-5"
-          >
-            Text in a modal
-          </Input>{" "}
+            className="mt-1  w-full rounded-md"
+          />
           <br></br>
           <label >
             Content
           </label>
-          <Input
+          <textarea
             id="email"
-            type="email"
+            type="textarea"
             onChange={(e) => setContent(e.target.value)}
             value={content}
             variant="h6"
             component="h2"
-            className="m-5"
+            className="w-full mt-1 rounded-md"
           >
             Text in a modal
-          </Input>{" "}
-
-          <label >
+          </textarea>{" "}
+          <label className="mt-3" >
             Image
           </label>
 
+
           <input
-            className="file-upload-input mx-auto"
+            className="file-upload-input my-1 w-full border border-black rounded-md"
             type="file"
             name="image"
             onChange={handleProductImageChange}
             accept="image/*"
             required
           />
-
           <br></br>
           <Button
             onClick={handleSubmit}
-            className=" m-5 border-solid border-[#00acc1] border-2 text-[#00acc1] hover:bg-[#00acc1] hover:text-[#ffffff]"
+            className="my-1 border-solid border-[#00acc1] border-2 text-[#00acc1] hover:bg-[#00acc1] hover:text-[#ffffff]"
             variant="text"
           >
             Edit
           </Button>
           <Button
-            className="m-5 border-solid border-[#0b3e45] border-2 text-[#0b3e45] hover:bg-[#0b3e45] hover:text-[#ffffff]"
+            className=" my-1 border-solid border-[#0b3e45] border-2 text-[#0b3e45] hover:bg-[#0b3e45] hover:text-[#ffffff]"
             variant="text"
             onClick={handleClose}
           >
             Cancel
           </Button>
           <Button
-            className="m-5 border-solid border-red-800 border-2 text-red-800 hover:bg-red-800 hover:text-[#ffffff]"
+            className="my-1 border-solid border-red-800 border-2 text-red-800 hover:bg-red-800 hover:text-[#ffffff]"
             variant="text"
             onClick={handleDelete}
           >

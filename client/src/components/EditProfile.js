@@ -7,6 +7,8 @@ import axios from "axios";
 import { useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router";
 import { UserContext } from "../UserContext";
+import { mdiAccountEdit } from "@mdi/js";
+import Icon from "@mdi/react";
 
 const style = {
   position: "absolute",
@@ -21,78 +23,71 @@ const style = {
 };
 
 function EditProfile() {
-    
   const { profileRefresh, updateProfileRefresh } = useContext(UserContext);
 
-  const navigate=useNavigate()
-const [open, setOpen] = React.useState(false);
+  const navigate = useNavigate();
+  const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-    /////////////////////
-    const [userId ,setUserId] = useState()
-    const [userData ,setUserData] = useState({})
-    const [name, setName] = useState("");
+  /////////////////////
+  const [userId, setUserId] = useState();
+  const [userData, setUserData] = useState({});
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
 
-  
   const [productImage, setProductImage] = useState(null);
 
   const handleProductImageChange = (event) => {
     setProductImage(event.target.files[0]);
   };
 
-
-
-
-
-    
-    const fetchProtectedData = async () => {
-      try {
-        const token = localStorage.getItem("auth");
-        if (token) {
-          const response = await axios.get("http://localhost:5000/protected", {
-            headers: {
-              Authorization: token,
-            },
-          });
-          setUserId(response.data.user.id)
-          console.log(response.data.user.email)
-          let id=response.data.user.id
-          try {
-            const response = await axios.get(`http://localhost:5000/api/users/${id}`);
-            console.log(response.data)
-            setUserData(response.data[0])
-            setName(response.data[0].firstName)
-            setEmail(response.data[0].email)
-
-          } catch (error) {
-            console.error("Error retrieving data:", error);
-          }
+  const fetchProtectedData = async () => {
+    try {
+      const token = localStorage.getItem("auth");
+      if (token) {
+        const response = await axios.get("http://localhost:5000/protected", {
+          headers: {
+            Authorization: token,
+          },
+        });
+        setUserId(response.data.user.id);
+        console.log(response.data.user.email);
+        let id = response.data.user.id;
+        try {
+          const response = await axios.get(
+            `http://localhost:5000/api/users/${id}`
+          );
+          console.log(response.data);
+          setUserData(response.data[0]);
+          setName(response.data[0].firstName);
+          setEmail(response.data[0].email);
+        } catch (error) {
+          console.error("Error retrieving data:", error);
         }
-      } catch (error) {
-        console.error(error);
-        localStorage.removeItem("auth");
-        window.location.href = "http://localhost:3000/Login";
-      } finally {
-        console.log(false);
       }
-    };
-  
-  
-  useEffect(()=>{
-    if(localStorage.auth != null){   
-      fetchProtectedData()
+    } catch (error) {
+      console.error(error);
+      localStorage.removeItem("auth");
+      window.location.href = "http://localhost:3000/Login";
+    } finally {
+      console.log(false);
     }
-  },[])
-    
+  };
+
+  useEffect(() => {
+    if (localStorage.auth != null) {
+      fetchProtectedData();
+    }
+  }, []);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-console.log(name,email,userId )
+    console.log(name, email, userId);
 
-const formData = new FormData()
-formData.append('firstName',name)
-formData.append('image',productImage)
-formData.append('email',email)
+    const formData = new FormData();
+    formData.append("firstName", name);
+    formData.append("image", productImage);
+    formData.append("email", email);
 
     // console.log(name , productImage , email)
 
@@ -100,25 +95,28 @@ formData.append('email',email)
       .put(`http://localhost:5000/api/usersMulter/${userId}`, formData)
       .then(function (response) {
         console.log(response);
-      
-        handleClose()
-        updateProfileRefresh(response)
-        
+
+        handleClose();
+        updateProfileRefresh(response);
       })
       .catch(function (error) {
         console.log(error);
       });
- console.log(profileRefresh)
-  }
+    console.log(profileRefresh);
+  };
   return (
     <div>
-      <Button
-        className="mb-10 border-solid border-[#0b3e45] border-2 text-[#00acc1] hover:bg-[#0b3e45] hover:text-[#ffffff]"
-        variant="text"
-        onClick={handleOpen}
-      >
-        Edit
-      </Button>
+      <div className="flex justify-end">
+        {" "}
+        <Icon
+          path={mdiAccountEdit}
+          size={2}
+          color="#00acc1"
+          onClick={handleOpen}
+          className="cursor-pointer hover:scale-105"
+        />
+      </div>
+
       <Modal
         open={open}
         onClose={handleClose}
@@ -153,16 +151,14 @@ formData.append('email',email)
               Text in a modal
             </Input>{" "}
             <br></br>
-
-           
-                     <input
-            className="file-upload-input mx-auto"
-            type="file"
-            name="image"
-            onChange={handleProductImageChange}
-            accept="image/*"
-            required
-          />
+            <input
+              className="file-upload-input mx-auto"
+              type="file"
+              name="image"
+              onChange={handleProductImageChange}
+              accept="image/*"
+              required
+            />
             <Button
               onClick={handleSubmit}
               className=" m-5 border-solid border-[#00acc1] border-2 text-[#00acc1] hover:bg-[#00acc1] hover:text-[#ffffff]"

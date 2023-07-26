@@ -105,18 +105,18 @@ function Profile() {
         />
         <main className="profile-page">
           <section className="relative block h-500-px bg-cyan-600">
-            {/* <div
-          className="absolute top-0 w-full h-full bg-center bg-contain"
+            <div
+          className="absolute top-0 w-full bg-cover h-full bg-center "
           style={{
             backgroundImage:
-              'url("https://images.pexels.com/photos/3638731/pexels-photo-3638731.jpeg?auto=compress&cs=tinysrgb&w=600")'
+              'url("https://images.pexels.com/photos/1010657/pexels-photo-1010657.jpeg?auto=compress&cs=tinysrgb&w=600")'
           }}
         >
           <span
             id="blackOverlay"
             className="w-full h-full absolute opacity-50 bg-black"
           />
-        </div> */}
+        </div>
             <div
               className="top-auto bottom-0 left-0 right-0 w-full absolute pointer-events-none overflow-hidden h-70-px"
               style={{ transform: "translateZ(0px)" }}
@@ -201,20 +201,22 @@ function Profile() {
                         <p className="mb-4 text-lg leading-relaxed text-blueGray-700">
                           My Blogs
                         </p>
-                        <section className="  grid grid-cols-2 items-center ">
+                        <section className="flex flex-wrap items-center justify-center ">
                           {UserBlogs.map((blog) => (
                             <article
-                              className="flex flex-col w-96 shadow my-4 text-start"
+                              className="flex flex-col w-96 shadow my-4 text-start m-5"
                               key={blog._id}
                             >
                               <div className="hover:opacity-75  ">
-                                <img className="w-full" src={`http://localhost:5000/${blog.image}`}/>
+                                <img className="w-full h-80" src={`http://localhost:5000/${blog.image}`}/>
                               </div>
                               <div className="bg-white flex flex-col justify-start p-6">
-                                <p className="text-3xl font-bold hover:text-gray-700 pb-4">
+                                <div className="flex justify-between items-center pb-4">
+                                <p className="text-3xl text-center font-bold hover:text-gray-700 ">
                                   {blog.title}
                                 </p>
-
+                                <EditBlog id={blog._id} blogProps={blog} />
+                                </div>
                                 <p className="text-sm pb-3">
                                   By{" "}
                                   <span className="font-semibold hover:text-gray-800">
@@ -228,13 +230,12 @@ function Profile() {
                                 {/* <p className="uppercase text-gray-800 hover:text-black pt-3">
                                   {blog.content}
                                 </p> */}
-                                <div className="w-full overflow-hidden">
-                                  <p className="whitespace-normal h-auto w-52">
+                                <div className="w-full overflow-hidden mt-4">
+                                  <p className="whitespace-normal h-10 w-52">
                                     {blog.content}
                                   </p>
                                 </div>
                               </div>
-                              <EditBlog id={blog._id} blogProps={blog} />
                             </article>
                           ))}
                         </section>

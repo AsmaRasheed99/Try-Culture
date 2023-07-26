@@ -31,6 +31,16 @@ const blogPostSchema = new Schema({
     default: Date.now,
     required:false
   },
+  comments: {
+    type: Array,
+    default: [],
+    required:false
+  },
+  likes: {
+    type: Array,
+    default: [],
+    required:false
+  }
   
    
   // flag: {

@@ -18,7 +18,8 @@ import Payment from "./pages/Provider/Payment";
 import About from "./pages/aboutPage/About";
 import Contact from "./pages/Contact";
 import Messenger from './pages/Messenger/Messenger'
-
+import BlogDetails from "./components/BlogDetails";
+import Events from "./pages/Events";
 //------------------ Dashboard  ----------------------- //
 
 import Sidebar from "./pages/dashboard/Sidebar";
@@ -103,12 +104,14 @@ export default function App() {
     <Route path="/Cultures" element={<Cultures/>}/>
     <Route path="/Culture/:country" element={<Culture UserIdApp={UserIdApp}/>}/>
     <Route path="/Profile" element={<Profile/>}/>
-    <Route path="/Calendar" element={<Calendar/>}/>
+    <Route path="/Calendar/:country" element={<Calendar/>}/>
     <Route path="SignUp" element={<SignUp/>}/>
     <Route path="SignIn" element={<SignIn/>}/>
     <Route path="About" element={<About />} /> 
     <Route path="ContactUs" element={<Contact />} /> 
     <Route path="Messenger" element={<Messenger UserApp={UserApp} />} /> 
+    <Route path="/BlogDetails/:id" element={<BlogDetails UserApp={UserApp}/>}/>
+    <Route path="/Events" element={<Events/>}/>
 
 
     {/* <Route path="ServiceForm" element={<ServiceForm/>}/> */}
@@ -159,10 +162,11 @@ export default function App() {
     <Route path="/Cultures" element={<Cultures/>}/>
     <Route path="/Culture/:country" element={<Culture  UserIdApp={UserIdApp}/>}/>
     <Route path="/Profile" element={<Profile/>}/>
-    <Route path="/Calendar" element={<Calendar/>}/>
+    <Route path="/Calendar/:country" element={<Calendar/>}/>
     <Route path="SignUp" element={<SignUp/>}/>
     <Route path="About" element={<About />} /> 
     <Route path="ContactUs" element={<Contact />} /> 
+    <Route path="/BlogDetails/:id" element={<BlogDetails UserApp={UserApp}/>}/>
 
 
     <Route path="ServiceForm" element={<ServiceForm UserIdApp = {UserIdApp}/>}/>

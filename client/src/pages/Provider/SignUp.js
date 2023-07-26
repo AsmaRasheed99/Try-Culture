@@ -2,6 +2,9 @@ import React from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import Icon from "@mdi/react";
+import { mdiEyeOutline } from "@mdi/js";
+import { mdiEyeOffOutline } from "@mdi/js";
 function SignUp() {
 
 const [name, setName] = useState("");
@@ -18,6 +21,11 @@ const [passwordp, setpasswordp] = useState("");
 
 const [ConfirmPassword, setConfirmPassword] = useState("");
 const [ConfirmPasswordp, setConfirmPasswordp] = useState("");
+
+const [showPassword, setShowPassword] = useState(false);
+const togglePasswordVisibility = () => {
+  setShowPassword((prevShowPassword) => !prevShowPassword);
+};
 
 const handleSubmit = async (event) => {
     event.preventDefault();
@@ -140,57 +148,78 @@ return (
            subscribe and share your business with the world
         </h1>
         <form className="mt-6" onSubmit={handleSubmit}>
-            <div className="mb-2 p-3">
+            <div className="p-3">
             <input
                 type="email" placeholder="Email" value={email}
                 onChange={(e) => setemail(e.target.value)} 
-                className="block w-full text-xl px-4 py-2 mt-2 text-cyan-500 bg-white border rounded-md focus:border-cyan-200 focus:ring-cyan-100 focus:outline-none focus:ring focus:ring-opacity-40"
+                className="w-full px-8 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white mt-5"
             />
-             <p className="text-red-500">{emailp}</p>
 
             </div>
-            <div className="mb-2 p-3">
+             <p className="text-red-500 px-3">{emailp}</p>
+            <div className=" p-3">
             <input
                 type="text" placeholder="Full Name" value={name}
                 onChange={(e) => setName(e.target.value)}
-                className="block w-full text-xl px-4 py-2 mt-2 text-gray-800 bg-white border rounded-md focus:border-cyan-200 focus:ring-cyan-100 focus:outline-none focus:ring focus:ring-opacity-40"
+                className="w-full px-8 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white mt-5"
             />
-              <p className="text-red-500">{namep}</p>
 
             </div>
-            <div className="mb-2 p-3">
+              <p className="text-red-500 px-3">{namep}</p>
+            <div className="p-3">
             <input
               type="tel" placeholder="07xxxxxxxx"
               value={phone}
               onChange={(e) => setphone(e.target.value)}
-                className="block text-xl w-full px-4 py-2 mt-2 text-gray-800 bg-white border rounded-md focus:border-cyan-200 focus:ring-cyan-100 focus:outline-none focus:ring focus:ring-opacity-40"
-            />
-             <p className="text-red-500">{phonep}</p>
+              className="w-full px-8 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white mt-5"
+              />
 
             </div>
-            <div className="mb-2 p-3">
-            <input
-                type="password" placeholder="Password" 
+             <p className="text-red-500 px-3">{phonep}</p>
+            <div className="p-3 relative">
+              <input
+                className="w-full px-8 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white mt-5"
+                type={showPassword ? "text" : "password"}
+                placeholder="Password"
                 value={password}
+                required
                 onChange={(e) => setpassword(e.target.value)}
-                className="block text-xl w-full px-4 py-2 mt-2 text-cyan-500 bg-white border rounded-md focus:border-cyan-200 focus:ring-cyan-100 focus:outline-none focus:ring focus:ring-opacity-40"
-            />
-            <p className="text-red-500">{passwordp}</p>
-
+              />
+              <button
+                className="absolute right-7 top-1/2"
+                onClick={togglePasswordVisibility}
+              >
+                {showPassword ? (
+                  <Icon path={mdiEyeOutline} size={1} />
+                ) : (
+                  <Icon path={mdiEyeOffOutline} size={1} />
+                )}
+              </button>
             </div>
-            <div className="mb-2 p-3">
-            <input
-                type="password"
+              <p className="text-red-500  px-3">{passwordp}</p>
+
+            <div className="p-3 relative">
+              <input
+                type={showPassword ? "text" : "password"}
                 placeholder="Confirm Password"
                 name="confirmPassword"
                 value={ConfirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
                 required
-                className="block text-xl w-full px-4 py-2 mt-2 text-cyan-500 bg-white border rounded-md focus:border-cyan-200 focus:ring-cyan-100 focus:outline-none focus:ring focus:ring-opacity-40"
-            />
-                          <p className="text-red-500">{ConfirmPasswordp}</p>
-
+                className="w-full px-8 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white mt-5"
+              />
+              <button
+                className="absolute right-7 top-1/2"
+                onClick={togglePasswordVisibility}
+              >
+                {showPassword ? (
+                  <Icon path={mdiEyeOutline} size={1} />
+                ) : (
+                  <Icon path={mdiEyeOffOutline} size={1} />
+                )}
+              </button>
             </div>
+              <p className="text-red-500  px-3">{ConfirmPasswordp}</p>
 
             <div className="mt-6 p-3">
             <button className="w-full px-4 py-2 text-2xl tracking-wide text-white transition-colors duration-200 transform bg-cyan-500 rounded-md hover:bg-cyan-400 focus:outline-none focus:bg-cyan-400">

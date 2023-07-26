@@ -21,7 +21,7 @@ const style = {
   p: 4,
 };
 
-function AddEvent() {
+function AddEvent({country}) {
   const [theDate, setDate] = useState("");
   const [Time, setTime] = useState("");
   const [EventName, setEventName] = useState("");
@@ -136,7 +136,7 @@ function AddEvent() {
           Date: theDate,
           Time: Time,
           EventName: EventName,
-          Culture: Culture,
+          Culture: country,
           location: Location,
           Details: Details,
           Organizer: Organizer,
@@ -239,7 +239,6 @@ function AddEvent() {
               component="h2"
               className="m-5"
             >
-              Text in a modal
             </Input>{" "}
             <label>Time</label>
             <Input
@@ -251,20 +250,8 @@ function AddEvent() {
               component="h2"
               className="m-5"
             >
-              Text in a modal
             </Input>{" "}
-            <label>Culture</label>
-            <Input
-              id="culture"
-              type="text"
-              onChange={(e) => setCulture(e.target.value)}
-              value={Culture}
-              variant="h6"
-              component="h2"
-              className="m-5"
-            >
-              Text in a modal
-            </Input>{" "}
+       
             <label>Location</label>
             <Input
               id="location"
@@ -275,7 +262,6 @@ function AddEvent() {
               component="h2"
               className="m-5"
             >
-              Text in a modal
             </Input>{" "}
             <label
               for="Info"

@@ -20,10 +20,13 @@ import {
 } from "@material-tailwind/react";
 import {
   ChevronDownIcon,
-  UserCircleIcon,
-  Bars3Icon,
   XMarkIcon,
   LanguageIcon,
+  LifebuoyIcon,
+  PowerIcon,
+  Bars3Icon,
+
+
 } from "@heroicons/react/24/outline";
 
 const colors = {
@@ -173,6 +176,36 @@ function NavList() {
           </ListItem>
         </Link>
       </Typography>
+     
+      <Typography
+        as="a"
+        href="#"
+        variant="small"
+        color="blue-gray"
+        className="font-normal"
+      >
+            <Link to="/Events"
+        onClick={()=>updateNav(false)}>
+          <ListItem className="flex items-center gap-2 py-2 pr-4 text-xl">
+            Events
+          </ListItem>
+        </Link>
+      </Typography>
+     
+      <Typography
+        as="a"
+        href="#"
+        variant="small"
+        color="blue-gray"
+        className="font-normal"
+      >
+        <Link to="/Messenger"
+        onClick={()=>updateNav(false)}>
+          <ListItem className="flex items-center gap-2 py-2 pr-4 text-xl">
+            Chat
+          </ListItem>
+        </Link>
+      </Typography>
       <NavListMenu />
     </List>
   );
@@ -217,6 +250,97 @@ export default function Example() {
 
   },[closeNav])
 
+  const profileMenuItems = [
+    {
+      label: "Profile",
+      
+      icon: LifebuoyIcon,
+    },
+    {
+      label: "Sign Out",
+      icon: PowerIcon,
+    },
+  ];
+
+   function ProfileMenu() {
+
+    const [isMenuOpen, setIsMenuOpen] = React.useState(false);
+    const navigate =useNavigate()
+
+    const closeMenu = (label) => {
+      setIsMenuOpen(false);
+      if (label == "Sign Out") {
+        localStorage.removeItem("auth");
+        window.location.href = "http://localhost:3000/";
+        console.log(label);
+      } else if (label == "Profile") {
+        navigate("/Profile")        
+      }
+    };
+
+    return (
+      <Menu open={isMenuOpen} handler={setIsMenuOpen} placement="bottom-end">
+        <MenuHandler>
+          <Button
+            variant="text"
+            color="blue-gray"
+            className="flex items-center gap-1 rounded-full py-0.5 pr-2 pl-0.5 lg:ml-auto"
+          >
+            <svg
+              xmlns="https://source.unsplash.com/MP0IUfwrn0A"
+              className="h-7 w-7 text-cyan-500"
+              viewBox="0 0 20 20"
+              fill="currentColor"
+            >
+              {" "}
+              <path
+                fillRule="evenodd"
+                d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"
+                clipRule="evenodd"
+              />
+            </svg>
+            <ChevronDownIcon
+              strokeWidth={2.5}
+              className={`h-3 w-3 transition-transform text-black ${
+                isMenuOpen ? "rotate-180" : ""
+              }`}
+            />
+          </Button>
+        </MenuHandler>
+        <MenuList className="p-1">
+          {profileMenuItems.map(({ label, icon }, key) => {
+            const isLastItem = key === profileMenuItems.length - 1;
+            return (
+              <MenuItem
+                key={label}
+                onClick={() => {
+                  closeMenu(label);
+                }}
+                className={`flex items-center gap-2 rounded ${
+                  isLastItem
+                    ? "hover:bg-red-500/10 focus:bg-red-500/10 active:bg-red-500/10"
+                    : ""
+                }`}
+              >
+                {React.createElement(icon, {
+                  className: `h-4 w-4 ${isLastItem ? "text-red-500" : ""}`,
+                  strokeWidth: 2,
+                })}
+                <Typography
+                  as="span"
+                  variant="small"
+                  className="font-normal"
+                  color={isLastItem ? "red" : "inherit"}
+                >
+                  {label}
+                </Typography>
+              </MenuItem>
+            );
+          })}
+        </MenuList>
+      </Menu>
+    );
+  }
   return (
     
     <Navbar className="mx-auto max-w-screen-4xl px-4 py-2 sticky top-0 z-10">
@@ -242,16 +366,18 @@ export default function Example() {
               className="font-normal flex gap-3"
             >
               <Link to="/" onClick={handleLogout}>
-                <Button variant="gradient" size="lg" color="cyan">
+                {/* <Button variant="gradient" size="lg" color="cyan">
                   Log Out
-                </Button>
+                </Button> */}
+
               </Link>
               <Link to="/Profile">
-                <Button variant="gradient" size="lg" color="cyan">
+                {/* <Button variant="gradient" size="lg" color="cyan">
                   <UserCircleIcon className="h-[18px] w-[18px]" />
                   
-                </Button>
+                </Button> */}
               </Link>
+              <ProfileMenu/>
             </Typography>
           ) : (
              <>

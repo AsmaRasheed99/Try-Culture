@@ -36,18 +36,16 @@ console.log(blogs)
 
   return (
     <>
-    <div className="bg-white  flex flex-col items-center  w-full ">
-  <div className="w-screen px-6 lg:px-8">
-    <div className=" max-w-2xl lg:mx-0">
-    
-    </div>
-    <div className=" place-items-center   mx-auto mt-10 grid max-w-2xl grid-cols-1  gap-y-16 border-t border-gray-200 pt-10 sm:mt-16 sm:pt-16 lg:mx-0 lg:max-w-none lg:grid-cols-4">
+    <div className=" flex flex-col items-center  w-screen ">
+  <div className="w-full ">
+   
+    <div className='flex w-full flex-wrap mt-10 justify-center '>
       
       {blogs?.map((blog)=>{
 
 return(
 
-    <div className="max-w-xs container  bg-white rounded-xl shadow-lg transform transition duration-500 hover:scale-105 hover:shadow-2xl">
+    <div className="w-80 container   bg-white rounded-xl shadow-lg transform transition duration-500 hover:scale-105 hover:shadow-2xl">
       <div>
        
         <h1 className="text-2xl mt-2 ml-4 font-bold text-gray-800 cursor-pointer hover:text-gray-900 transition duration-100">
@@ -59,12 +57,12 @@ return(
         </p>
       </div>
       <img
-        className="w-full cursor-pointer"
+        className="w-full h-60 cursor-pointer"
         src={`http://localhost:5000/${blog.image}
         `}
         alt=""
       />
-      <div className="flex p-4 justify-between">
+      <div className="flex h-20 p-4 justify-between">
         <div className="flex items-center space-x-2">
           <img
             className="w-10 h-10 rounded-full"
@@ -91,10 +89,10 @@ return(
   </div>
 </div>
 
-<div className='flex justify-center mt-5'>
+<div className='flex justify-center mt-10'>
      <Link to="/Blogs">
       <Button 
-            className="m-5 border-solid border-[#0b3e45] border-2 text-[#0b3e45] hover:bg-[#0b3e45] hover:text-[#ffffff]"
+            className=" border-solid border-[#0b3e45] border-2 text-[#0b3e45] hover:bg-[#0b3e45] hover:text-[#ffffff]"
             variant="text"
           >
             Read More
