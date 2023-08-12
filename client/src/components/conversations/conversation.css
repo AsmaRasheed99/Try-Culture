@@ -1,16 +1,13 @@
-.conversation {
+/* .conversation {
     display: flex;
     align-items: center;
     padding: 10px;
     cursor: pointer;
-    margin-top: 20px;
-  }
+    margin-top: 10px;
+  } */
+ 
   
-  .conversation:hover {
-    background-color: rgb(245, 243, 243);
-  }
-  
-  .conversationImg {
+  /* .conversationImg {
     width: 40px;
     height: 40px;
     border-radius: 50%;
@@ -26,4 +23,5 @@
     .conversationName {
       display: none;
     }
-  }
+    
+  } */

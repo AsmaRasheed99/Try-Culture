@@ -66,7 +66,7 @@ function Culture({ UserIdApp }) {
 
   const [currentPage, setCurrentPage] = useState(1);
 
-  const itemsPerPage = 3;
+  const itemsPerPage = 6;
 
   const totalPagesArray = Math.ceil(Business.length / itemsPerPage);
 
@@ -131,7 +131,7 @@ function Culture({ UserIdApp }) {
             </h4>
             <p className="mt-6 mb-8 text-md sm:mb-12 flex flex-wrap">
               {Culture.Information}
-              <br className="hidden md:inline md:hidden" />
+              <br className="hidden md:inline " />
             </p>
             <div className="flex flex-col space-y-4 sm:items-center sm:justify-center sm:flex-row sm:space-y-0 sm:space-x-4 lg:justify-start">
               <div className="flex items-center justify-center">
@@ -195,7 +195,7 @@ function Culture({ UserIdApp }) {
               </form>
               <div className="flex justify-between  w-full lg:w-1/4">
               <select
-                className="px-4 py-3 w-48 md:w-60 rounded-md border-gray-300 rounded-lg bg-gray-50 focus:ring-cyan-500 focus:border-cyan-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-cyan-500 dark:focus:border-cyan-500 text-sm appearance-none "
+                className="px-4 py-3 w-48 md:w-60 mr-2 border-gray-300 rounded-lg bg-gray-50 focus:ring-cyan-500 focus:border-cyan-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-cyan-500 dark:focus:border-cyan-500 text-sm appearance-none "
                 value={yourSelectedStateValueLocation}
                 onChange={(e) => {
                   setyourSelectedStateValueLocation(e.target.value);
@@ -213,7 +213,7 @@ function Culture({ UserIdApp }) {
                 <option value="Aqaba">Aqaba</option>
               </select>
               <select
-                className="px-4 py-3 w-48 md:w-60 rounded-md border-gray-300 rounded-lg bg-gray-50 focus:ring-cyan-500 focus:border-cyan-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-cyan-500 dark:focus:border-cyan-500 text-sm appearance-none "
+                className="px-4 py-3 w-48 md:w-60  border-gray-300 rounded-lg bg-gray-50 focus:ring-cyan-500 focus:border-cyan-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-cyan-500 dark:focus:border-cyan-500 text-sm appearance-none "
                 value={yourSelectedStateValueType}
                 onChange={(e) => {
                   setyourSelectedStateValueType(e.target.value);
@@ -278,13 +278,25 @@ function Culture({ UserIdApp }) {
               </Typography>
             </CardBody>
             <CardFooter className="pt-3">
-              <Rating
+            {card?.UsersIdRate?.includes(UserIdApp) ?
+        <div className="flex">
+        <TotalRating rating={card.rating}/>
+         <p className="bg-base-200  w-6 h-6 rounded-full ml-5 text-center">{(Math.round((card.rating)* 10) / 10)
+
+
+
+}</p>  
+        </div>
+        : 
+        <Rating
                 ServiceId={card._id}
                 card={card}
                 UserIdApp={UserIdApp}
                 rating={card.rating}
+                currentPage={currentPage}
               />
-              {card?.UsersIdRate?.includes(UserIdApp) ? null : null}
+      }
+            
             </CardFooter>
           </Card>
         ))}

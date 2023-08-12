@@ -33,7 +33,11 @@ const userSchema = new Schema({
     phone:{
         type : String,
         required: false   
-    }
+    },
+    resetPin:{
+        type : Number,
+        required : false,
+    },
     
     },
      {timestamp : true}

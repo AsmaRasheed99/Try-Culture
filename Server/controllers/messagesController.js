@@ -3,6 +3,7 @@ const Message = require("../models/Message");
 
 const AddMessage = async (req, res) => {
     const message = req.body;
+    console.log(message);
     try {
         const mes = await Message.create(message);
         console.log(mes);

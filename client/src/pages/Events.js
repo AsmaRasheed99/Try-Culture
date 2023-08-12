@@ -1,3 +1,4 @@
+import { Card } from '@mui/material';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 
@@ -59,19 +60,10 @@ const handleFilterChange = (typeValue, LocationValue) => {
    <div className="flex justify-center mt-5 mb-5">
         <div className="w-full md:w-full mx-8  p-5 rounded-lg   transform transition duration-300 ">
           <div className="relative">
-            <div className="absolute flex items-center ml-2 h-full">
-              <svg
-                className="w-4 h-4 fill-current text-primary-gray-dark"
-                viewBox="0 0 16 16"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path d="M15.8898 15.0493L11.8588 11.0182C11.7869 10.9463 11.6932 10.9088 11.5932 10.9088H11.2713C12.3431 9.74952 12.9994 8.20272 12.9994 6.49968C12.9994 2.90923 10.0901 0 6.49968 0C2.90923 0 0 2.90923 0 6.49968C0 10.0901 2.90923 12.9994 6.49968 12.9994C8.20272 12.9994 9.74952 12.3431 10.9088 11.2744V11.5932C10.9088 11.6932 10.9495 11.7869 11.0182 11.8588L15.0493 15.8898C15.1961 16.0367 15.4336 16.0367 15.5805 15.8898L15.8898 15.5805C16.0367 15.4336 16.0367 15.1961 15.8898 15.0493ZM6.49968 11.9994C3.45921 11.9994 0.999951 9.54016 0.999951 6.49968C0.999951 3.45921 3.45921 0.999951 6.49968 0.999951C9.54016 0.999951 11.9994 3.45921 11.9994 6.49968C11.9994 9.54016 9.54016 11.9994 6.49968 11.9994Z" />
-              </svg>
-            </div>
+          
             <div className="flex flex-col md:flex-row lg:flex-row justify-between w-full  ">
 
-            <form className="w-full mb-5 lg:mb-0   lg:w-3/4 mr-2 ">
+            <form className="w-full mb-5 lg:mb-0   lg:w-3/4 mr-3 ">
                 <label
                   htmlFor="default-search"
                   className="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white"
@@ -116,9 +108,9 @@ const handleFilterChange = (typeValue, LocationValue) => {
                   </button>
                 </div>
               </form>
-              <div className="flex justify-between  w-full lg:w-1/4">
+              <div className="flex justify-between gap-3 w-full lg:w-1/4">
               <select
-                className="px-4 py-3 w-48 md:w-60 rounded-md border-gray-300 rounded-lg bg-gray-50 focus:ring-cyan-500 focus:border-cyan-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-cyan-500 dark:focus:border-cyan-500 text-sm appearance-none "
+                className="px-4 py-3 w-48 md:w-60  border-gray-300 rounded-lg bg-gray-50 focus:ring-cyan-500 focus:border-cyan-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-cyan-500 dark:focus:border-cyan-500 text-sm appearance-none "
                 value={yourSelectedStateValueLocation}
                 onChange={(e) => {
                   setyourSelectedStateValueLocation(e.target.value);
@@ -128,7 +120,7 @@ const handleFilterChange = (typeValue, LocationValue) => {
                   );
                 }}
               >
-                <option value="">all location</option>
+                <option value="">Location</option>
                 <option value="amman">amman</option>
                 <option value="zarqa">zarqa</option>
                 <option value="Irbid">Irbid</option>
@@ -136,7 +128,7 @@ const handleFilterChange = (typeValue, LocationValue) => {
                 <option value="Aqaba">Aqaba</option>
               </select>
               <select
-                className="px-4 py-3 w-48 md:w-60 rounded-md border-gray-300 rounded-lg bg-gray-50 focus:ring-cyan-500 focus:border-cyan-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-cyan-500 dark:focus:border-cyan-500 text-sm appearance-none "
+                className="px-4 py-3 w-48 md:w-60  border-gray-300 rounded-lg bg-gray-50 focus:ring-cyan-500 focus:border-cyan-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-cyan-500 dark:focus:border-cyan-500 text-sm appearance-none "
                 value={yourSelectedStateValueType}
                 onChange={(e) => {
                   setyourSelectedStateValueType(e.target.value);
@@ -146,9 +138,9 @@ const handleFilterChange = (typeValue, LocationValue) => {
                   );
                 }}
               >
-                <option value="">All Categories</option>
-                <option value="resturant">restaurants</option>
-                <option value="LanguageInstitute">Language Institute</option>
+                <option value="">Culture</option>
+                <option value="China">China</option>
+                <option value="Jordan">Jordan</option>
                 <option value="Shop">Shop</option>
               </select>
               </div>
@@ -170,15 +162,15 @@ const handleFilterChange = (typeValue, LocationValue) => {
       <div className='flex flex-wrap gap-4 justify-center '>
 
                {FilteredEvents?.map((event, index) => (
-                <div key={index} className="event_item border p-5 w-96">
+                <div key={index} className="border rounded-md shadow-md m-5 p-5 lg:w-1/3 w-full bg-base-200 hover:scale-105">
                   <div className="ei_Dot dot_active" />
-                  <div className="ei_Title font-bold text-lg">{event.EventName}</div><br></br>
-                  <div className="ei_Title">Organized By : {event.Organizer}</div><br></br>
+                  <div className="ei_Title font-bold text-xl mb-3">{event.EventName}</div><br></br>
+                  <div className="ei_Title"><span className='font-bold text-lg'>Organized By :</span>  {event.Organizer}</div><br></br>
 
-                  <div className="ei_Title">On : {event.Date}</div><br></br>
-                  <div className="ei_Title"> At : {event.Time}</div><br></br>
-                  <div className="ei_Title">{event.location}</div><br></br>
-                  <div className="ei_Title">{event.Details}</div><br></br>
+                  <div className="ei_Title"><span className='font-bold text-lg'>On :</span> {event.Date}</div><br></br>
+                  <div className="ei_Title"> <span className='font-bold text-lg'>At :</span> {event.Time}</div><br></br>
+                  <div className="ei_Title"><span className='font-bold text-lg'>At :</span>{event.location}</div><br></br>
+                  <Card className="p-5 my-5 ">{event.Details}</Card><br></br>
                 </div>
               ))}
                    </div>

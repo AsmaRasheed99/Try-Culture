@@ -1,13 +1,12 @@
-import React, { useState } from "react";
-import "swiper/css";
-import "swiper/css/navigation";
-// Import Swiper React components
+import React from "react";
+
 import "/node_modules/flag-icons/css/flag-icons.min.css";
 import Slider2 from "../components/Slider";
-import blog1 from "../images/blog1.jpg";
-import { Button } from "@material-tailwind/react";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import BlogSection from "../components/BlogSection";
+import ContactUs from "../pages/ContactUs";
+
+
 function Home() {
   const navigate = useNavigate();
 
@@ -18,9 +17,9 @@ function Home() {
   return (
     <div>
       <Slider2 />
-      <div className="container my-24 lg:px-30 md:px-5 sm:px-5 ">
-        {/* Section: Design Block */}
-        <section className="mb-32 text-gray-800 flex flex-col justify-center w-screen">
+      <div className="flex justify-center  my-24 lg:px-30 md:px-5 sm:px-5 ">
+       
+        <section className="mb-32 text-gray-800 flex flex-col justify-center w-full">
           <h2 className="text-3xl font-bold mb-8 text-center font-serif italic text-cyan-500">
             CHOOSE A CULTURE
           </h2>
@@ -68,27 +67,7 @@ function Home() {
               </div>
             </div>
             <div className="grow-0 shrink-0 basis-auto w-full lg:w-7/12 md:px-6">
-              {/* <>
-                {" "}
-                <div
-                  className="flex mb-12 cursor-pointer"
-                  onClick={() => {
-                    handleCulture("Egypt");
-                  }}
-                >
-                  <div className="shrink-0">
-                    <div className="p-4 rounded-md shadow-lg">
-                      <span className="fi fi-eg"></span>
-                    </div>
-                  </div>
-                  <div className="grow ml-4">
-                    <p className="font-bold mb-1">Egypt</p>
-                    <p className="text-gray-500">
-                    The Egyptian culture in Jordan represents a vibrant tapestry of traditions and customs…
-                    </p>
-                  </div>
-                </div>
-              </> */}
+          
               <>
                 <div
                   className="flex mb-12 cursor-pointer"
@@ -152,13 +131,13 @@ function Home() {
             </div>
           </div>
         </section>
-        {/* Section: Design Block */}
+       
       </div>
 
       <>
-        {/* Container for demo purpose */}
-        <div className=" my-24 w-screen bg-[#f2f2f2] py-10">
-          {/* Section: Design Block */}
+       
+        <div className="  w-full bg-[#e5f5f752] py-5">
+          
           <section className="mb-5 text-gray-800 text-center ">
             <h2 className="text-3xl font-bold mb-8 text-center font-serif italic text-cyan-500">
               SHARE YOUR EXPERIENCE
@@ -171,7 +150,8 @@ function Home() {
 
           </section>
         </div>
-      </>
+        <ContactUs/>
+      </> 
     </div>
   );
 }

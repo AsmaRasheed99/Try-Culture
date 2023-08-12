@@ -37,7 +37,7 @@ import {UserContext} from "../UserContext"
 import TotalRating from "./TotalRating";
 
 
-const Rating = ({ ServiceId, UserIdApp, card ,rating}) => {
+const Rating = ({ ServiceId, UserIdApp, card ,rating, currentPage}) => {
   const starCount = 5; // Total number of stars
   const[showRating, setShowRating] = useState(true);
 
@@ -45,15 +45,16 @@ const Rating = ({ ServiceId, UserIdApp, card ,rating}) => {
   const [RatingStatus, setRatingStatus] = useState(false);
   const { RateRefresh,setRateRefresh} = useContext(UserContext);
 
-console.log(ServiceId,UserIdApp, card);
-console.log(card?.UsersIdRate?.includes(UserIdApp))
+// console.log(ServiceId,UserIdApp, card);
+// console.log(card?.UsersIdRate?.includes(UserIdApp))
 useEffect(()=>{
   if(card?.UsersIdRate?.includes(UserIdApp)){
     setRatingStatus(true)
-  }
-},[filledStars,card])
+    // console.log(currentPage)
 
-console.log(RatingStatus)
+  }
+},[filledStars,card, UserIdApp,currentPage])
+
 
 
 
@@ -82,15 +83,16 @@ console.log(RatingStatus)
     } 
     
     catch (error) {
-      console.error("Error updating user:", error);
+      console.error(error);
     }
   };
 
   return (
     <>
-    {RatingStatus === false && showRating? 
       
       <div className="flex items-center">
+            {console.log(RatingStatus === false && showRating)}
+
       {Array(starCount)
         .fill()
         .map((_, index) => (
@@ -115,13 +117,7 @@ console.log(RatingStatus)
         ))}
     </div>
   
-      :
-      <div className="flex">
-      <TotalRating rating={rating}/>
-       <p className="bg-[#a59f9f] w-5 text-center">{rating}</p>  
-      </div>
-    
-  }
+   
     </>
   );
 };

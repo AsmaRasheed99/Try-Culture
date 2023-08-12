@@ -175,10 +175,10 @@ const Blogs = () => {
     <>
       <div className="container mx-auto  py-6 flex flex-col md:flex-col lg:flex-row">
         {/* Posts Section */}
-        <section className="w-full md:w-2/3 flex flex-col items-center px-3">
+        <section className="w-full lg:md:w-2/3 flex flex-col items-center px-3">
           {slicedResArray.map((blog) => (
             <article
-              className="flex flex-col flex-wrap shadow my-4 w-full "
+              className="flex flex-col flex-wrap shadow my-4 lg:w-[70%] md:w-full w-full"
               key={blog._id}
               onClick={()=>{handleBlog(blog._id)}}
             >
@@ -189,7 +189,7 @@ const Blogs = () => {
                   alt="Blog"
                 />
               </div>
-              <div className="bg-white w-full flex flex-col justify-start p-6">
+              <div className="bg-base-200 w-full flex flex-col justify-start p-6">
                 <p className="text-3xl font-bold hover:text-gray-700 pb-4">
                   {blog.title}
                 </p>
@@ -204,9 +204,9 @@ const Blogs = () => {
                   Published on {blog.date}
                 </p>
                 <hr></hr>
-                <p className=" text-gray-800 hover:text-black pt-3">
-                  {blog.content}
-                </p>
+                <p className=" text-gray-800 text-lg hover:text-black pt-3">
+                {blog.content.split('\n').slice(0, 2).join('\n')} 
+                </p> <Link className="text-blue-700 text-xl mt-2">Continue Reading</Link>
               </div>
             </article>
           ))}
@@ -221,21 +221,21 @@ const Blogs = () => {
         </section>
         
         {/* Sidebar Section  */}
-        <aside className="w-full md:w-1/3 flex flex-col items-center px-3">
-          <div className="w-full bg-white shadow flex flex-col my-4 p-6">
-            <p className="text-xl font-semibold pb-5">Share Your Experience</p>
-            <p className="pb-2">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas
-              mattis est eu odio sagittis tristique. Vestibulum ut finibus leo.
-              In hac habitasse platea dictumst.
+        <aside className="w-full lg:md:w-1/3 flex lg:flex-col md:flex-col flex-wrap items-center px-3">
+          <div className="w-full bg-base-200 shadow flex flex-col my-4 p-6 md: h-72 lg:h-64 ">
+            <p className="text-xl  font-semibold pb-5">Share Your Experience</p>
+            <p className="pb-2 text-lg h-32">
+              write about a resturant , shop , institute you
+               found through our website , any event you attended 
+               or about any culture you would like to talk about.
             </p>
-            <div className="flex flex-col justify-center items-center">
+            <div className="flex flex-col justify-center items-center ">
               <Button
-                className="w-full bg-cyan-600 text-white font-bold text-sm uppercase rounded hover:bg-[#0b3e45] flex items-center justify-center px-2 py-3 mt-4"
+                className="w-full  bg-cyan-600 text-white font-bold text-sm uppercase rounded hover:bg-[#0b3e45] flex items-center justify-center px-2 py-3 mt-4"
                 variant="text"
                 onClick={handleOpen}
               >
-                Share Your Experience
+               Write a Blog
               </Button>
               <Modal
                 open={open}
@@ -265,14 +265,7 @@ const Blogs = () => {
                       }
                     ></textarea>
 
-                    {/* <input
-                      type="file"
-                      className="file-input file-input-bordered file-input-accent w-full max-w-xs"
-                      onChange={(e) => {
-                        onChange(e);
-                      }}
-                      accept="image/*"
-                    /> */}
+                 
                     <input
                       className="file-upload-input mx-auto"
                       type="file"
@@ -302,26 +295,24 @@ const Blogs = () => {
           </div>
 
           {/** */}
-          <div className="w-full bg-white shadow flex flex-col my-4 p-6">
-            <p className="text-xl font-semibold pb-5">Contact Us</p>
-            <p className="pb-2">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas
-              mattis est eu odio sagittis tristique. Vestibulum ut finibus leo.
-              In hac habitasse platea dictumst.
+          <div className="w-full bg-base-200 shadow flex flex-col my-4 p-6  lg:h-64">
+            <p className="text-xl  font-semibold pb-5">Contact Us</p>
+            <p className="pb-2 text-lg h-32">
+              If you have any advices or noticed anything that 
+              needed to be reported to us please feel free to contact us.
             </p>
             <Link
               to="/ContactUs"
-              className="w-full bg-cyan-600 text-white font-bold text-sm uppercase rounded hover:bg-[#0b3e45] flex items-center justify-center px-2 py-3 mt-4"
+              className="w-full bg-cyan-600  text-white font-bold text-sm uppercase rounded hover:bg-[#0b3e45] flex items-center justify-center px-2 py-3 mt-4"
             >
               Get in touch with us
             </Link>
           </div>
-          <div className="w-full bg-white shadow flex flex-col my-4 p-6">
-            <p className="text-xl font-semibold pb-5">About Us</p>
-            <p className="pb-2">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas
-              mattis est eu odio sagittis tristique. Vestibulum ut finibus leo.
-              In hac habitasse platea dictumst.
+          <div className="w-full bg-base-200 shadow flex flex-col my-4 p-6  lg:h-64">
+            <p className="text-xl font-semibold pb-5 ">About Us</p>
+            <p className="pb-2 text-lg h-32">
+              Are you curious about us and about Try A Culture , 
+              get to know us now
             </p>
             <Link
               to="/about"

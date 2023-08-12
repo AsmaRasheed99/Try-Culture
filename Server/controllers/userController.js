@@ -119,18 +119,11 @@ const newUserLogin = async (req, res) => {
       const user0 = user[0];
       res.json({ token, user0 });
     }
+  }else{
+    res.status(404).send({ error:"email not found" });
   }
 };
 
-// const updateUser = async (req, res) => {
-//   const userId = req.params.id;
-//   const updatedUserData = req.body;
-//   const user = await User.findByIdAndUpdate(userId, updatedUserData, {
-//     new: true,
-//   });
-//   const updatedUser = await user.save();
-//   res.json(updatedUser);
-// };
 
 const updateUserMulter = async (req, res) => {
   const userId = req.params.id;

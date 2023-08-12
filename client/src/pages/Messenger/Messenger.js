@@ -7,9 +7,7 @@ import axios from "axios";
 import { io } from 'socket.io-client';
 
 export default function Messenger({UserApp}) {
-    // console.log(UserApp)
     const UserId = UserApp.id;
-
     const [conversations, setConversations] = useState([]);
     const [currentChat, setcurrentChat] = useState(null);
     const [messages, setMessages] = useState([]);
@@ -19,10 +17,25 @@ export default function Messenger({UserApp}) {
     const [FilterDataUsers,setFilterDataUsers]= useState([]);
     const [searchTermUsers, setSearchTermUsers] = useState("");
     const [refreshMessenger, setRefreshMessenger] = useState(null);
+    const [userImg , setImage] = useState(null);
     const socket = useRef()
     const scrollRef = useRef();
 
-
+   
+    useEffect(()=>{
+        const getImg = async ()=>{
+          try {
+            const response = await axios.get(`http://localhost:5000/api/users/${UserId}`)
+                setImage(response.data[0].image)
+          } catch (error) {
+            console.error(error);
+          }
+        }
+        if(UserApp.id !== undefined){
+        getImg();
+      }
+    },[UserApp])
+   
     useEffect(() => {
         socket.current = io("ws://localhost:5500");
         socket.current.on("getMessage", (data) => {
@@ -81,14 +94,18 @@ export default function Messenger({UserApp}) {
     const message = {
         sender: UserId,
         text:newMessage,
-        conversationId: currentChat._id
+        conversationId: currentChat._id,
+        image : userImg
+
     };
  
     const receiverId = currentChat.members.find(member => member !== UserId)
     socket.current.emit("sendMessage" , {
         senderId: UserId,
         receiverId,
-        text: newMessage
+        text: newMessage,
+
+
     });
     try {
         const res = await axios.post("http://localhost:5000/api/AddMessage", message);
@@ -171,7 +188,7 @@ const startConversation = async (id)=>{
   
     })
     setRefreshMessenger(conversation.data)
-    {console.log(conversation)}
+    {console.log(conversation)} 
 
  } catch (error) {
     
@@ -179,48 +196,52 @@ const startConversation = async (id)=>{
 }
  return (
     <>
-    <div className='messenger'>
-        <div className='chatMenu'>
-            <div className='chatMenuWrapper'>
-           
-            {conversations.map((c) =>
-            <div onClick={()=> setcurrentChat(c)}>
-             <Conversation conversation={c} currentUser={UserApp} />
+ 
+
+
+<div className='flex w-screen flex-col md:flex-row lg:flex-row justify-between p-5 '>
+    {/* large screen */}
+    <div className=' hidden lg:inline-block md:inline-block h-screen overflow-y-auto   w-80'>
+    {conversations.map((c) =>
+            <div className='border my-4 border-base-300 shadow-md rounded-lg hover:scale-105' key={c.id} onClick={()=> setcurrentChat(c)}>
+             <Conversation key={c.id} conversation={c} currentUser={UserApp} />
              </div>
              )}
-           
-            
+    </div>
+    {/* small screen */}
+    <div className='flex lg:hidden md:hidden overflow-x-auto'>
+    {conversations.map((c) =>
+            <div  key={c.id} onClick={()=> setcurrentChat(c)}>
+             <Conversation key={c.id} conversation={c} currentUser={UserApp} />
+             </div>
+             )}
+    </div>
 
-            
-            </div>
-        </div>
-        <div className='chatBox'>
-            <div className='chatBoxWrapper'>
+
+  <div className='flex flex-col lg:h-full w-full p-[10px]'>
                 {currentChat? <> 
-                    <div className='chatBoxTop'>
+                    <div className='chatBoxTop h-80 p-3 m-5 rounded-lg shadow-lg lg:h-[70vh] pr-[10px] overflow-y-auto'>
                 {messages?.map((m)=>{
             
-            {console.log(messages)}
-                 return (  <Message message={m} own={m.sender === UserId}  />)
+                 return (  <Message message={m} own={m.sender === UserId}   />)
                 })}
                 </div>
               
                
-                <div className='chatBoxBottom'>
+                <div className='chatBoxBottom flex mt-5 justify-center items-center'>
                     <textarea 
-                    className='chatMessageInput' 
+                    className='chatMessageInput w-[80%] h-[90%] p-[10px] ml-[20px] rounded-md' 
                     placeholder="Write Something"
                     onChange={(e)=>setNewMessage(e.target.value)}
                     value={newMessage}
                     ></textarea>
-                    <button className='chatSubmitButton' onClick={handleSubmit}>send</button>
+                    <button className='chatSubmitButton rounded-md text-white bg-cyan-700 ml-7 cursor-pointer h-10 w-20' onClick={handleSubmit}>send</button>
                 </div>
-                </> : <span className='noConversationText'>Start A Conversation</span> }
+                </> : <span className='noConversationText  text-5xl cursor-default text-base-200'>Start A Conversation</span> }
             </div>
             
-        </div>
-        <div className='chatOnline'>
-            <div className='chatOnlineWrapper'>
+  <div className='chatOnline flex justify-center w-full lg:w-80 md:w-80'>
+            <div className='chatOnlineWrapper h-full p-[10px] w-full'>
             <input
               type="text"
               id="search"
@@ -234,7 +255,7 @@ const startConversation = async (id)=>{
               }}
             />             
             {FilterDataUsers.map((c) =>
-             <div className="conversation" onClick={()=>
+             <div className="conversation flex items-center w-full" onClick={()=>
              
            {
             // setcurrentChat(c)
@@ -245,7 +266,7 @@ const startConversation = async (id)=>{
              
              }>
              <img
-               className="conversationImg"
+               className="conversationImg w-[40px] h-[40px] rounded-full m-5"
                src={`http://localhost:5000/${c?.image}`}
                alt=""
              />
@@ -255,7 +276,10 @@ const startConversation = async (id)=>{
              )}
             </div>
         </div>
-        </div>
+
+</div>
+
+        
         </>
   )
 }

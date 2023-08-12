@@ -5,6 +5,7 @@ import axios from "axios";
 import Icon from "@mdi/react";
 import { mdiEyeOutline } from "@mdi/js";
 import { mdiEyeOffOutline } from "@mdi/js";
+import { Typography } from "@material-tailwind/react";
 
 function Registration() {
   const [name, setName] = useState("");
@@ -23,6 +24,16 @@ function Registration() {
   const [ConfirmPasswordp, setConfirmPasswordp] = useState("");
 
   const [showPassword, setShowPassword] = useState(false);
+
+
+  const [EmailError, setEmailError] = useState(false);
+  const [PhoneError, setPhoneError] = useState(false);
+  const [NameError, setNameError] = useState(false);
+  const [PasswordError, setPasswordError] = useState(false);
+
+
+
+
   const togglePasswordVisibility = () => {
     setShowPassword((prevShowPassword) => !prevShowPassword);
   };
@@ -73,6 +84,7 @@ function Registration() {
   function validateName(name) {
     if (name === "") {
       setNamep(" !please enter your name");
+      setNameError(true)
       return false;
     } else {
       setNamep("");
@@ -83,6 +95,7 @@ function Registration() {
   function validateEmail(userEmail) {
     if (!/\S+@\S+\.\S+/.test(userEmail)) {
       setemailp("! E-mail must be in a valid format such as example@gmail.com");
+      setEmailError(true)
       return false;
     } else {
       setemail("");
@@ -92,6 +105,7 @@ function Registration() {
   function validatePhone(userphone) {
     if (!/^07[0-9]{8}$/.test(userphone)) {
       setphonep("! Phone number must be 10 digits starting with 07");
+      setPhoneError(true)
       return false;
     }
     setphonep("");
@@ -103,6 +117,7 @@ function Registration() {
     const passwordRegex =
       /^(?=.*[0-9])(?=.*[!@#$%^&*])(?=.*[A-Z])[a-zA-Z0-9!@#$%^&*]{8,}$/;
     if (!passwordRegex.test(password)) {
+      setPasswordError(true)
       setpasswordp(
         "! Password must contain at least 8 characters, 1 number, 1 uppercase letter, and 1 special character"
       );
@@ -115,6 +130,7 @@ function Registration() {
 
   function validateConfirmPassword() {
     if (password !== ConfirmPassword) {
+      setPasswordError(true)
       setConfirmPasswordp("! Passwords do not match");
       return false;
     } else {
@@ -122,57 +138,128 @@ function Registration() {
       return true;
     }
   }
+  const backgroundImageUrl = 'https://img.freepik.com/free-vector/worldwide-connection-gray-background-illustration-vector_53876-61769.jpg?size=626&ext=jpg&ga=GA1.1.558610342.1683500202&semt=ais';
 
   return (
     <>
       <div
-        className="relative flex flex-col justify-center min-h-screen overflow-hidden"
-        style={{ backgroundColor: "#e5f5f7" }}
+      style={{ backgroundImage: `url(${backgroundImageUrl})` }} 
+        className="relative flex flex-col justify-center min-h-screen overflow-hidden bg-blue-gray-500 bg-no-repeat bg-cover "
+        
       >
-        <div className="w-full p-12 m-auto bg-white rounded-md shadow-xl lg:max-w-xl">
-          <h1 className="text-5xl font-bold text-center text-cyan-500 uppercase">
+        <div className="w-full p-12 m-auto bg-white rounded-md shadow-xl lg:max-w-xl my-5">
+          <div className="w-full flex items-center justify-center">
+          <p
+          className=" cursor-pointer py-1.5  lg:pl-2 text-5xl font-serif "
+        >
+          Try <span className="text-5xl text-cyan-500">A</span> Culture
+        </p>
+
+
+          </div>
+   
+          <h1  className="text-2xl  text-center text-black ">
             Register
           </h1>
           <form className="mt-6" onSubmit={handleSubmit}>
-            <div className="p-3">
+            <div className="p-1">
+              {!EmailError ? <>
+              
+                <input
+                type="email"
+                placeholder="Email"
+                value={email}
+                onChange={(e) => setemail(e.target.value)}
+                className="w-full text-xl px-8 py-5 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 focus:outline-none focus:border-gray-400 focus:bg-white mt-5"
+              />
+              </> : <>
+              
+              
               <input
                 type="email"
                 placeholder="Email"
                 value={email}
                 onChange={(e) => setemail(e.target.value)}
-                className="w-full px-8 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white mt-5"
+                className="w-full focus:ring-red-500 focus:border-red-500  text-xl px-8 py-5 rounded-lg font-medium bg-gray-100 border border-red-500 placeholder-gray-500 focus:outline-none  focus:bg-white mt-5"
               />
+              
+              
+              </>}
+       
             </div>
               <p className="text-red-500  px-3">{emailp}</p>
-            <div className="p-3">
+            <div className="p-1">
+              {!NameError?  <>
+                <input
+                type="text"
+                placeholder="Full Name"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                className="w-full px-8 text-xl py-5 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500  focus:outline-none focus:border-gray-400 focus:bg-white mt-5"
+              />
+              </> :<>
+              
               <input
                 type="text"
                 placeholder="Full Name"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-                className="w-full px-8 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white mt-5"
+                className="w-full focus:ring-red-500 focus:border-red-500  text-xl px-8 py-5 rounded-lg font-medium bg-gray-100 border border-red-500 placeholder-gray-500 focus:outline-none  focus:bg-white mt-5"
               />
+              
+              
+              </>}
+         
             </div>
               <p className="text-red-500  px-3">{namep}</p>
-            <div className=" p-3">
+            <div className=" p-1">
+              {!PhoneError ? <>
+                <input
+                type="tel"
+                placeholder="07xxxxxxxx"
+                value={phone}
+                onChange={(e) => setphone(e.target.value)}
+                className="w-full px-8 text-xl py-5 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500  focus:outline-none focus:border-gray-400 focus:bg-white mt-5"
+              />
+              </>  : <>
               <input
                 type="tel"
                 placeholder="07xxxxxxxx"
                 value={phone}
                 onChange={(e) => setphone(e.target.value)}
-                className="w-full px-8 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white mt-5"
+                className="w-full focus:ring-red-500 focus:border-red-500  text-xl px-8 py-5 rounded-lg font-medium bg-gray-100 border border-red-500 placeholder-gray-500 focus:outline-none  focus:bg-white mt-5"
               />
+              
+              </>}
+         
             </div>
               <p className="text-red-500 px-3">{phonep}</p>
-            <div className="p-3 relative">
-              <input
-                className="w-full px-8 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white mt-5"
+            <div className="p-1 relative">
+
+              {!PasswordError? <>
+                <input
+                className="w-full px-8 text-xl py-5 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 focus:outline-none focus:border-gray-400 focus:bg-white mt-5"
                 type={showPassword ? "text" : "password"}
                 placeholder="Password"
                 value={password}
                 required
                 onChange={(e) => setpassword(e.target.value)}
               />
+              
+              </> : <>
+              <input
+                className="w-full focus:ring-red-500 focus:border-red-500  text-xl px-8 py-5 rounded-lg font-medium bg-gray-100 border border-red-500 placeholder-gray-500 focus:outline-none  focus:bg-white mt-5"
+                type={showPassword ? "text" : "password"}
+                placeholder="Password"
+                value={password}
+                required
+                onChange={(e) => setpassword(e.target.value)}
+              />
+              
+              
+              
+              </>}
+    
               <button
                 className="absolute right-7 top-1/2"
                 onClick={togglePasswordVisibility}
@@ -186,7 +273,7 @@ function Registration() {
             </div>
               <p className="text-red-500  px-3">{passwordp}</p>
 
-            <div className="p-3 relative">
+            <div className="p-1 relative">
               <input
                 type={showPassword ? "text" : "password"}
                 placeholder="Confirm Password"
@@ -194,7 +281,7 @@ function Registration() {
                 value={ConfirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
                 required
-                className="w-full px-8 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white mt-5"
+                className="w-full px-8 text-xl py-5 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500  focus:outline-none focus:border-gray-400 focus:bg-white mt-5"
               />
               <button
                 className="absolute right-7 top-1/2"

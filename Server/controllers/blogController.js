@@ -49,6 +49,9 @@ const createNewBlog = async (req, res) => {
 
   }
 
+  const EditComment = async (req, res) => {
+    
+  }
 
 
   const Likes = async (req, res) => {
@@ -115,5 +118,6 @@ const createNewBlog = async (req, res) => {
     getBlog,
     Comments,
     Likes,
-    deleteComment
+    deleteComment,
+    EditComment
   }; 

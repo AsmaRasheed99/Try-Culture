@@ -28,9 +28,9 @@ export default function Conversation({ conversation, currentUser }) {
 
 console.log(user)
   return (
-    <div className="conversation">
+    <div className="conversation flex items-center w-36 ">
       <img
-        className="conversationImg"
+        className="conversationImg w-[40px] h-[40px] rounded-full m-5"
         src={`http://localhost:5000/${user?.image} `}
  
         alt=""

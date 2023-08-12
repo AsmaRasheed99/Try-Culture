@@ -5,7 +5,13 @@ import axios from "axios";
 import Icon from "@mdi/react";
 import { mdiEyeOutline } from "@mdi/js";
 import { mdiEyeOffOutline } from "@mdi/js";
+
 function SignUp() {
+  const [EmailError, setEmailError] = useState(false);
+  const [PhoneError, setPhoneError] = useState(false);
+  const [NameError, setNameError] = useState(false);
+  const [PasswordError, setPasswordError] = useState(false);
+
 
 const [name, setName] = useState("");
 const [namep, setNamep] = useState("");
@@ -74,46 +80,50 @@ const handleSubmit = async (event) => {
 };
 
 function validateName(name) {
-    if (name === "") {
+  if (name === "") {
     setNamep(" !please enter your name");
+    setNameError(true)
     return false;
-    } else {
+  } else {
     setNamep("");
     return true;
-    }
+  }
 }
 
 function validateEmail(userEmail) {
-    if (!/\S+@\S+\.\S+/.test(userEmail)) {
+  if (!/\S+@\S+\.\S+/.test(userEmail)) {
     setemailp("! E-mail must be in a valid format such as example@gmail.com");
+    setEmailError(true)
     return false;
-    } else {
+  } else {
     setemail("");
     return true;
-    }
+  }
 }
 function validatePhone(userphone) {
-    if (!/^07[0-9]{8}$/.test(userphone)) {
+  if (!/^07[0-9]{8}$/.test(userphone)) {
     setphonep("! Phone number must be 10 digits starting with 07");
+    setPhoneError(true)
     return false;
-    }
-    setphonep("");
-    return true;
+  }
+  setphonep("");
+  return true;
 }
 
 function validatePassword(userPassword) {
-    let password = userPassword;
-    const passwordRegex =
+  let password = userPassword;
+  const passwordRegex =
     /^(?=.*[0-9])(?=.*[!@#$%^&*])(?=.*[A-Z])[a-zA-Z0-9!@#$%^&*]{8,}$/;
-    if (!passwordRegex.test(password)) {
+  if (!passwordRegex.test(password)) {
+    setPasswordError(true)
     setpasswordp(
-        "! Password must contain at least 8 characters, 1 number, 1 uppercase letter, and 1 special character"
+      "! Password must contain at least 8 characters, 1 number, 1 uppercase letter, and 1 special character"
     );
     return false;
-    } else {
+  } else {
     setpasswordp("");
     return true;
-    }
+  }
 }
 
 function validateConfirmPassword() {
@@ -126,7 +136,7 @@ function validateConfirmPassword() {
     }
   }
 
-  const backgroundImageUrl = 'https://images-ext-1.discordapp.net/external/hRkXOoDd7ZLu_-SprloP_3KVP3L48oz5mD_OI1zY6k4/https/www.adlittle.com/sites/default/files/viewpoints/CreatingValueInTelecomsConsolidation169_0.jpg.pagespeed.ce.LdsEKwgWKc.jpg?width=880&height=495';
+  const backgroundImageUrl = 'https://img.freepik.com/free-vector/worldwide-connection-gray-background-illustration-vector_53876-61769.jpg?size=626&ext=jpg&ga=GA1.1.558610342.1683500202&semt=ais';
 
     
 return (
@@ -149,42 +159,102 @@ return (
         </h1>
         <form className="mt-6" onSubmit={handleSubmit}>
             <div className="p-3">
-            <input
-                type="email" placeholder="Email" value={email}
-                onChange={(e) => setemail(e.target.value)} 
-                className="w-full px-8 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white mt-5"
+   
+                    {!EmailError ? <>
+              
+              <input
+              type="email"
+              placeholder="Email"
+              value={email}
+              onChange={(e) => setemail(e.target.value)}
+              className="w-full text-xl px-8 py-5 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 focus:outline-none focus:border-gray-400 focus:bg-white mt-5"
             />
+            </> : <>
+            
+            
+            <input
+              type="email"
+              placeholder="Email"
+              value={email}
+              onChange={(e) => setemail(e.target.value)}
+              className="w-full focus:ring-red-500 focus:border-red-500  text-xl px-8 py-5 rounded-lg font-medium bg-gray-100 border border-red-500 placeholder-gray-500 focus:outline-none  focus:bg-white mt-5"
+            />
+            
+            
+            </>}
 
             </div>
              <p className="text-red-500 px-3">{emailp}</p>
             <div className=" p-3">
-            <input
-                type="text" placeholder="Full Name" value={name}
+            {!NameError?  <>
+                <input
+                type="text"
+                placeholder="Full Name"
+                value={name}
                 onChange={(e) => setName(e.target.value)}
-                className="w-full px-8 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white mt-5"
-            />
+                className="w-full px-8 text-xl py-5 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500  focus:outline-none focus:border-gray-400 focus:bg-white mt-5"
+              />
+              </> :<>
+              
+              <input
+                type="text"
+                placeholder="Full Name"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                className="w-full focus:ring-red-500 focus:border-red-500  text-xl px-8 py-5 rounded-lg font-medium bg-gray-100 border border-red-500 placeholder-gray-500 focus:outline-none  focus:bg-white mt-5"
+              />
+              
+              
+              </>}
 
             </div>
               <p className="text-red-500 px-3">{namep}</p>
             <div className="p-3">
-            <input
-              type="tel" placeholder="07xxxxxxxx"
-              value={phone}
-              onChange={(e) => setphone(e.target.value)}
-              className="w-full px-8 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white mt-5"
+            {!PhoneError ? <>
+                <input
+                type="tel"
+                placeholder="07xxxxxxxx"
+                value={phone}
+                onChange={(e) => setphone(e.target.value)}
+                className="w-full px-8 text-xl py-5 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500  focus:outline-none focus:border-gray-400 focus:bg-white mt-5"
               />
+              </>  : <>
+              <input
+                type="tel"
+                placeholder="07xxxxxxxx"
+                value={phone}
+                onChange={(e) => setphone(e.target.value)}
+                className="w-full focus:ring-red-500 focus:border-red-500  text-xl px-8 py-5 rounded-lg font-medium bg-gray-100 border border-red-500 placeholder-gray-500 focus:outline-none  focus:bg-white mt-5"
+              />
+              
+              </>}
 
             </div>
              <p className="text-red-500 px-3">{phonep}</p>
             <div className="p-3 relative">
-              <input
-                className="w-full px-8 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white mt-5"
+            {!PasswordError? <>
+                <input
+                className="w-full px-8 text-xl py-5 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 focus:outline-none focus:border-gray-400 focus:bg-white mt-5"
                 type={showPassword ? "text" : "password"}
                 placeholder="Password"
                 value={password}
                 required
                 onChange={(e) => setpassword(e.target.value)}
               />
+              
+              </> : <>
+              <input
+                className="w-full focus:ring-red-500 focus:border-red-500  text-xl px-8 py-5 rounded-lg font-medium bg-gray-100 border border-red-500 placeholder-gray-500 focus:outline-none  focus:bg-white mt-5"
+                type={showPassword ? "text" : "password"}
+                placeholder="Password"
+                value={password}
+                required
+                onChange={(e) => setpassword(e.target.value)}
+              />
+              
+              
+              
+              </>}
               <button
                 className="absolute right-7 top-1/2"
                 onClick={togglePasswordVisibility}
@@ -199,14 +269,14 @@ return (
               <p className="text-red-500  px-3">{passwordp}</p>
 
             <div className="p-3 relative">
-              <input
+               <input
                 type={showPassword ? "text" : "password"}
                 placeholder="Confirm Password"
                 name="confirmPassword"
                 value={ConfirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
                 required
-                className="w-full px-8 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white mt-5"
+                className="w-full px-8 text-xl py-5 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500  focus:outline-none focus:border-gray-400 focus:bg-white mt-5"
               />
               <button
                 className="absolute right-7 top-1/2"

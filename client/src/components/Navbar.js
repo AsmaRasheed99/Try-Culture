@@ -55,7 +55,7 @@ function NavListMenu() {
   const renderItems = navListMenuItems.map(
     ({ icon, title, description, color, path }, key) => (
       <Link to={path} key={key}
-      onClick={()=>{updateNav(!closeNav)
+      onClick={()=>{updateNav(false)
      
       }}
 
@@ -279,12 +279,13 @@ export default function Example() {
     };
 
     return (
+         <div className="flex justify-end w-64">
       <Menu open={isMenuOpen} handler={setIsMenuOpen} placement="bottom-end">
         <MenuHandler>
           <Button
             variant="text"
             color="blue-gray"
-            className="flex items-center gap-1 rounded-full py-0.5 pr-2 pl-0.5 lg:ml-auto"
+            className="flex items-center gap-1 rounded-full py-0.5 "
           >
             <svg
               xmlns="https://source.unsplash.com/MP0IUfwrn0A"
@@ -339,17 +340,18 @@ export default function Example() {
           })}
         </MenuList>
       </Menu>
+      </div>
     );
   }
   return (
     
-    <Navbar className="mx-auto max-w-screen-4xl px-4 py-2 sticky top-0 z-10">
+    <Navbar className="mx-auto max-w-screen-4xl px-4 py-2 sticky top-0 z-20">
       <div className="flex items-center justify-between text-blue-gray-900">
         <Typography
           as="a"
           href="#"
           variant="h6"
-          className="mr-4 cursor-pointer py-1.5 px-3 lg:ml-2 text-4xl font-serif "
+          className=" w-64 cursor-pointer py-1.5  lg:pl-2 text-4xl font-serif "
         >
           Try <span className="text-5xl text-cyan-500">A</span> Culture
         </Typography>
@@ -366,16 +368,11 @@ export default function Example() {
               className="font-normal flex gap-3"
             >
               <Link to="/" onClick={handleLogout}>
-                {/* <Button variant="gradient" size="lg" color="cyan">
-                  Log Out
-                </Button> */}
+             
 
               </Link>
               <Link to="/Profile">
-                {/* <Button variant="gradient" size="lg" color="cyan">
-                  <UserCircleIcon className="h-[18px] w-[18px]" />
-                  
-                </Button> */}
+             
               </Link>
               <ProfileMenu/>
             </Typography>
@@ -421,12 +418,12 @@ export default function Example() {
               className="font-normal flex gap-3"
             >
               <Link to="/" onClick={handleLogout}>
-                <Button variant="gradient" size="lg" color="cyan" >
+                <Button onClick={()=>{updateNav(false)}} variant="gradient" size="lg" color="cyan" >
                   Log Out
                 </Button>
               </Link>
               <Link to="/Profile">
-                <Button variant="gradient" size="lg" color="cyan" >
+                <Button onClick={()=>{updateNav(false)}} variant="gradient" size="lg" color="cyan" >
                 Profile
                 </Button>
               </Link>
@@ -441,12 +438,14 @@ export default function Example() {
               className="font-normal flex gap-3"
             >
             <Link to="/SignUp">
-              <Button variant="gradient" size="lg" color="cyan"  onClick={() => handleTypeSelection("provider")}>
+              <Button variant="gradient" size="lg" color="cyan"  onClick={() => {handleTypeSelection("provider")
+            updateNav(false)}}>
                 Join Us
               </Button>
             </Link>
             <Link to="/Registration">
-              <Button variant="gradient" size="lg" color="cyan" onClick={() => handleTypeSelection("user")}>
+              <Button variant="gradient" size="lg" color="cyan" onClick={() => {handleTypeSelection("user")
+            updateNav(false)}}>
                 Sign Up
               </Button>
             </Link>

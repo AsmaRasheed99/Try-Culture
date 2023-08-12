@@ -2,7 +2,7 @@
 import Icon from '@mdi/react';
 import { mdiEmail, mdiFileEdit, mdiHandshake, mdiHandshakeOutline, mdiLanPending, mdiPlus, mdiReload  } from '@mdi/js';
 import { mdiAccountMultipleOutline } from '@mdi/js';
-import { mdiShieldCrownOutline  } from '@mdi/js';
+import { mdiShieldCrownOutline,mdiAlert   } from '@mdi/js';
 import { UserContext } from '../../UserContext';
 import React,{useContext} from "react";
 
@@ -140,6 +140,14 @@ function handleLogOut(){
             <Icon path={mdiPlus} size={1} />
             </ListItemPrefix>
             <a style={{color:'black'}}> Edit Cultures </a>
+          </ListItem>
+          </Link>
+          <Link to='/Reports'>
+          <ListItem className="hover:bg-[#00ACC1]">
+            <ListItemPrefix>
+            <Icon path={mdiAlert} size={1} />
+            </ListItemPrefix>
+            <a style={{color:'black'}}> Reports </a>
           </ListItem>
           </Link>
 

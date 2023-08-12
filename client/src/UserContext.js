@@ -35,7 +35,7 @@ console.log(profileRefresh)
         <>
             <UserContext.Provider
                 value={{
-                 test,updateTest,closeNav,updateNav,profileRefresh,updateProfileRefresh,updateEventRefresh,EventRefresh,updateRateRefresh,RateRefresh
+                 test,updateTest,closeNav,updateNav,profileRefresh,updateProfileRefresh,updateEventRefresh,EventRefresh,setRateRefresh,RateRefresh
                 }}
             >
                 {children}

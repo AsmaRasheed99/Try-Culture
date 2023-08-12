@@ -31,16 +31,7 @@ function AddEvent({country}) {
   const [Organizer, setOrganizer] = useState(null);
   const [userId, setUserId] = useState(null);
   const {EventRefresh, updateEventRefresh} = useContext(UserContext)
-  //   console.log({
-  //     Organizer,
-  //     theDate,
-  //     Time,
-  //     EventName,
-  //     Culture,
-  //     Location,
-  //     Details,
-  //     userId,
-  //   });
+
 
   const fetchProtectedData = async () => {
     try {
@@ -56,8 +47,6 @@ function AddEvent({country}) {
       }
     } catch (error) {
       console.error(error);
-      // localStorage.removeItem("auth");
-      // window.location.href = "http://localhost:3000/Login";
     }
   };
   useEffect(() => {
@@ -151,6 +140,7 @@ function AddEvent({country}) {
     }
   };
 
+  console.log(Organizer)
   return (
     <div>
       <Button

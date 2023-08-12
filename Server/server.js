@@ -11,6 +11,9 @@ const ServiceRouts = require("./Routes/serviceRouter");
 const EventsRouts = require("./Routes/EventsRouter");
 const ConversationRouts = require("./Routes/conversationsRouter");
 const MessageRouts = require("./Routes/messagesRouter");
+const GoogleRouts = require("./Routes/googleRouter");
+const ForgotRouts = require("./Routes/forgotRouter");
+const ReportRouts = require("./Routes/reportRouter");
 
 const notFoundHandler = require("./middleware/404");
 const dbURI = "mongodb+srv://asmarasheed4599:Asma+1999@cluster0.x5pxndb.mongodb.net/Try-A-Culture"
@@ -33,6 +36,7 @@ app.get("/", (req, res) => {
 });
 
 app.use(userRouts);
+app.use(ReportRouts);
 app.use(aboutUsRouts);
 app.use(paymentRouts);
 app.use(BlogRouts);
@@ -41,6 +45,9 @@ app.use(ServiceRouts);
 app.use(EventsRouts);
 app.use(ConversationRouts);
 app.use(MessageRouts);
+app.use(GoogleRouts);
+app.use(ForgotRouts);
+
 
 app.use("*", notFoundHandler);
 app.use(errorHandler);
