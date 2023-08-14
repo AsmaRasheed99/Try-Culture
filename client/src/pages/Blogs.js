@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link, Navigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import axios from "axios";
 import Swal from "sweetalert2";
 import Box from "@mui/material/Box";
@@ -7,6 +7,7 @@ import { Button } from "@material-tailwind/react";
 import Modal from "@mui/material/Modal";
 import { useNavigate } from "react-router-dom";
 import { Pagination } from "@mui/material";
+import { HashLink } from "react-router-hash-link";
 const style = {
   position: "absolute",
   top: "50%",
@@ -55,7 +56,7 @@ const Blogs = () => {
               Authorization: token,
             },
           });
-          setUser(response.data.user.username);
+          setUser(response.data.user.firstName);
           setUserId(response.data.user.id);
           id =response.data.user.id;
 
@@ -162,11 +163,11 @@ const Blogs = () => {
 
   const totalResPagesArray = Math.ceil(blogs.length / itemsPerPage);
 
+  const blogsArray = blogs.slice().reverse();
 
   const startResIndexArray = (currentResPage - 1) * itemsPerPage;
   const endResIndexArray = startResIndexArray + itemsPerPage;
-  const slicedResArray = blogs.slice(startResIndexArray, endResIndexArray);
-
+  const slicedResArray = blogsArray.slice(startResIndexArray, endResIndexArray);
 
   const handleBlog = (id)=> {
    navigate(`/BlogDetails/${id}`)
@@ -301,12 +302,12 @@ const Blogs = () => {
               If you have any advices or noticed anything that 
               needed to be reported to us please feel free to contact us.
             </p>
-            <Link
-              to="/ContactUs"
+            <HashLink
+              to="/Contact#"
               className="w-full bg-cyan-600  text-white font-bold text-sm uppercase rounded hover:bg-[#0b3e45] flex items-center justify-center px-2 py-3 mt-4"
             >
               Get in touch with us
-            </Link>
+            </HashLink>
           </div>
           <div className="w-full bg-base-200 shadow flex flex-col my-4 p-6  lg:h-64">
             <p className="text-xl font-semibold pb-5 ">About Us</p>
@@ -314,12 +315,12 @@ const Blogs = () => {
               Are you curious about us and about Try A Culture , 
               get to know us now
             </p>
-            <Link
-              to="/about"
+            <HashLink smooth={true}
+              to="/about#"
               className="w-full bg-cyan-600 text-white font-bold text-sm uppercase rounded hover:bg-[#0b3e45] flex items-center justify-center px-2 py-3 mt-4"
             >
               Get to know us
-            </Link>
+            </HashLink>
           </div>
         </aside>
       </div>

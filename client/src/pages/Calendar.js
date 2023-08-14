@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import "../components/styles/Calendar.css";
+import "../styles/Calendar.css";
 import Icon from "@mdi/react";
 import { mdiPlusCircleOutline } from "@mdi/js";
 import axios from "axios";

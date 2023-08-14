@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { UserContext } from "../UserContext";
 import { useContext } from "react";
+import { HashLink } from 'react-router-hash-link';
 
 import {
   Navbar,
@@ -140,12 +141,12 @@ function NavList() {
         color="blue-gray"
         className="font-normal"
       >
-        <Link to="/"
+        <HashLink smooth={true} to="/#"
         onClick={()=>updateNav(false)}>
           <ListItem className="flex items-center gap-2 py-2 pr-4 text-xl">
             Home
           </ListItem>
-        </Link>
+        </HashLink>
       </Typography>
       <Typography
         as="a"
@@ -154,12 +155,12 @@ function NavList() {
         color="blue-gray"
         className="font-normal"
       >
-        <Link to="/Cultures"
+        <HashLink smooth={true} to="/Cultures#"
         onClick={()=>updateNav(false)}>
           <ListItem className="flex items-center gap-2 py-2 pr-4 text-xl">
             Cultures
           </ListItem>
-        </Link>
+        </HashLink>
       </Typography>
      
       <Typography
@@ -169,12 +170,12 @@ function NavList() {
         color="blue-gray"
         className="font-normal"
       >
-        <Link to="/Blogs"
+        <HashLink smooth={true} to="/Blogs#"
         onClick={()=>updateNav(false)}>
           <ListItem className="flex items-center gap-2 py-2 pr-4 text-xl">
             Blogs
           </ListItem>
-        </Link>
+        </HashLink>
       </Typography>
      
       <Typography
@@ -184,12 +185,12 @@ function NavList() {
         color="blue-gray"
         className="font-normal"
       >
-            <Link to="/Events"
+            <HashLink smooth={true} to="/Events#"
         onClick={()=>updateNav(false)}>
           <ListItem className="flex items-center gap-2 py-2 pr-4 text-xl">
             Events
           </ListItem>
-        </Link>
+        </HashLink>
       </Typography>
      
       <Typography
@@ -199,12 +200,12 @@ function NavList() {
         color="blue-gray"
         className="font-normal"
       >
-        <Link to="/Messenger"
+        <HashLink smooth={true} to="/Messenger#"
         onClick={()=>updateNav(false)}>
           <ListItem className="flex items-center gap-2 py-2 pr-4 text-xl">
             Chat
           </ListItem>
-        </Link>
+        </HashLink>
       </Typography>
       <NavListMenu />
     </List>
@@ -349,7 +350,7 @@ export default function Example() {
       <div className="flex items-center justify-between text-blue-gray-900">
         <Typography
           as="a"
-          href="#"
+
           variant="h6"
           className=" w-64 cursor-pointer py-1.5  lg:pl-2 text-4xl font-serif "
         >
@@ -362,7 +363,6 @@ export default function Example() {
           {isLoggedIn ? (
             <Typography
               as="a"
-              href="#"
               variant="small"
               color="blue-gray"
               className="font-normal flex gap-3"

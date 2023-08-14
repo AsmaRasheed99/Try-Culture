@@ -5,6 +5,11 @@ import Slider2 from "../components/Slider";
 import { Link, useNavigate } from "react-router-dom";
 import BlogSection from "../components/BlogSection";
 import ContactUs from "../pages/ContactUs";
+import AboutSection from "./aboutPage/AboutSection";
+import AOS from 'aos';
+import 'aos/dist/aos.css'; 
+
+AOS.init(); 
 
 
 function Home() {
@@ -19,7 +24,7 @@ function Home() {
       <Slider2 />
       <div className="flex justify-center  my-24 lg:px-30 md:px-5 sm:px-5 ">
        
-        <section className="mb-32 text-gray-800 flex flex-col justify-center w-full">
+        <section className="mb-20 text-gray-800 flex flex-col justify-center w-full">
           <h2 className="text-3xl font-bold mb-8 text-center font-serif italic text-cyan-500">
             CHOOSE A CULTURE
           </h2>
@@ -27,13 +32,14 @@ function Home() {
             Exploring the Multifaceted Diversity of Cultures within a Single
             Country
           </p>
-          <div className="flex flex-wrap items-center  mx-auto">
+          <div  className="flex flex-wrap items-center  mx-auto">
             <div className="grow-0 shrink-0 basis-auto w-full lg:w-5/12 mb-12 lg:mb-0 md:px-6">
               <div
                 className="relative overflow-hidden bg-no-repeat bg-cover h-96 rounded-lg shadow-lg"
                 data-mdb-ripple="true"
                 data-mdb-ripple-color="light"
                 style={{ backgroundPosition: "50%" }}
+                data-aos="fade-right" data-aos-duration="3000"
               >
                 <img
                   src="https://images.pexels.com/photos/4937197/pexels-photo-4937197.jpeg?auto=compress&cs=tinysrgb&w=600"
@@ -66,7 +72,7 @@ function Home() {
                 </Link>
               </div>
             </div>
-            <div className="grow-0 shrink-0 basis-auto w-full lg:w-7/12 md:px-6">
+            <div data-aos="fade-left" data-aos-duration="3000" className="grow-0 shrink-0 basis-auto w-full lg:w-7/12 md:px-6">
           
               <>
                 <div
@@ -136,9 +142,9 @@ function Home() {
 
       <>
        
-        <div className="  w-full bg-[#e5f5f752] py-5">
+        <div className="  w-full bg-base-200 py-5">
           
-          <section className="mb-5 text-gray-800 text-center ">
+          <section className="py-20 text-gray-800 text-center ">
             <h2 className="text-3xl font-bold mb-8 text-center font-serif italic text-cyan-500">
               SHARE YOUR EXPERIENCE
             </h2>
@@ -152,6 +158,7 @@ function Home() {
         </div>
         <ContactUs/>
       </> 
+      <AboutSection/>
     </div>
   );
 }

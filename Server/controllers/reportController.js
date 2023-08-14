@@ -20,6 +20,14 @@ const getReport = async (req, res) => {
         res.status(500).json({ error: error.message });
       }
   };
+const AllReports = async (req, res) => {
+    try {
+        const report = await Report.find();
+        res.status(200).json(report);
+      } catch (error) {
+        res.status(500).json({ error: error.message });
+      }
+  };
 
   const UpdateReport = async (req, res) => { 
     const ReportId  = req.params.id;
@@ -45,4 +53,5 @@ const newComments = blog.comments.filter((comment) => {return comment.comment !=
     getReport,
     UpdateReport,
     DeleteReport,
+    AllReports,
   }; 

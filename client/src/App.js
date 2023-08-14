@@ -24,18 +24,19 @@ import ForgotPassword from "./pages/ForgotPassword";
 
 //------------------ Dashboard  ----------------------- //
 
-import Sidebar from "./pages/dashboard/Sidebar";
-import NavListMenuD from "./pages/dashboard/NavDashboard";
-import MainDashboard from "./pages/dashboard/MainDashboard";
-import EditAboutContact from "./pages/dashboard/EditAboutUs";
-import UserInfo from "./components/dashboard/UserInfo"
-import ApproveTable from "./components/dashboard/ApproveTable";
-import AdminInfo from "./components/dashboard/AdminInfo";
-import  Chat  from "./pages/dashboard/Chat";
-import Pending from "./components/dashboard/Pending";
-import AddCultures from "./components/dashboard/AddCultures"
-import EditCultures from "./components/dashboard/EditCultures"
-import Reports from "./components/dashboard/Reports";
+import Sidebar from "./dashboard/components/Sidebar";
+import NavListMenuD from "./dashboard/components/NavDashboard";
+import MainDashboard from "./dashboard/pages/MainDashboard";
+import EditAboutContact from "./dashboard/pages/EditAboutUs";
+import UserInfo from "./dashboard/pages/UserInfo";
+import AdminInfo from "./dashboard/pages/AdminInfo";
+import ContactAdmin from "./dashboard/pages/ContactAdmin";
+import Pending from "./dashboard/pages/Pending";
+import AddCultures from "./dashboard/pages/AddCultures";
+import EditCultures from "./dashboard/pages/EditCultures";
+import Reports from "./dashboard/pages/Reports";
+import Subsicribers from "./dashboard/pages/Subsicribers";
+
 
 
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
@@ -79,7 +80,8 @@ export default function App() {
       }
     } catch (error) {
       console.error(error);
-
+    localStorage.removeItem("auth")
+    window.location.href = "http://localhost:3000/Login"
     } finally {
       console.log(false);
     }
@@ -134,8 +136,8 @@ export default function App() {
           <Route index element={<MainDashboard />} />
           <Route path="ListUser" element={<UserInfo />} />
           <Route path="EditAboutContact" element={<EditAboutContact />} />
-          <Route path="Chat" element={<Chat />} />
-          <Route path="ListRestaurant" element={<ApproveTable />} />
+          <Route path="ContactAdmin" element={<ContactAdmin />} />
+          <Route path="Subsicribers" element={<Subsicribers />} />
           <Route path="ListAdmin" element={<AdminInfo />} />
           <Route path="Pending" element={<Pending />} />
           <Route path="AddCultures" element={<AddCultures />} />

@@ -10,7 +10,7 @@ import {
 function Footer() {
   return (
     <>
-      <footer className="footer footer-center p-10 bg-[#e5f5f756] text-base-content rounded">
+      <footer className="footer footer-center p-10 bg-white text-base-content rounded">
         <div className="grid grid-flow-col gap-4"></div>
         <div>
           <div className="grid gap-4 text-xl font-serif italic">

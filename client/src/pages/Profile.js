@@ -12,9 +12,10 @@ import EditProfile from "../components/EditProfile";
 import { UserContext } from "../UserContext";
 import EditBlog from "../components/EditBlog";
 import EditBusiness from "../components/EditBusiness";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 function Profile() {
   const { profileRefresh, updateProfileRefresh } = useContext(UserContext);
+  const navigate = useNavigate()
 
   const [userId, setUserId] = useState();
   const [userRole, setUserRole] = useState();
@@ -89,7 +90,9 @@ function Profile() {
   }, [profileRefresh]);
 
   console.log(img);
-
+  const handleBlog = (id)=> {
+    navigate(`/BlogDetails/${id}`)
+   }
   
   return (
     <div>
@@ -204,8 +207,10 @@ function Profile() {
                         <section className="flex flex-wrap items-center justify-center ">
                           {UserBlogs.map((blog) => (
                             <article
-                              className="flex flex-col w-96 shadow my-4 text-start m-5"
+                              className="flex flex-col w-96 shadow my-4 text-start m-5 cursor-pointer"
                               key={blog._id}
+                              onClick={()=>{handleBlog(blog._id)}}
+
                             >
                               <div className="hover:opacity-75  ">
                                 <img className="w-full h-80" src={`http://localhost:5000/${blog.image}`}/>
@@ -215,7 +220,6 @@ function Profile() {
                                 <p className="text-3xl text-center font-bold hover:text-gray-700 ">
                                   {blog.title}
                                 </p>
-                                <EditBlog id={blog._id} blogProps={blog} />
                                 </div>
                                 <p className="text-sm pb-3">
                                   By{" "}
@@ -227,14 +231,14 @@ function Profile() {
                                   Published on {blog.date}
                                 </p>
                                 <hr></hr>
-                                {/* <p className="uppercase text-gray-800 hover:text-black pt-3">
-                                  {blog.content}
-                                </p> */}
-                                <div className="w-full overflow-hidden mt-4">
+                              
+                                <div className="w-ful flex justify-between items-center overflow-hidden mt-4">
                                   <p className="whitespace-normal h-10 w-52">
                                     {blog.content}
                                   </p>
+                                <EditBlog id={blog._id} blogProps={blog} />
                                 </div>
+
                               </div>
                             </article>
                           ))}

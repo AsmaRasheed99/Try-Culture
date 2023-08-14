@@ -2,7 +2,6 @@ const express = require("express");
 const router = express.Router();
 
 const culturesController = require("../controllers/culturesController");
-const protected =require("../middleware/Protected")
 const { upload } = require('../middleware/uploadMiddleware');
 
 router.get("/api/getAllCultures", culturesController.getAllCultures);

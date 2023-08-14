@@ -2,14 +2,12 @@ import  React from "react";
 import Box from "@mui/material/Box";
 import { Button } from "@material-tailwind/react";
 import Modal from "@mui/material/Modal";
-import { Input } from "@mui/material";
 import axios from "axios";
 import { useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router";
 import { UserContext } from "../UserContext";
 import Icon from "@mdi/react";
-import { mdiNoteEdit } from "@mdi/js";
-
+import { mdiPencil } from '@mdi/js';
 const style = {
   position: "absolute",
   top: "50%",
@@ -118,15 +116,8 @@ function EditBlog(props) {
     }
   return (
     <div>
-     <Icon className="cursor-pointer " path={mdiNoteEdit} color={"green"} size={1} onClick={handleOpen} />
+     <Icon className="cursor-pointer " path={mdiPencil} color={"green"} size={1} onClick={handleOpen} />
 
-    {/* <Button
-      className="mb-10 border-solid border-[#0b3e45] border-2 text-[#00acc1] hover:bg-[#0b3e45] hover:text-[#ffffff]"
-      variant="text"
-      onClick={handleOpen}
-    >
-      Edit
-    </Button> */}
     <Modal
       open={open}
       onClose={handleClose}

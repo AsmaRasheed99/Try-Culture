@@ -5,15 +5,6 @@ const About = () => {
   return (
     <>
 
-
-
-
-
-
-
-
-
-    
     <BackimgAbout/>
     </>
   )

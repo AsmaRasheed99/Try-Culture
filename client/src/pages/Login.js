@@ -54,8 +54,7 @@ function Login() {
 
   
  
-    const [ user, setUser ] = useState([]);
-    const [ profile, setProfile ] = useState([]);
+    
 
 
 
@@ -228,6 +227,7 @@ function Login() {
               <button
                 className="absolute right-7 top-1/2"
                 onClick={togglePasswordVisibility}
+                type="button"
               >
                 {showPassword ? (
                   <Icon path={mdiEyeOutline} size={1} />

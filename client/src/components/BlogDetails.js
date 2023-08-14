@@ -41,12 +41,10 @@ const BlogDetails = () => {
     }
   }, []);
 
-  console.log(user);
   const fetchBlog = async (req, res) => {
     try {
       const blog = await axios.get(`http://localhost:5000/api/Blog/${id}`);
       setBlog(blog.data);
-      setComment("");
     } catch (error) {
       console.error(error.message);
     }
@@ -73,6 +71,8 @@ const BlogDetails = () => {
         { NewComment: Allcomments }
       );
       fetchBlog();
+      setComment("");
+
     } catch (error) {
       console.error(error.message);
     }
@@ -80,6 +80,7 @@ const BlogDetails = () => {
 
   const handleLike = async () => {
     const Likes = user._id;
+    
     const oldLikes = [...blog.likes] || [];
     const AllLikes = [...oldLikes, Likes];
     try {
@@ -103,6 +104,7 @@ const BlogDetails = () => {
         { Likes: AllLikes }
       );
       fetchBlog();
+
     } catch (error) {
       console.error(error.message);
     }
@@ -118,6 +120,7 @@ const BlogDetails = () => {
         { oldComments: oldComments }
       );
       fetchBlog();
+
     } catch (error) {
       console.error(error.message);
     }
@@ -134,6 +137,7 @@ const Data ={
 }
 try {
   const response = await axios.post("http://localhost:5000/api/AddNewReport",Data)
+  setComment("");
 } catch (error) {
   console.error(error.message);
 }
@@ -141,8 +145,9 @@ try {
 
  }
 
-const handleEdit = async() => {
-  
+const handleEdit = async(comment,index) => {
+  handleDelete(index)
+  setComment(comment.comment)
 }
 
 
@@ -233,7 +238,7 @@ const handleEdit = async() => {
             <>
               <li
                 className="rounded-sm px-3 py-1 hover:bg-gray-100 cursor-pointer"
-                onClick={() => handleEdit()}
+                onClick={() => handleEdit(comment,index)}
               >
                 Edit
               </li>
@@ -320,7 +325,7 @@ const handleEdit = async() => {
                 <div className="w-full flex justify-end px-3">
                   <input
                     type="submit"
-                    className="px-2.5 py-1.5 rounded-md text-white text-sm bg-indigo-500"
+                    className="px-2.5 py-1.5 rounded-md text-white text-sm bg-indigo-500 cursor-pointer"
                     defaultValue="Post Comment"
                   />
                 </div>

@@ -3,7 +3,9 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import moment from "moment";
 import { Button } from "@material-tailwind/react";
-import { Link, Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { HashLink } from 'react-router-hash-link';
+
 const BlogSection = () => {
   const [blogs, setBlogs] = useState([]);
   const [date, setDate] = useState([]);
@@ -31,15 +33,14 @@ const BlogSection = () => {
     fetchBlogs();
   }, []);
 
-  // console.log(blogs)
   const handleBlog = (id)=> {
     Navigate(`/BlogDetails/${id}`)
    }
   return (
     <>
-      <div className=" flex flex-col items-center  w-full ">
+      <div className=" flex flex-col items-center py-10 w-full ">
         <div className="w-full ">
-          <div className="flex w-full flex-wrap mt-10 justify-center ">
+          <div className="flex w-full flex-wrap gap-16 mt-10 justify-center ">
             {blogs?.map((blog) => {
               return (
                 <div
@@ -47,15 +48,15 @@ const BlogSection = () => {
                   onClick={() => {
                     handleBlog(blog._id);
                   }}
-                  className="w-96 container   bg-white rounded-xl shadow-lg transform transition duration-500 hover:scale-105 hover:shadow-2xl"
+                  className="w-96 container  bg-white rounded-xl shadow-lg transform transition duration-500 hover:scale-105 hover:shadow-2xl"
+                  data-aos="fade-up" data-aos-duration="3000"
+
                 >
                   <div>
-                    <h1 className="text-xl mt-2  p-3 text-start font-bold text-gray-800 cursor-pointer hover:text-gray-900 transition duration-100">
+                    <h1 className="text-xl mt-2 lg:h-28 p-3 text-start font-bold text-gray-800 cursor-pointer hover:text-gray-900 transition duration-100">
                       {blog.title}
                     </h1>
-                    <p className="ml-4 mt-1 mb-2 text-gray-700 hover:underline cursor-pointer">
-                      #by {blog.author}
-                    </p>
+                
                   </div>
                   <img
                     className="w-full h-60 cursor-pointer"
@@ -88,14 +89,14 @@ const BlogSection = () => {
       </div>
 
       <div className="flex justify-center mt-10">
-        <Link to="/Blogs">
+        <HashLink smoooth={true} to="/Blogs#">
           <Button
-            className=" border-solid border-[#0b3e45] border-2 text-[#0b3e45] hover:bg-[#0b3e45] hover:text-[#ffffff]"
+            className=" shadow-md shadow-[#0b3e456f] text-[#0b3e45] bg-[#28c0d084] hover:bg-[#0b3e45] hover:text-[#ffffff]"
             variant="text"
           >
             Check more blogs
           </Button>
-        </Link>
+        </HashLink>
       </div>
     </>
   );

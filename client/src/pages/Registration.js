@@ -263,6 +263,8 @@ function Registration() {
               <button
                 className="absolute right-7 top-1/2"
                 onClick={togglePasswordVisibility}
+                type="button"
+
               >
                 {showPassword ? (
                   <Icon path={mdiEyeOutline} size={1} />
@@ -286,6 +288,8 @@ function Registration() {
               <button
                 className="absolute right-7 top-1/2"
                 onClick={togglePasswordVisibility}
+                type="button"
+
               >
                 {showPassword ? (
                   <Icon path={mdiEyeOutline} size={1} />
