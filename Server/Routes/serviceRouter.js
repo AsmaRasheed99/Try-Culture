@@ -2,8 +2,7 @@ const express = require("express");
 const router = express.Router();
 
 const ServiceController = require("../controllers/ServiceController");
-const protected =require("../middleware/Protected")
-const { uploadSingle, uploadMultiple } = require('../middleware/handleImage');
+const { uploadSingle } = require('../middleware/handleImage');
 
 router.post("/api/AddNewBusiness",uploadSingle, ServiceController.AddNewBusiness);
 router.get("/api/getAllBusniess", ServiceController.getAllBusniess);

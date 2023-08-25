@@ -28,7 +28,7 @@ app.use(cors());
 const path = require("path");
 app.use("/public", express.static(path.join(__dirname, "public")));
 
-app.use(express.json({limit:'50mb'}));
+app.use(express.json());
 
 
 app.get("/", (req, res) => {

@@ -18,23 +18,16 @@ function Calendar() {
   const [events, setEvents] = useState([]);
   const [DoneEvents, setDoneEvents] = useState([]);
   const [filteredEvents, setfilteredEvents] = useState([]);
+
+
   const getMonthData = (year, month) => {
     const firstDay = new Date(year, month, 1);
     const lastDay = new Date(year, month + 1, 0);
-    const startDate = new Date(
-      firstDay.getFullYear(),
-      firstDay.getMonth(),
-      firstDay.getDate() - firstDay.getDay()
-    );
-    const endDate = new Date(
-      lastDay.getFullYear(),
-      lastDay.getMonth(),
-      lastDay.getDate() + (6 - lastDay.getDay())
-    );
+  
     const dates = [];
-    let currentDate = startDate;
+    let currentDate = firstDay;
 
-    while (currentDate <= endDate) {
+    while (currentDate <= lastDay) {
       dates.push(new Date(currentDate));
       currentDate.setDate(currentDate.getDate() + 1);
     }
@@ -231,8 +224,8 @@ function Calendar() {
                 </div>
               ))}
               {DoneEvents.map((event, index) => (
-                <div key={index} className="event_item border p-5 bg-red-500">
-                  <div className="ei_Dot dot_active" />
+                <div key={index} className="event_item border  shadow-lg p-8 w-full lg:w-1/2 bg-red-100">
+                  <div className="ei_Dot dot_active " />
                   <div className="ei_Title font-bold text-lg">
                     {event.EventName}
                   </div>

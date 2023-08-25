@@ -3,7 +3,6 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 
 const Events = ({country}) => {
-  console.log(country)
   
   const [events, setEvents] = useState([]);
 
@@ -19,7 +18,6 @@ const Events = ({country}) => {
     setFilteredEvents(events);
   }, [events]);
 
-console.log(events)
 
 
 
@@ -141,7 +139,7 @@ const handleFilterChange = (typeValue, LocationValue) => {
                 <option value="">Culture</option>
                 <option value="China">China</option>
                 <option value="Jordan">Jordan</option>
-                <option value="Shop">Shop</option>
+                <option value="Egypt">Egypt</option>
               </select>
               </div>
               </div>

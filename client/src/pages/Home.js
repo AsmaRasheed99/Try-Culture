@@ -8,6 +8,7 @@ import ContactUs from "../pages/ContactUs";
 import AboutSection from "./aboutPage/AboutSection";
 import AOS from 'aos';
 import 'aos/dist/aos.css'; 
+import EventSection from "../components/EventSection";
 
 AOS.init(); 
 
@@ -76,13 +77,13 @@ function Home() {
           
               <>
                 <div
-                  className="flex mb-12 cursor-pointer"
+                  className="flex mb-12 cursor-pointer "
                   onClick={() => {
                     handleCulture("China");
                   }}
                 >
                   <div className="shrink-0">
-                    <div className="p-4 rounded-md shadow-lg">
+                    <div className="p-4 rounded-md shadow-lg hover:scale-105 bg-base-200">
                       <span className="fi fi-cn"></span>
                     </div>
                   </div>
@@ -102,7 +103,7 @@ function Home() {
                   }}
                 >
                   <div className="shrink-0">
-                    <div className="p-4 rounded-md shadow-lg">
+                    <div className="p-4 rounded-md shadow-lg hover:scale-105 bg-base-200">
                       <span className="fi fi-ma"></span>
                     </div>
                   </div>
@@ -122,7 +123,7 @@ function Home() {
                       handleCulture("Mexico");
                     }}
                   >
-                    <div className="p-4 rounded-md shadow-lg">
+                    <div className="p-4 rounded-md shadow-lg hover:scale-105 bg-base-200">
                       <span className="fi fi-mx"></span>
                     </div>
                   </div>
@@ -141,8 +142,9 @@ function Home() {
       </div>
 
       <>
-       
-        <div className="  w-full bg-base-200 py-5">
+      <EventSection/>
+
+        <div className="  w-full bg-white py-5">
           
           <section className="py-20 text-gray-800 text-center ">
             <h2 className="text-3xl font-bold mb-8 text-center font-serif italic text-cyan-500">
@@ -156,9 +158,10 @@ function Home() {
 
           </section>
         </div>
-        <ContactUs/>
       </> 
       <AboutSection/>
+      <ContactUs/>
+
     </div>
   );
 }

@@ -150,7 +150,7 @@ return (
            {/* <PricingReact/> */}
           <div>
    
-      <div className="max-w-sm xl:w-[600px]  p-6 bg-white group h-full rounded-2xl w-full   shadow-xl lg:max-w-xl">
+      <div className="max-w-sm xl:w-[600px]  p-12 bg-white group h-full rounded-2xl w-full   shadow-xl lg:max-w-xl">
         <h1 className="text-3xl font-bold text-center text-cyan-500 uppercase">
            Join Our Family
         </h1>
@@ -158,7 +158,7 @@ return (
            subscribe and share your business with the world
         </h1>
         <form className="mt-6" onSubmit={handleSubmit}>
-            <div className="p-3">
+            <div className="p-1">
    
                     {!EmailError ? <>
               
@@ -185,7 +185,7 @@ return (
 
             </div>
              <p className="text-red-500 px-3">{emailp}</p>
-            <div className=" p-3">
+            <div className=" p-1">
             {!NameError?  <>
                 <input
                 type="text"
@@ -209,7 +209,7 @@ return (
 
             </div>
               <p className="text-red-500 px-3">{namep}</p>
-            <div className="p-3">
+            <div className="p-1">
             {!PhoneError ? <>
                 <input
                 type="tel"
@@ -231,7 +231,7 @@ return (
 
             </div>
              <p className="text-red-500 px-3">{phonep}</p>
-            <div className="p-3 relative">
+            <div className="p-1 relative">
             {!PasswordError? <>
                 <input
                 className="w-full px-8 text-xl py-5 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 focus:outline-none focus:border-gray-400 focus:bg-white mt-5"
@@ -270,7 +270,7 @@ return (
             </div>
               <p className="text-red-500  px-3">{passwordp}</p>
 
-            <div className="p-3 relative">
+            <div className="p-1 relative">
                <input
                 type={showPassword ? "text" : "password"}
                 placeholder="Confirm Password"
@@ -295,15 +295,13 @@ return (
             </div>
               <p className="text-red-500  px-3">{ConfirmPasswordp}</p>
 
-            <div className="mt-6 p-3">
+            <div className="mt-6 p-1">
             <button className="w-full px-4 py-2 text-2xl tracking-wide text-white transition-colors duration-200 transform bg-cyan-500 rounded-md hover:bg-cyan-400 focus:outline-none focus:bg-cyan-400">
                 Sign Up
             </button>
             </div>
         </form>
-        <div className="relative flex items-center justify-center w-full mt-6 border border-t">
-            <div className="absolute px-5 bg-white">Or</div>
-        </div>
+      
 
         <p className="mt-8 text-lg font-light text-center text-gray-500">
             {" "}

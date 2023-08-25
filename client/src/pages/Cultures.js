@@ -38,7 +38,7 @@ function Cultures() {
 
   const [currentResPage, setCurrentResPage] = useState(1);
 
-  const itemsPerPage = 4;
+  const itemsPerPage = 8;
 
   const totalResPagesArray = Math.ceil(countries.length / itemsPerPage);
 
@@ -55,7 +55,7 @@ function Cultures() {
   return (
     <>
       <Slider2 />
-      <div className=" grid lg:grid-cols-4  md:grid-cols-2 sm:grid-cols-1 gap-5 place-items-center p-20 ">
+      <div className="flex flex-wrap items-center justify-center py-16 gap-4 lg:gap-8 lg:px-32">
         {slicedResArray?.map((card, index) => {
           return (
             <div
@@ -63,7 +63,7 @@ function Cultures() {
                 handleCulture(card.Culture);
               }}
               key={card._id}
-              className="w-full h-96 flex justify-center flex-col cursor-pointer hover:scale-105"
+              className=" h-96 flex justify-center flex-col cursor-pointer hover:scale-105 my-10"
             >
               <div className="bg-white shadow-md border border-gray-200 rounded-lg w-72 dark:bg-gray-800 dark:border-gray-700 hover:shadow-lg ">
                 <img
@@ -73,7 +73,7 @@ function Cultures() {
                 />
               </div>
         
-              <div className=" text-xl font-semibold p-3">
+              <div className=" text-xl font-semibold p-3  ">
                 {card.Culture}
               </div>
               

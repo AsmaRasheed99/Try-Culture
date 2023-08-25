@@ -22,7 +22,7 @@ const getReport = async (req, res) => {
   };
 const AllReports = async (req, res) => {
     try {
-        const report = await Report.find();
+        const report = await Report.find({flag:false});
         res.status(200).json(report);
       } catch (error) {
         res.status(500).json({ error: error.message });

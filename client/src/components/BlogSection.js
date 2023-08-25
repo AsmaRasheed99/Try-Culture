@@ -48,7 +48,7 @@ const BlogSection = () => {
                   onClick={() => {
                     handleBlog(blog._id);
                   }}
-                  className="w-96 container  bg-white rounded-xl shadow-lg transform transition duration-500 hover:scale-105 hover:shadow-2xl"
+                  className="w-96 container  bg-base-200 rounded-xl shadow-lg transform transition duration-500 hover:scale-105 hover:shadow-2xl"
                   data-aos="fade-up" data-aos-duration="3000"
 
                 >

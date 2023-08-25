@@ -6,11 +6,12 @@ import {
   FaTwitter,
   FaYoutube,
 } from "react-icons/fa";
+import { HashLink } from 'react-router-hash-link';
 
 function Footer() {
   return (
     <>
-      <footer className="footer footer-center p-10 bg-white text-base-content rounded">
+      <footer className="footer footer-center p-10 bg-base-200 text-base-content rounded">
         <div className="grid grid-flow-col gap-4"></div>
         <div>
           <div className="grid gap-4 text-xl font-serif italic">
@@ -35,11 +36,11 @@ function Footer() {
                 marginTop: "2rem",
               }}
             >
-             <a href=""><FaFacebookF /></a>
-             <a href=""><FaTwitter /></a>
-             <a href=""><FaPinterestP /></a>
-             <a href=""><FaInstagram /></a>
-             <a href=""><FaYoutube /></a>
+             <a href="" target="_blank"><FaFacebookF /></a>
+             <a href="" target="_blank"><FaTwitter /></a>
+             <a href="" target="_blank"><FaPinterestP /></a>
+             <a href="" target="_blank"><FaInstagram /></a>
+             <a href="" target="_blank"><FaYoutube /></a>
             </div>
           </div>
         </div>
@@ -47,10 +48,9 @@ function Footer() {
           <div className="divider"></div>
         </div>
         <div className="grid grid-flow-col justify-start gap-4">
-          <a className="link link-hover">About us</a>
-          <a className="link link-hover">Contact</a>
-          <a className="link link-hover">Jobs</a>
-          <a className="link link-hover">Press kit</a>
+          <HashLink smooth={true} to="/About#">About us</HashLink>
+          <HashLink smooth={true} to="/Contact#">Contact</HashLink>
+          <HashLink smooth={true} to="/SignUp#">Join Us</HashLink>
         </div>
         <p className="self-end">
           Copyright © 2023 - All rights reserved by ACME Industries Ltd

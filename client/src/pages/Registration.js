@@ -300,15 +300,13 @@ function Registration() {
             </div>
               <p className="text-red-500  px-3">{ConfirmPasswordp}</p>
 
-            <div className="mt-6 p-3">
+            <div className="mt-6 p-1">
               <button className="w-full px-4 py-2 text-2xl tracking-wide text-white transition-colors duration-200 transform bg-cyan-500 rounded-md hover:bg-cyan-400 focus:outline-none focus:bg-cyan-400">
                 Sign Up
               </button>
             </div>
           </form>
-          <div className="relative flex items-center justify-center w-full mt-6 border border-t">
-            <div className="absolute px-5 bg-white">Or</div>
-          </div>
+        
 
           <p className="mt-8 text-lg font-light text-center text-gray-500">
             {" "}

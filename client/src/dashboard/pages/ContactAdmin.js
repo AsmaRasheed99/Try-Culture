@@ -29,20 +29,6 @@ const ContactAdmin = () => {
   useEffect(() => {
     fetchUsers();
 
-    // axios.get('http://localhost:5000/reporters')
-    // .then((response) => {
-    //   setReporters(response.data);
-    //   setCurrentUser(response.data[0])
-    //   setAvColor(
-
-    //     {
-    //       backgroundColor: Checkcolor(response.data[0]),
-    //       color: '#fff',
-    //     }
-
-    //   )
-    // })
-    // .catch((error) => console.log(error.message))
   }, []);
 
   console.log(usersMessages);
@@ -111,23 +97,7 @@ const ContactAdmin = () => {
               </div>
               <div className="ml-2 font-bold text-2xl">Mail box</div>
             </div>
-            {/* <div className="flex flex-col items-center bg-indigo-100 border border-gray-200 mt-4 w-full py-6 px-4 rounded-lg">
-          <div className="h-20 w-20 rounded-full border overflow-hidden">
-            <img
-              src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1480&q=80"
-              alt="Avatar"
-              className="h-full w-full"
-            />
-          </div>
-          <div className="text-sm font-semibold mt-2">Aminos Co.</div>
-          <div className="text-xs text-gray-500">Lead UI/UX Designer</div>
-          <div className="flex flex-row items-center mt-3">
-            <div className="flex flex-col justify-center h-4 w-8 bg-indigo-500 rounded-full">
-              <div className="h-3 w-3 bg-white rounded-full self-end mr-1" />
-            </div>
-            <div className="leading-none ml-1 text-xs">Active</div>
-          </div>
-        </div> */}
+           
             <div className="flex flex-col mt-8">
               <div className="flex flex-row items-center justify-between text-xs">
                 <span className="font-bold">Active Conversations</span>
@@ -137,7 +107,6 @@ const ContactAdmin = () => {
               </div>
               <div className="flex flex-col space-y-1 mt-4 -mx-2 h-auto overflow-y-auto">
                 {usersMessages?.map((e) => {
-                  console.log(e);
                   let firstLetter = e.firstName.charAt(0);
 
                   const avatarStyle = {
@@ -178,7 +147,7 @@ const ContactAdmin = () => {
                                   {currentUser.firstName?.charAt(0)}
                                 </Avatar>
                                 
-                                <p>{e}</p>
+                                <p className="ml-2">{e}</p>
                                 </div>
                                 </div>
                               );

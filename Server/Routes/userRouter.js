@@ -2,12 +2,8 @@ const express = require("express");
 const router = express.Router();
 const userController = require("../controllers/userController");
 const protected =require("../middleware/Protected")
-const User = require("../models/user");
-const uploadController = require('../controllers/uploadController');
-const { uploadSingle, uploadMultiple } = require('../middleware/handleImage');
+const { uploadSingle } = require('../middleware/handleImage');
 
-// router.post('/upload-single', uploadSingle, uploadController.uploadSingle);
-// router.post('/upload-multiple', uploadMultiple, uploadController.uploadMultiple);
 router.get("/api/users",protected , userController.allUsers);
 router.get("/api/usersMessages",protected , userController.usersMessages);
 router.get("/api/Providers", userController.allProviders);

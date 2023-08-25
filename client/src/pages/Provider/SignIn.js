@@ -160,7 +160,7 @@ function SignIn() {
           </h1>
    
           <form className="mt-6"  onSubmit={handleSubmit}>
-            <div className="mb-2 p-3">
+            <div className="mb-2 p-1">
             {!EmailError ?<>
               
               <input
@@ -184,7 +184,7 @@ function SignIn() {
                                           <p className="text-red-500">{emailp}</p>
 
             </div>
-            <div className="p-3 relative">
+            <div className="p-1 relative">
             {!PasswordError ? <>
               
               <input
@@ -229,7 +229,7 @@ function SignIn() {
             </Link>
 
               </div>
-            <div className="mt-6 p-3">
+            <div className="mt-6 p-1">
                 <button className="w-full text-2xl px-4 py-2 tracking-wide text-white transition-colors duration-200 transform bg-cyan-500 rounded-md hover:bg-cyan-400 focus:outline-none focus:bg-cyan-400">
                   Login
                 </button>{" "}

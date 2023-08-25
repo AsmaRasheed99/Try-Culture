@@ -1,13 +1,9 @@
 const express = require("express");
 const router = express.Router();
 const blogController = require("../controllers/blogController");
-// const uploadController = require('../controllers/uploadController');
-const { uploadSingle, uploadMultiple } = require('../middleware/handleImage');
-const { upload } = require('../middleware/uploadMiddleware');
+const { uploadSingle } = require('../middleware/handleImage');
 
 
-// router.post('/upload-single', uploadSingle, uploadController.uploadSingle);
-// router.post('/upload-multiple', uploadMultiple, uploadController.uploadMultiple);
 
 router.get("/api/getAllBlogs", blogController.getAllBlogs);
 router.get("/api/allUserBlogs/:id", blogController.allUserBlogs);
