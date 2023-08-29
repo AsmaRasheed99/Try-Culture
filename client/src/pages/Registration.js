@@ -1,11 +1,10 @@
 import React from "react";
-import { useParams, Link, useNavigate } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import axios from "axios";
 import Icon from "@mdi/react";
 import { mdiEyeOutline } from "@mdi/js";
 import { mdiEyeOffOutline } from "@mdi/js";
-import { Typography } from "@material-tailwind/react";
+import { Link } from "react-router-dom";
 
 function Registration() {
   const [name, setName] = useState("");
@@ -75,8 +74,7 @@ function Registration() {
           window.location.href = "http://localhost:3000/";
         }
       } catch (error) {
-        // console.error("Error inserting data:", error);
-        console.log(error);
+        console.error("Error inserting data:", error.Message);
       }
     }
   };
@@ -192,7 +190,7 @@ function Registration() {
               {!NameError?  <>
                 <input
                 type="text"
-                placeholder="Full Name"
+                placeholder="Username"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 className="w-full px-8 text-xl py-5 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500  focus:outline-none focus:border-gray-400 focus:bg-white mt-5"
@@ -201,7 +199,7 @@ function Registration() {
               
               <input
                 type="text"
-                placeholder="Full Name"
+                placeholder="Username"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 className="w-full focus:ring-red-500 focus:border-red-500  text-xl px-8 py-5 rounded-lg font-medium bg-gray-100 border border-red-500 placeholder-gray-500 focus:outline-none  focus:bg-white mt-5"
@@ -216,7 +214,7 @@ function Registration() {
               {!PhoneError ? <>
                 <input
                 type="tel"
-                placeholder="07xxxxxxxx"
+                placeholder="07* **** ***"
                 value={phone}
                 onChange={(e) => setphone(e.target.value)}
                 className="w-full px-8 text-xl py-5 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500  focus:outline-none focus:border-gray-400 focus:bg-white mt-5"
@@ -224,7 +222,7 @@ function Registration() {
               </>  : <>
               <input
                 type="tel"
-                placeholder="07xxxxxxxx"
+                placeholder="07* **** ***"
                 value={phone}
                 onChange={(e) => setphone(e.target.value)}
                 className="w-full focus:ring-red-500 focus:border-red-500  text-xl px-8 py-5 rounded-lg font-medium bg-gray-100 border border-red-500 placeholder-gray-500 focus:outline-none  focus:bg-white mt-5"

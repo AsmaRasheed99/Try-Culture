@@ -17,10 +17,10 @@ const getBlog = async (req, res) => {
 }
 
 const createNewBlog = async (req, res) => {
-    const { title, content, author, userId, UserImage, comments , likes } = req.body;
-    const image = req.file.path;
-   console.log(title, content, author, userId, image, UserImage)
     try {
+      const { title, content, author, userId, UserImage, comments , likes } = req.body;
+      const image = req.file.path;
+     console.log(title, content, author, userId, image, UserImage)  
       const blogPost = await BlogPost.create({ image,title, content, author, userId , UserImage, comments , likes});
       res.status(200).json(blogPost);
     } catch (error) {

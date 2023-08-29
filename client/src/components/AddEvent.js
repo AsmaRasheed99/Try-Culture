@@ -25,7 +25,6 @@ function AddEvent({country}) {
   const [theDate, setDate] = useState("");
   const [Time, setTime] = useState("");
   const [EventName, setEventName] = useState("");
-  const [Culture, setCulture] = useState("");
   const [Location, setLocation] = useState("");
   const [Details, setDetails] = useState("");
   const [Organizer, setOrganizer] = useState(null);
@@ -140,7 +139,6 @@ function AddEvent({country}) {
     }
   };
 
-  console.log(Organizer)
   return (
     <div>
       <Button

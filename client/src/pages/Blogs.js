@@ -8,6 +8,8 @@ import Modal from "@mui/material/Modal";
 import { useNavigate } from "react-router-dom";
 import { Pagination } from "@mui/material";
 import { HashLink } from "react-router-hash-link";
+import { Textarea } from "@material-tailwind/react";
+import { Input } from "@material-tailwind/react";
 const style = {
   position: "absolute",
   top: "50%",
@@ -20,19 +22,18 @@ const style = {
   p: 4,
 };
 
-const Blogs = () => {
-  const [open, setOpen] = React.useState(false);
+const Blogs = ({ UserIdApp }) => {
+  const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-  const [ModalOpen , setModalOpen] = useState(false);
 
-  const [productImage, setProductImage] = useState(null);
+  const [BlogImage, setBlogImage] = useState(null);
 
-  const handleProductImageChange = (event) => {
-    setProductImage(event.target.files[0]);
+  const handleBlogImageChange = (event) => {
+    setBlogImage(event.target.files[0]);
   };
 
- const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const [User, setUser] = useState(null);
   const [UserAll, setUserAll] = useState(null);
@@ -46,40 +47,20 @@ const Blogs = () => {
   });
 
   useEffect(() => {
-    let id;
     const fetchProtectedData = async () => {
       try {
-        const token = localStorage.getItem("auth");
-        if (token) {
-          const response = await axios.get("http://localhost:5000/protected", {
-            headers: {
-              Authorization: token,
-            },
+        axios
+          .get(`http://localhost:5000/api/users/${UserIdApp}`)
+          .then((response) => {
+            setUserAll(response.data[0]);
+            setUser(response.data[0].firstName);
+            setUserId(response.data[0]._id);
+          })
+          .catch((error) => {
+            console.error("Error fetching user data:", error);
           });
-          setUser(response.data.user.firstName);
-          setUserId(response.data.user.id);
-          id =response.data.user.id;
-
-        }
-        console.log(User);
-
-
-
-    axios
-        .get(`http://localhost:5000/api/users/${id}`)
-        .then((response) => {
-          setUserAll(response.data[0]);
-        })
-        .catch((error) => {
-          console.error("Error fetching user data:", error);
-        });  
-
-
-        
       } catch (error) {
         console.error(error);
-        // localStorage.removeItem("auth");
-        // window.location.href = "http://localhost:3000/Login";
       }
     };
     const fetchBlogs = async () => {
@@ -93,39 +74,33 @@ const Blogs = () => {
         console.error(error);
       }
     };
-    if (localStorage.auth != null) {
+    if (localStorage.auth != null && UserIdApp) {
       fetchProtectedData();
     }
     fetchBlogs();
-  }, []);
-  console.log(User)
-  console.log(UserAll?.image)
+  }, [UserIdApp]);
+
+  // append to allow us to send files in //POST//
+
   const createNewBlog = async (e) => {
     e.preventDefault();
-    console.log(newBlog.title, newBlog.content, newBlog.author);
     const formData = new FormData();
-    formData.append("image", productImage);
+    formData.append("image", BlogImage);
     formData.append("title", newBlog.title);
     formData.append("content", newBlog.content);
     formData.append("author", User);
     formData.append("userId", userId);
-    formData.append("UserImage", UserAll?.image)
-    // formData.append("image", UserAll.image);
+    formData.append("UserImage", UserAll?.image);
     try {
       const response = await axios.post(
         "http://localhost:5000/api/createNewBlog",
         formData
-        // {...newBlog, author: User, image: img,  userId: userId,   }
       );
-      setOpen(false);
       handleClose();
-      // updateProfileRefresh(response)
-      // setModalOpen(false); // Close the modal
 
       const createdBlog = response.data;
       setBlogs([...blogs, createdBlog]);
       setNewBlog({
-        // Image: productImage,
         title: "",
         content: "",
         author: "",
@@ -145,43 +120,44 @@ const Blogs = () => {
       });
       console.error(error.message);
     }
-    console.log(userId);
   };
 
-  const closeModal = () => {
-    setModalOpen(false);
+  /// pagination
+
+  const [currentBlogPage, setcurrentBlogPage] = useState(1);
+
+  const handleBlogChangeArray = (event, page) => {
+    setcurrentBlogPage(page);
   };
-   /// pagination
- 
-
-  const [currentResPage, setCurrentResPage] = useState(1);
-
-  const handleResChangeArray = (event, page) => {
-    setCurrentResPage(page);}
 
   const itemsPerPage = 1;
 
-  const totalResPagesArray = Math.ceil(blogs.length / itemsPerPage);
+  const totalBlogPagesArray = Math.ceil(blogs.length / itemsPerPage);
 
   const blogsArray = blogs.slice().reverse();
 
-  const startResIndexArray = (currentResPage - 1) * itemsPerPage;
-  const endResIndexArray = startResIndexArray + itemsPerPage;
-  const slicedResArray = blogsArray.slice(startResIndexArray, endResIndexArray);
+  const startBlogIndexArray = (currentBlogPage - 1) * itemsPerPage;
+  const endBlogIndexArray = startBlogIndexArray + itemsPerPage;
+  const slicedBlogArray = blogsArray.slice(
+    startBlogIndexArray,
+    endBlogIndexArray
+  );
 
-  const handleBlog = (id)=> {
-   navigate(`/BlogDetails/${id}`)
-  }
+  const handleBlog = (id) => {
+    navigate(`/BlogDetails/${id}`);
+  };
   return (
     <>
       <div className="container mx-auto  py-6 flex flex-col md:flex-col lg:flex-row">
         {/* Posts Section */}
         <section className="w-full lg:md:w-2/3 flex flex-col items-center px-3">
-          {slicedResArray.map((blog) => (
+          {slicedBlogArray.map((blog) => (
             <article
               className="flex flex-col flex-wrap shadow my-4 lg:w-[70%] md:w-full w-full"
               key={blog._id}
-              onClick={()=>{handleBlog(blog._id)}}
+              onClick={() => {
+                handleBlog(blog._id);
+              }}
             >
               <div className="hover:opacity-75 ">
                 <img
@@ -194,7 +170,6 @@ const Blogs = () => {
                 <p className="text-3xl font-bold hover:text-gray-700 pb-4">
                   {blog.title}
                 </p>
-
                 <p className="text-sm pb-3">
                   By{" "}
                   <span className="font-semibold hover:text-gray-800">
@@ -206,38 +181,52 @@ const Blogs = () => {
                 </p>
                 <hr></hr>
                 <p className=" text-gray-800 text-lg hover:text-black pt-3">
-                {blog.content.split('\n').slice(0, 2).join('\n')} 
-                </p> <Link className="text-blue-700 text-xl mt-2">Continue Reading</Link>
+                  {blog.content.split(".").slice(0, 3).join(".")}
+                </p>{" "}
+                <Link className="text-blue-700 text-xl mt-2">
+                  Continue Reading
+                </Link>
               </div>
             </article>
           ))}
           <div className="flex flex-col justify-center items-center  mt-20 w-full">
-          
-          <Pagination
-            count={totalResPagesArray}
-            page={currentResPage}
-            onChange={handleResChangeArray}
-          />
-        </div>
+            <Pagination
+              count={totalBlogPagesArray}
+              page={currentBlogPage}
+              onChange={handleBlogChangeArray}
+            />
+          </div>
         </section>
-        
+
         {/* Sidebar Section  */}
         <aside className="w-full lg:md:w-1/3 flex lg:flex-col md:flex-col flex-wrap items-center px-3">
           <div className="w-full bg-base-200 shadow flex flex-col my-4 p-6 md: h-72 lg:h-64 ">
             <p className="text-xl  font-semibold pb-5">Share Your Experience</p>
             <p className="pb-2 text-lg h-32">
-              write about a resturant , shop , institute you
-               found through our website , any event you attended 
-               or about any culture you would like to talk about.
+              write about a resturant , shop , institute you found through our
+              website , any event you attended or about any culture you would
+              like to talk about.
             </p>
-            <div className="flex flex-col justify-center items-center ">
-              <Button
-                className="w-full  bg-cyan-600 text-white font-bold text-sm uppercase rounded hover:bg-[#0b3e45] flex items-center justify-center px-2 py-3 mt-4"
-                variant="text"
-                onClick={handleOpen}
-              >
-               Write a Blog
-              </Button>
+            <div className=" flex flex-col justify-center  ">
+              {localStorage.auth !== undefined ? (
+                <Button
+                  className="w-full  bg-cyan-600 text-white font-bold text-sm uppercase rounded hover:bg-[#0b3e45] flex items-center justify-center px-2 py-3 mt-4"
+                  variant="text"
+                  onClick={handleOpen}
+                >
+                  Write a Blog
+                </Button>
+              ) : (
+                <Link to="/Login">
+                  <Button
+              className="w-full bg-cyan-600 text-white font-bold text-sm uppercase rounded hover:bg-[#0b3e45] flex items-center justify-center px-2 py-3 mt-4"
+              variant="text"
+                  >
+                    Login to write a blog
+                  </Button>
+                </Link>
+              )}
+
               <Modal
                 open={open}
                 onClose={handleClose}
@@ -245,12 +234,13 @@ const Blogs = () => {
                 aria-describedby="modal-modal-description"
               >
                 <Box sx={style}>
-                  <div className="flex flex-col">
+                  <form className="flex flex-col" onSubmit={createNewBlog}>
                     <input
                       type="text"
                       placeholder="Title"
                       className="input input-bordered input-info w-full max-w-xs mb-5"
                       value={newBlog.title}
+                      required
                       onChange={(e) =>
                         setNewBlog({ ...newBlog, title: e.target.value })
                       }
@@ -261,22 +251,22 @@ const Blogs = () => {
                       placeholder="Content"
                       className="input input-bordered input-info input-lg w-full max-w-xs mb-5"
                       value={newBlog.content}
+                      required
                       onChange={(e) =>
                         setNewBlog({ ...newBlog, content: e.target.value })
                       }
                     ></textarea>
 
-                 
                     <input
                       className="file-upload-input mx-auto"
                       type="file"
                       name="image"
-                      onChange={handleProductImageChange}
+                      onChange={handleBlogImageChange}
                       accept="image/*"
                       required
                     />
                     <Button
-                      onClick={createNewBlog}
+                      type="submit"
                       className="w-full bg-cyan-600 text-white font-bold text-sm uppercase rounded hover:bg-[#0b3e45] flex items-center justify-center px-2 py-3 mt-10"
                       variant="text"
                     >
@@ -289,7 +279,7 @@ const Blogs = () => {
                     >
                       Cancel
                     </Button>
-                  </div>
+                  </form>
                 </Box>
               </Modal>
             </div>
@@ -299,8 +289,8 @@ const Blogs = () => {
           <div className="w-full bg-base-200 shadow flex flex-col my-4 p-6  lg:h-64">
             <p className="text-xl  font-semibold pb-5">Contact Us</p>
             <p className="pb-2 text-lg h-32">
-              If you have any advices or noticed anything that 
-              needed to be reported to us please feel free to contact us.
+              If you have any advices or noticed anything that needed to be
+              reported to us please feel free to contact us.
             </p>
             <HashLink
               to="/Contact#"
@@ -312,10 +302,11 @@ const Blogs = () => {
           <div className="w-full bg-base-200 shadow flex flex-col my-4 p-6  lg:h-64">
             <p className="text-xl font-semibold pb-5 ">About Us</p>
             <p className="pb-2 text-lg h-32">
-              Are you curious about us and about Try A Culture , 
-              get to know us now
+              Are you curious about us and about Try A Culture , get to know us
+              now
             </p>
-            <HashLink smooth={true}
+            <HashLink
+              smooth={true}
               to="/about#"
               className="w-full bg-cyan-600 text-white font-bold text-sm uppercase rounded hover:bg-[#0b3e45] flex items-center justify-center px-2 py-3 mt-4"
             >

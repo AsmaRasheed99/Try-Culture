@@ -38,7 +38,14 @@ const BlogSection = () => {
    }
   return (
     <>
-      <div className=" flex flex-col items-center py-10 w-full ">
+      <div className=" flex flex-col items-center py-16 w-full ">
+      <h2 className="text-3xl font-bold py-8 text-center font-serif italic text-cyan-500">
+              SHARE YOUR EXPERIENCE
+            </h2>
+            <p className="description text-lg text-center font-serif italic ">
+              Share your experience in exploring the richness of culture:
+              Insights, Stories, and Perspectives
+            </p>
         <div className="w-full ">
           <div className="flex w-full flex-wrap gap-16 mt-10 justify-center ">
             {blogs?.map((blog) => {
@@ -88,7 +95,7 @@ const BlogSection = () => {
         </div>
       </div>
 
-      <div className="flex justify-center mt-10">
+      <div className="flex justify-center py-16">
         <HashLink smoooth={true} to="/Blogs#">
           <Button
             className=" shadow-md shadow-[#0b3e456f] text-[#0b3e45] bg-[#28c0d084] hover:bg-[#0b3e45] hover:text-[#ffffff]"

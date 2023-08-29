@@ -17,7 +17,7 @@ const newUserGoogle = async (req, res) => {
     });
     const user = await NewUser.save();
     const token = jwt.sign(
-      { id: user._id, firstName: user.firstName, role: user.role },
+      { id: user._id, username: user.firstName, role: user.role },
       SECRETKEY,
       { expiresIn: "24h" }
     );
@@ -32,7 +32,7 @@ const newUserGoogle = async (req, res) => {
 
     if (validpassword) {
       const token = jwt.sign(
-        { id: userExist[0]._id, firstName: userExist[0].firstName, role: userExist[0].role },
+        { id: userExist[0]._id, username: userExist[0].firstName, role: userExist[0].role },
         SECRETKEY,
         { expiresIn: "24h" }
       );
@@ -55,7 +55,7 @@ const newBusinessGoogle = async (req, res) => {
     });
     const user = await NewUser.save();
     const token = jwt.sign(
-      { id: user._id, firstName: user.firstName, role: user.role },
+      { id: user._id, username: user.firstName, role: user.role },
       SECRETKEY,
       { expiresIn: "24h" }
     );
@@ -70,7 +70,7 @@ const newBusinessGoogle = async (req, res) => {
 
     if (validpassword) {
       const token = jwt.sign(
-        { id: userExist[0]._id, firstName: userExist[0].firstName, role: userExist[0].role },
+        { id: userExist[0]._id, username: userExist[0].firstName, role: userExist[0].role },
         SECRETKEY,
         { expiresIn: "24h" }
       );

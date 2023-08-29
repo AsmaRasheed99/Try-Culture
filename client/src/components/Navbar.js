@@ -94,29 +94,7 @@ function NavListMenu() {
         placement="bottom"
         allowHover={true}
       >
-        {/* <MenuHandler>
-          <Typography as="div" variant="small" className="font-normal">
-            <ListItem
-              className="flex items-center gap-2 py-2 pr-4 text-xl"
-              selected={isMenuOpen || isMobileMenuOpen}
-              onClick={() => setIsMobileMenuOpen((cur) => !cur)}
-            >
-              Language
-              <ChevronDownIcon
-                strokeWidth={2.5}
-                className={`hidden h-3 w-3 transition-transform lg:block ${
-                  isMenuOpen ? "rotate-180" : ""
-                }`}
-              />
-              <ChevronDownIcon
-                strokeWidth={2.5}
-                className={`block h-3 w-3 transition-transform lg:hidden ${
-                  isMobileMenuOpen ? "rotate-180" : ""
-                }`}
-              />
-            </ListItem>
-          </Typography>
-        </MenuHandler> */}
+ 
         <MenuList className="hidden max-w-screen-xl rounded-xl lg:block">
           <ul className="grid grid-cols-2 gap-y-2">{renderItems}</ul>
         </MenuList>
@@ -200,12 +178,13 @@ function NavList() {
         color="blue-gray"
         className="font-normal"
       >
+        {localStorage.auth ? (
         <HashLink smooth={true} to="/Messenger#"
         onClick={()=>updateNav(false)}>
           <ListItem className="flex items-center gap-2 py-2 pr-4 text-xl">
-            Chat
+            Chat 
           </ListItem>
-        </HashLink>
+        </HashLink>) : null }
       </Typography>
       <NavListMenu />
     </List>
@@ -226,12 +205,7 @@ export default function Example() {
   }
 
   const handleLogout = () => {
-    // Perform any necessary cleanup or API calls related to logout
-
-    // Clear the auth token or user data from local storage
     localStorage.removeItem("auth");
-
-    // Update the login status
     setIsLoggedIn(false);
   };
   React.useEffect(() => {

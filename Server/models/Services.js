@@ -76,7 +76,9 @@ const ServiceSchema = new Schema({
     required: false,
   },
   
-});
+},
+{timestamp : true}
+);
 
 const Service = mongoose.model("Service", ServiceSchema);
 

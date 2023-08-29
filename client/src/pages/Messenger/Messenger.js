@@ -34,7 +34,7 @@ export default function Messenger({UserApp}) {
         if(UserApp.id !== undefined){
         getImg();
       }
-    },[UserApp])
+    },[UserApp, UserId])
    
     useEffect(() => {
         socket.current = io("ws://localhost:5500");
@@ -57,7 +57,7 @@ export default function Messenger({UserApp}) {
     useEffect(()=>{
         socket.current.emit("addUser", UserId)
        
-    },[UserApp]);
+    },[UserApp, UserId]);
 
 
 
@@ -131,9 +131,13 @@ export default function Messenger({UserApp}) {
         },
       });
 
-      console.log(response.data);
-      setPersons(response.data);
-      setFilterDataUsers(response.data);
+      
+      setPersons(response.data.filter((user)=>{
+        return user._id !== UserId
+      }));
+      setFilterDataUsers(response.data.filter((user)=>{
+        return user._id !== UserId
+      }));
     } catch (error) {
       console.error("Error inserting data:", error);
     }

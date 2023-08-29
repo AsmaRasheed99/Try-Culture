@@ -1,4 +1,4 @@
-import React, { useEffect, useState ,useContext} from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import axios from 'axios';
 import Icon from "@mdi/react";
@@ -42,10 +42,6 @@ function SignIn() {
     const [emailp, setemailp] = useState("");
     const [password, setpassword] = useState("");
     const [passwordp, setpasswordp] = useState("");
- 
-    const [ user, setUser ] = useState([]);
-    const [ profile, setProfile ] = useState([]);
-   
     const [showPassword, setShowPassword] = useState(false);
     const togglePasswordVisibility = () => {
       setShowPassword((prevShowPassword) => !prevShowPassword);
@@ -132,6 +128,9 @@ function SignIn() {
            window.location.href = 'http://localhost:3000/ServiceForm';
         }else{
           console.log("failed")
+          setpasswordp(response.data.error === "incorrect password" ? "incorrect password": "");
+          setemailp(response.data.error === "incorrect password" ? " ": response.data.error );
+
         }
         
       } catch (error) {

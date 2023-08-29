@@ -2,9 +2,11 @@ import { Card } from '@mui/material';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 
-const Events = ({country}) => {
+const Events = () => {
   
   const [events, setEvents] = useState([]);
+  const [FilteredEvents, setFilteredEvents] = useState([]);
+  const [SearchTerm, setSearchTerm] = useState("");
 
   const fetchEvents = async () => {
     const events = await axios.get("http://localhost:5000/api/getAllEvents");
@@ -24,10 +26,8 @@ const Events = ({country}) => {
 /// filter 
 
 
-const [SearchTerm, setSearchTerm] = useState("");
-const [FilteredEvents, setFilteredEvents] = useState([]);
 const [yourSelectedStateValueLocation, setyourSelectedStateValueLocation] = useState("");
-const [yourSelectedStateValueType, setyourSelectedStateValueType] = useState("");
+const [yourSelectedStateValueCulture, setyourSelectedStateValueCulture] = useState("");
 
 
 
@@ -39,12 +39,12 @@ const filterDataByName = (searchTerm) => {
   };
 
 
-const handleFilterChange = (typeValue, LocationValue) => {
+const handleFilterChange = (cultureValue, LocationValue) => {
 
 
   const filteredDataBusiness = events?.filter(
     (item) =>
-      item.Culture?.toLowerCase().includes(typeValue.toLowerCase()) && item.location?.toLowerCase().includes(LocationValue.toLowerCase())
+      item.Culture?.toLowerCase().includes(cultureValue.toLowerCase()) && item.location?.toLowerCase().includes(LocationValue.toLowerCase())
   );
   setFilteredEvents(filteredDataBusiness);
 
@@ -113,7 +113,7 @@ const handleFilterChange = (typeValue, LocationValue) => {
                 onChange={(e) => {
                   setyourSelectedStateValueLocation(e.target.value);
                   handleFilterChange(
-                    yourSelectedStateValueType,
+                    yourSelectedStateValueCulture,
                     e.target.value
                   );
                 }}
@@ -127,9 +127,9 @@ const handleFilterChange = (typeValue, LocationValue) => {
               </select>
               <select
                 className="px-4 py-3 w-48 md:w-60  border-gray-300 rounded-lg bg-gray-50 focus:ring-cyan-500 focus:border-cyan-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-cyan-500 dark:focus:border-cyan-500 text-sm appearance-none "
-                value={yourSelectedStateValueType}
+                value={yourSelectedStateValueCulture}
                 onChange={(e) => {
-                  setyourSelectedStateValueType(e.target.value);
+                  setyourSelectedStateValueCulture(e.target.value);
                   handleFilterChange(
                     e.target.value,
                     yourSelectedStateValueLocation

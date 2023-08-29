@@ -16,7 +16,7 @@ const EventSection = () => {
         </div>
         <div className="md:mb-12 lg:mb-0">
           <img
-            src="https://img.freepik.com/free-photo/male-business-executive-giving-speech_107420-63810.jpg?size=626&ext=jpg&ga=GA1.2.558610342.1683500202&semt=sph"
+            src="https://images.pexels.com/photos/5239919/pexels-photo-5239919.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
             className="w-full h-1/2 rounded-lg shadow-lg dark:shadow-black/20"
             alt=""
           />

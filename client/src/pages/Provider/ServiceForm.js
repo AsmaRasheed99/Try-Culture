@@ -8,7 +8,7 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 
 
 function ServiceForm({UserIdApp}) {
-console.log(UserIdApp);
+
   const navigate = useNavigate();
 
   
@@ -38,7 +38,6 @@ console.log(UserIdApp);
     const fetchProvider = async () => {
       try {
         const provider = await axios.get(`http://localhost:5000/api/users/${UserIdApp}`)
-        console.log(provider.data)
         setProviderName(provider.data[0].firstName)
       } catch (error) {
         console.error(error);
@@ -48,8 +47,7 @@ console.log(UserIdApp);
       fetchProvider();
 
   }, []);
-console.log(ProviderName)
-
+ 
   const CreateNewBusiness = async (e) => {
     e.preventDefault();
 
@@ -66,10 +64,6 @@ console.log(ProviderName)
     formData.append("provider_id",UserIdApp);
     formData.append("provider_Name",ProviderName);
  
-    console.log(productImage, NewBusiness.location,NewBusiness.businessType,UserIdApp, ProviderName,NewBusiness.businessName, NewBusiness.phoneNumber,NewBusiness.WorkDays,NewBusiness.FromHours,NewBusiness.ToHours,NewBusiness.culture,)
-    console.log(NewBusiness)
-
-   
 
     try {
       const response = await axios.post(
@@ -91,12 +85,10 @@ console.log(ProviderName)
         provider_Name: ProviderName,
 
       });
-      console.log(response.data)
       let ServiceId = response.data._id;
 
       navigate(`/Payment/${ServiceId}`);
 
-      // window.location.href = "http://localhost:3000/Payment";
 
       console.log("New Business request:", createdBusiness);
 

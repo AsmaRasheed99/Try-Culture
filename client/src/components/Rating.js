@@ -3,10 +3,10 @@ import axios from "axios";
 import { UserContext } from "../UserContext";
 import TotalRating from "./TotalRating";
 
-const Rating = ({ ServiceId, UserIdApp, card, rating, currentPage }) => {
+const Rating = ({ ServiceId, UserIdApp, card, currentPage }) => {
   const starCount = 5; // Total number of stars
-  const [showRating, setShowRating] = useState(true);
 
+  const [showRating, setShowRating] = useState(true);
   const [filledStars, setFilledStars] = useState(0);
   const [RatingStatus, setRatingStatus] = useState(false);
   const { RateRefresh, setRateRefresh } = useContext(UserContext);
@@ -26,16 +26,16 @@ const Rating = ({ ServiceId, UserIdApp, card, rating, currentPage }) => {
     newrate.push(starIndex + 1);
 
     const sum = card.rate?.reduce(
-      (acc, curr) => parseInt(acc) + parseInt(curr),
+      (accumulated , current ) => parseInt(accumulated) + parseInt(current),
       0
     );
-    const avg = card.rate.length === 0 ? 1 : card.rate?.length;
+    const length = card.rate?.length ;
 
     try {
       const updatedBusinessData = {
         UsersIdRate: ids,
         rate: newrate,
-        rating: sum / avg,
+        rating: sum / length,
       };
 
       const NupdatedBusiness = await axios.put(
@@ -53,7 +53,6 @@ const Rating = ({ ServiceId, UserIdApp, card, rating, currentPage }) => {
     <>
       {localStorage.auth !== undefined ? (
         <div className="flex items-center">
-          {console.log(RatingStatus === false && showRating)}
 
           {Array(starCount)
             .fill()

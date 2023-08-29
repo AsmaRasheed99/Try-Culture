@@ -4,7 +4,7 @@ import axios from "axios";
 
 
 const ForgotPassword = () => {
-    const [email, setEmail] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [passwordp, setpasswordp] = useState("");
   const [reset, setReset] = useState(false);
@@ -84,13 +84,13 @@ const ForgotPassword = () => {
            }
     }
   return (
-    <div className="w-full h-[80vh] flex items-center justify-center">
+    <div className="w-full h-[80vh] flex items-center justify-center ">
     <div className="w-full max-w-xs">
       <p>Find your account</p>
 
       {checkMessage ? (
         <>
-          <form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 ">
+          <form className="bg-base-200 shadow-lg rounded-lg px-8 pt-6 pb-8 mb-4 ">
             <div>
             <p className="text-lg">Please enter your New password.
             <br/>
@@ -123,9 +123,9 @@ const ForgotPassword = () => {
         </>
       ) : (
         <>
-          <form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
-            <p>Please enter your email to search for your account.</p>
-            <div className="mb-4">
+          <form className="bg-base-200 shadow-lg rounded-lg px-8 pt-6 pb-8 mb-4">
+            <p>Please enter your email to reset your Password</p>
+            <div className="my-4">
               <label
                 className="block text-gray-700 text-sm font-bold mb-2"
                 htmlFor="Email"
@@ -162,7 +162,7 @@ const ForgotPassword = () => {
                 </div>
                 <div className="flex items-center justify-between">
                   <button
-                    className="bg-amber-500 hover:bg-amber-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                    className="bg-cyan-500 hover:bg-cyan-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
                     type="button"
                     onClick={handleResetPassword}
                   >
@@ -180,7 +180,7 @@ const ForgotPassword = () => {
                       <button
                         disabled=""
                         type="button"
-                        className="text-white bg-amber-700 hover:bg-amber-800 focus:ring-4 focus:ring-amber-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 dark:bg-amber-600 dark:hover:bg-amber-700 dark:focus:ring-amber-800 inline-flex items-center"
+                        className="text-white bg-cyan-700 hover:bg-cyan-800 focus:ring-4 focus:ring-cyan-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 dark:bg-cyan-600 dark:hover:bg-cyan-700 dark:focus:ring-cyan-800 inline-flex items-center"
                       >
                         <svg
                           aria-hidden="true"
@@ -205,7 +205,7 @@ const ForgotPassword = () => {
                   ) : (
                     <>
                       <button
-                        className="bg-amber-500 hover:bg-amber-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                        className="bg-cyan-500 hover:bg-cyan-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
                         type="button"
                         onClick={handleFind}
                       >

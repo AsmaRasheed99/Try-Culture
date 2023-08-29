@@ -1,12 +1,8 @@
 import React, { useState, useEffect, useContext } from "react";
 import "../styles/Calendar.css";
-import Icon from "@mdi/react";
-import { mdiPlusCircleOutline } from "@mdi/js";
 import axios from "axios";
-import Swal from "sweetalert2";
 import AddEvent from "../components/AddEvent";
 import { UserContext } from "../UserContext";
-import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
 
 function Calendar() {

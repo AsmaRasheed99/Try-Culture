@@ -15,7 +15,7 @@ import EditBusiness from "../components/EditBusiness";
 import { Link, useNavigate } from "react-router-dom";
 function Profile() {
   const { profileRefresh, updateProfileRefresh } = useContext(UserContext);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const [userId, setUserId] = useState();
   const [userRole, setUserRole] = useState();
@@ -36,7 +36,6 @@ function Profile() {
           },
         });
         setUserId(response.data.user.id);
-   
 
         axios
           .get(`http://localhost:5000/api/users/${response.data.user.id}`)
@@ -47,7 +46,6 @@ function Profile() {
             setUserRole(response.data[0].role);
             setUser(response.data[0]);
             setImage(response.data[0].image);
-            console.log(response.data);
           })
           .catch((error) => {
             console.error("Error fetching user data:", error);
@@ -58,7 +56,6 @@ function Profile() {
           const BlogsResponse = await axios.get(
             `http://localhost:5000/api/allUserBlogs/${id000}`
           );
-          console.log(BlogsResponse.data);
           setUserBlogs(BlogsResponse.data);
         } catch (error) {
           console.error("Error retrieving data:", error);
@@ -76,8 +73,6 @@ function Profile() {
       }
     } catch (error) {
       console.error(error);
-      // localStorage.removeItem("auth");
-      // window.location.href = "http://localhost:3000/Login";
     } finally {
       console.log(false);
     }
@@ -89,11 +84,10 @@ function Profile() {
     }
   }, [profileRefresh]);
 
-  console.log(img);
-  const handleBlog = (id)=> {
-    navigate(`/BlogDetails/${id}`)
-   }
-  
+  const handleBlog = (id) => {
+    navigate(`/BlogDetails/${id}`);
+  };
+
   return (
     <div>
       <>
@@ -109,17 +103,17 @@ function Profile() {
         <main className="profile-page">
           <section className="relative block h-500-px bg-cyan-600">
             <div
-          className="absolute top-0 w-full bg-cover h-full bg-center "
-          style={{
-            backgroundImage:
-              'url("https://images.pexels.com/photos/1010657/pexels-photo-1010657.jpeg?auto=compress&cs=tinysrgb&w=600")'
-          }}
-        >
-          <span
-            id="blackOverlay"
-            className="w-full h-full absolute opacity-50 bg-black"
-          />
-        </div>
+              className="absolute top-0 w-full bg-cover h-full bg-center "
+              style={{
+                backgroundImage:
+                  'url("https://images.pexels.com/photos/1010657/pexels-photo-1010657.jpeg?auto=compress&cs=tinysrgb&w=600")',
+              }}
+            >
+              <span
+                id="blackOverlay"
+                className="w-full h-full absolute opacity-50 bg-black"
+              />
+            </div>
             <div
               className="top-auto bottom-0 left-0 right-0 w-full absolute pointer-events-none overflow-hidden h-70-px"
               style={{ transform: "translateZ(0px)" }}
@@ -147,10 +141,10 @@ function Profile() {
                   <div className="flex flex-wrap justify-center">
                     <div className="w-full lg:w-3/12 px-4 lg:order-2 flex justify-center">
                       <div className="relative">
-                      <img className="shadow-xl rounded-full h-40 w-96 align-middle border-none absolute -m-16 -ml-20 lg:-ml-16 max-w-150-px" 
-                      src={`http://localhost:5000/${img}`}
-                      />
-
+                        <img
+                          className="shadow-xl rounded-full h-40 w-96 align-middle border-none absolute -m-16 -ml-20 lg:-ml-16 max-w-150-px"
+                          src={`http://localhost:5000/${img}`}
+                        />
                       </div>
                     </div>
                     <div className="w-full lg:w-4/12 px-4 lg:order-3 lg:text-right lg:self-center">
@@ -209,17 +203,21 @@ function Profile() {
                             <article
                               className="flex flex-col w-96 shadow my-4 text-start m-5 cursor-pointer"
                               key={blog._id}
-                              onClick={()=>{handleBlog(blog._id)}}
-
                             >
                               <div className="hover:opacity-75  ">
-                                <img className="w-full h-80" src={`http://localhost:5000/${blog.image}`}/>
+                                <img
+                                  className="w-full h-80"
+                                  src={`http://localhost:5000/${blog.image}`}
+                                  onClick={() => {
+                                    handleBlog(blog._id);
+                                  }}
+                                />
                               </div>
                               <div className="bg-white flex flex-col justify-start p-6">
                                 <div className="flex justify-between items-center pb-4">
-                                <p className="text-3xl text-center font-bold hover:text-gray-700 ">
-                                  {blog.title}
-                                </p>
+                                  <p className="text-3xl h-32 text-center font-bold hover:text-gray-700 ">
+                                    {blog.title}
+                                  </p>
                                 </div>
                                 <p className="text-sm pb-3">
                                   By{" "}
@@ -231,14 +229,13 @@ function Profile() {
                                   Published on {blog.date}
                                 </p>
                                 <hr></hr>
-                              
+
                                 <div className="w-ful flex justify-between items-center overflow-hidden mt-4">
                                   <p className="whitespace-normal h-10 w-52">
                                     {blog.content}
                                   </p>
-                                <EditBlog id={blog._id} blogProps={blog} />
+                                  <EditBlog id={blog._id} blogProps={blog} />
                                 </div>
-
                               </div>
                             </article>
                           ))}
@@ -255,18 +252,17 @@ function Profile() {
                           </p>
                           <div className="flex flex-wrap gap-7 justify-center mt-20 text-start">
                             {UserServices.map((card) => (
-                              <Card className="w-80 shadow-lg">
+                              <Card className="w-80 shadow-lg" key={card._id}>
                                 <CardHeader floated={false} color="blue-gray">
                                   <img
-                                  className="w-full h-60"
+                                    className="w-full h-60"
                                     src={`http://localhost:5000/${card.businessImage}`}
-
                                     alt="ui/ux review check"
                                   />
                                   <div className="to-bg-black-10 absolute inset-0 h-full w-full bg-gradient-to-tr from-transparent via-transparent to-black/60 " />
                                 </CardHeader>
-                                <CardBody>
-                                  <div className="mb-3 flex items-center justify-between">
+                                <CardBody className="h-80">
+                                  <div className="mb-3 h-16 flex items-center justify-between">
                                     <Typography
                                       variant="h5"
                                       color="blue-gray"
@@ -301,7 +297,7 @@ function Profile() {
                                     {card.phoneNumber}
                                   </Typography>
                                   <Typography color="gray">
-                                    <span className="text-lg font-semibold">
+                                    <span className="text-lg h-10 font-semibold">
                                       {" "}
                                       Location :
                                     </span>

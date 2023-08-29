@@ -1,8 +1,5 @@
 import React, { useEffect } from "react";
-import { Button } from "@material-tailwind/react";
-
-import { Link, useNavigate } from "react-router-dom";
-
+import {useNavigate } from "react-router-dom";
 import "pure-react-carousel/dist/react-carousel.es.css";
 import "swiper/css";
 import "swiper/css/navigation";
@@ -24,7 +21,6 @@ function Cultures() {
       const res = await axios.get("http://localhost:5000/api/getAllCultures");
       const countries = res.data;
       setCountries(countries);
-      console.log(countries);
     } catch (error) {
       console.log(error.message);
     }
@@ -34,29 +30,24 @@ function Cultures() {
     fetchCountries();
   }, []);
 
-  console.log(countries);
-
-  const [currentResPage, setCurrentResPage] = useState(1);
-
+  const [currentCulturePage, setcurrentCulturePage] = useState(1);
   const itemsPerPage = 8;
-
-  const totalResPagesArray = Math.ceil(countries.length / itemsPerPage);
-
-  const startResIndexArray = (currentResPage - 1) * itemsPerPage;
-  const endResIndexArray = startResIndexArray + itemsPerPage;
-  const slicedResArray = countries.slice(startResIndexArray, endResIndexArray);
+  const totalCulturePagesArray = Math.ceil(countries.length / itemsPerPage);
+  const startCultureIndexArray = (currentCulturePage - 1) * itemsPerPage;
+  const endCultureIndexArray = startCultureIndexArray + itemsPerPage;
+  const slicedCultureArray = countries.slice(startCultureIndexArray, endCultureIndexArray);
 
   /// filter
 
   const handleResChangeArray = (event, page) => {
-    setCurrentResPage(page);
+    setcurrentCulturePage(page);
   };
 
   return (
     <>
       <Slider2 />
       <div className="flex flex-wrap items-center justify-center py-16 gap-4 lg:gap-8 lg:px-32">
-        {slicedResArray?.map((card, index) => {
+        {slicedCultureArray?.map((card, index) => {
           return (
             <div
               onClick={() => {
@@ -83,8 +74,8 @@ function Cultures() {
       </div>
       <div className="flex flex-col justify-center items-center  mb-8 w-full">
         <Pagination
-          count={totalResPagesArray}
-          page={currentResPage}
+          count={totalCulturePagesArray}
+          page={currentCulturePage}
           onChange={handleResChangeArray}
         />
       </div>

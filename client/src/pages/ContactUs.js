@@ -1,7 +1,6 @@
 import React, { useState,useEffect } from "react";
 import axios from "axios";
 import Swal from "sweetalert2";
-import { Link } from "react-router-dom";
 
 const ContactUs = () => {
   
@@ -17,7 +16,7 @@ const ContactUs = () => {
             Authorization: token,
           },
         });
-    
+
         setUserId(response.data.user.id)
         setUserMessages(response.data.user.message)
     
@@ -28,7 +27,6 @@ const ContactUs = () => {
       console.log(false);
     }
   };
-
 
 
 
@@ -51,8 +49,9 @@ const ContactUs = () => {
     event.preventDefault();
 
     // To passed as the data to be sent.
-  
-let message = userMessages 
+    let message = userMessages ?  [...userMessages ] : [ ]
+
+    
 message.push(message0)
 console.log(message)
     try {

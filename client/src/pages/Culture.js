@@ -1,6 +1,5 @@
 import React from "react";
 import { useState, useEffect, useContext } from "react";
-import { Link } from "react-router-dom";
 import Pagination from "@mui/material/Pagination";
 import Rating from "../components/Rating";
 import axios from "axios";
@@ -15,6 +14,7 @@ import {
 } from "@material-tailwind/react";
 import TotalRating from "../components/TotalRating";
 
+
 import { UserContext } from "../UserContext";
 function Culture({ UserIdApp }) {
   const navigate = useNavigate();
@@ -22,7 +22,6 @@ function Culture({ UserIdApp }) {
 
   const [Business, setBusiness] = useState([]);
   const [Culture, setCulture] = useState([]);
-  const [showRating, setShowRating] = useState(true);
   const { RateRefresh, setRateRefresh } = useContext(UserContext);
   const [FilteredBusiness, setFilteredBusiness] = useState([]);
 
@@ -42,7 +41,7 @@ function Culture({ UserIdApp }) {
     } catch (error) {
       console.error(error);
     }
-
+  
     try {
       const culture = await axios.get(
         `http://localhost:5000/api/oneCulture/${country}`
@@ -52,10 +51,8 @@ function Culture({ UserIdApp }) {
       console.error(error.message);
     }
   };
-
   useEffect(() => {
     fetchServices();
-    setShowRating(country?.UsersIdRate?.includes(UserIdApp));
   }, [RateRefresh]);
 
   useEffect(() => {
@@ -114,7 +111,6 @@ function Culture({ UserIdApp }) {
     navigate(`/Calendar/${country}`);
   };
 
-  console.log(localStorage.auth);
   return (
     <div style={{ backgroundColor: "#f2f2f2" }}>
       <section className="dark:bg-gray-800 dark:text-gray-100">

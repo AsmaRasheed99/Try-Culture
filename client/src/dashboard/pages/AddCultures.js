@@ -7,7 +7,6 @@ const AddCultures = () => {
   const [Culture, setCulture] = useState("");
   const [Information, setInformation] = useState("");
 
- 
   const [productImage, setProductImage] = useState(null);
 
   const handleProductImageChange = (event) => {
@@ -30,16 +29,17 @@ const AddCultures = () => {
     formData.append("image2", productImage0);
     formData.append("Information", Information);
 
-  console.log(Culture, productImage, productImage0, Information)
+    console.log(Culture, productImage, productImage0, Information);
     try {
       // Send the data to the server using an HTTP POST request
       const response = await axios.post(
-        "http://localhost:5000/api/AddNewCulture",formData, {
+        "http://localhost:5000/api/AddNewCulture",
+        formData,
+        {
           headers: {
-            'Content-Type': 'multipart/form-data',
-        },
-      }
-       
+            "Content-Type": "multipart/form-data",
+          },
+        }
       );
       setCultures(response.data);
       console.log("Cultures");
@@ -47,7 +47,7 @@ const AddCultures = () => {
       console.error(error.message);
     }
   };
-  
+
   useEffect(() => {}, []);
 
   return (
@@ -96,10 +96,10 @@ const AddCultures = () => {
             ></textarea>
 
             <label
-              className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+              className="block my-2 text-sm font-medium text-gray-900 dark:text-white"
               htmlFor="hero"
             >
-              Hero Image
+              Card Image
             </label>
             <input
               className="file-upload-input mx-auto"
@@ -111,10 +111,10 @@ const AddCultures = () => {
             />
 
             <label
-              className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+              className="block my-2 text-sm font-medium text-gray-900 dark:text-white"
               htmlFor="user_avatar"
             >
-              Card Image
+              Hero Image
             </label>
             <input
               className="file-upload-input mx-auto"

@@ -42,17 +42,15 @@ const Contact = () => {
    const [name, setName] = useState("");
    const [email, setEmail] = useState("");
    const [phone, setPhone] = useState("");
-   const [message0, setMessage] = useState([]);
+   const [newMessage, setNewMessage] = useState([]);
  
    const handleSubmit = async (event) => {
  
      event.preventDefault();
  
-     // To passed as the data to be sent.
    
- let message = userMessages 
- message.push(message0)
- console.log(message)
+     let message = userMessages ?  [...userMessages ] : [ ]
+     message.push(newMessage)
      try {
        const contactMessage = {
          message,
@@ -227,8 +225,8 @@ const Contact = () => {
                         rows={6}
                         placeholder="Your Message"
                         className="text-body-color border-[f0f0f0] focus:border-primary w-full resize-none rounded border py-3 px-[14px] text-base outline-none focus-visible:shadow-none shadow-md transition duration-300"
-                        value={message0}
-                        onChange={(event) => setMessage(event.target.value)} required
+                        value={newMessage}
+                        onChange={(event) => setNewMessage(event.target.value)} required
                       />
                     </div>
                     <div>

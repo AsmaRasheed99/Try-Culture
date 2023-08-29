@@ -101,7 +101,7 @@ export default function App() {
     <Route index element={<Home />} />
     <Route path="/Login" element={<Login/>}/>
     <Route path="/Registration" element={<Registration/>}/>
-    <Route path="/Blogs" element={<Blogs/>}/>
+    <Route path="/Blogs" element={<Blogs UserIdApp={UserIdApp}/>}/>
     <Route path="/Cultures" element={<Cultures/>}/>
     <Route path="/Culture/:country" element={<Culture UserIdApp={UserIdApp}/>}/>
     <Route path="/Profile" element={<Profile/>}/>
@@ -143,6 +143,7 @@ export default function App() {
           <Route path="AddCultures" element={<AddCultures />} />
           <Route path="EditCultures" element={<EditCultures />} />
           <Route path="Reports" element={<Reports />} /> 
+          <Route path="/ForgotPassword" element={<ForgotPassword/>}/>
 
         </Routes>
       </div>
@@ -170,6 +171,10 @@ export default function App() {
     <Route path="/BlogDetails/:id" element={<BlogDetails UserApp={UserApp}/>}/>
     <Route path="ServiceForm" element={<ServiceForm UserIdApp = {UserIdApp}/>}/>
     <Route path="/Payment/:id" element={<Payment UserIdApp = {UserIdApp} />} />
+    <Route path="Messenger" element={<Messenger UserApp={UserApp} />} /> 
+    <Route path="/Events" element={<Events/>}/>
+    <Route path="/ForgotPassword" element={<ForgotPassword/>}/>
+
         </Routes>
         <Footer/>
       </Router>
