@@ -60,7 +60,7 @@ const Contact = () => {
      } catch (error) {
        console.error("Error updating user:", error);
      }
-     Swal.fire("Success", "Message sent successfully!", "success");
+    //  Swal.fire("Success", "Message sent successfully!", "success");
    
  
    };

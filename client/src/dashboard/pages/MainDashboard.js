@@ -4,10 +4,11 @@ import axios from 'axios';
 
 
 
+
 const MainDashboard = () => {
   const [users ,setUsers] = useState([])
   const [Subsicribers ,setSubsicribers] = useState([])
-
+  
   const [Cultures ,setCultures] = useState([])
   
   
@@ -29,18 +30,18 @@ const MainDashboard = () => {
       .catch((error) => console.log(error.message))
   
   
-      axios.get('http://localhost:5000/api/AllReports')
-      .then((response) => {
-        setReports(response.data);
-      })
-      .catch((error) => console.log(error.message))
+      // axios.get('http://localhost:5000/api/AllReports')
+      // .then((response) => {
+      //   setReports(response.data);
+      // })
+      // .catch((error) => console.log(error.message))
   
       
-      axios.get('http://localhost:5000/api/getAllBusniess')
-      .then((response) => {
-        setServices(response.data);
-      })
-      .catch((error) => console.log(error.message))
+      // axios.get('http://localhost:5000/api/getAllBusniess')
+      // .then((response) => {
+      //   setServices(response.data);
+      // })
+      // .catch((error) => console.log(error.message))
   
       axios.get('http://localhost:5000/api/getAllCultures')
       .then((response) => {
@@ -49,12 +50,12 @@ const MainDashboard = () => {
       })
       .catch((error) => console.log(error.message))
 
-      axios.get('http://localhost:5000/api/pendingBusiness')
-      .then((response) => {
-        setPending(response.data);
+      // axios.get('http://localhost:5000/api/pendingBusiness')
+      // .then((response) => {
+      //   setPending(response.data);
         
-      })
-      .catch((error) => console.log(error.message))
+      // })
+      // .catch((error) => console.log(error.message))
   
       
   
